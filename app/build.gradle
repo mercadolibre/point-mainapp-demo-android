@@ -1,0 +1,61 @@
+apply plugin:'com.android.application'
+apply from: "$rootDir/gradle/android-app.gradle"
+apply from: "$rootDir/gradle/dexcount.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
+apply from: rootProject.file('jacoco.gradle')
+
+android {
+    compileSdk project.compileSdkVersion.toInteger()
+
+    defaultConfig {
+        applicationId project.applicationId
+        minSdk project.minSdkVersion.toInteger()
+        targetSdk project.targetSdkVersion.toInteger()
+        versionCode project.versionCode.toInteger()
+        versionName project.versionName
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    resourcePrefix 'point_mainapp_demo_app'
+
+    buildTypes {
+        debug {
+            // You can set different values for the same variable depending on the build type. These can be accessed by BuildConfig class
+        }
+
+        mds {
+            initWith(buildTypes.debug)
+        }
+
+        release {
+            // You can set different values for the same variable depending on the build type. These can be accessed by BuildConfig class
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            unitTests.returnDefaultValues = true
+        }
+    }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:$ktxVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "com.google.android.material:material:$materialDesignVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation files("libs/nativesdk-0.1.0.aar")
+}

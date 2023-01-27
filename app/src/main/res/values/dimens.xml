@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="point_mainapp_demo_app_050m">4dp</dimen>
+    <dimen name="point_mainapp_demo_app_1m">8dp</dimen>
+    <dimen name="point_mainapp_demo_app_1_25m">10dp</dimen>
+    <dimen name="point_mainapp_demo_app_2m">16dp</dimen>
+    <dimen name="point_mainapp_demo_app_3m">24dp</dimen>
+    <dimen name="point_mainapp_demo_app_4m">32dp</dimen>
+    <dimen name="point_mainapp_demo_app_5m">40dp</dimen>
+    <dimen name="point_mainapp_demo_app_6m">48dp</dimen>
+    <dimen name="point_mainapp_demo_app_7m">56dp</dimen>
+
+    <dimen name="point_mainapp_demo_app_title_size">24sp</dimen>
+    <dimen name="point_mainapp_demo_app_body_size">14sp</dimen>
+</resources>

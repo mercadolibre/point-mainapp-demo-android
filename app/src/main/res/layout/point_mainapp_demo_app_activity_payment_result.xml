@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/point_mainapp_demo_appPrimaryLightColor"
+    tools:context=".view.payment.result.PaymentResultActivity">
+
+    <ImageView
+        android:id="@+id/point_mainapp_demo_appImageview"
+        android:layout_width="@dimen/point_mainapp_demo_app_7m"
+        android:layout_height="@dimen/point_mainapp_demo_app_7m"
+        android:contentDescription="@string/point_mainapp_demo_app_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/point_mainapp_demo_app_ic_done"
+        app:tint="@color/point_mainapp_demo_appDoneColor" />
+
+    <TextView
+        android:id="@+id/point_mainapp_demo_appTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/point_mainapp_demo_app_3m"
+        android:gravity="center_horizontal"
+        android:text="@string/point_mainapp_demo_app_payment_success"
+        android:textSize="@dimen/point_mainapp_demo_app_title_size"
+        app:layout_constraintBottom_toTopOf="@+id/point_mainapp_demo_appImageview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_go_to_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/point_mainapp_demo_app_6m"
+        android:paddingHorizontal="@dimen/point_mainapp_demo_app_2m"
+        android:paddingVertical="@dimen/point_mainapp_demo_app_1_25m"
+        android:text="@string/point_mainapp_demo_app_lab_back_to_home_action"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/point_mainapp_demo_app_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/point_mainapp_demo_app_reference_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/point_mainapp_demo_app_2m"
+        android:drawablePadding="@dimen/point_mainapp_demo_app_050m"
+        android:drawableStart="@drawable/point_mainapp_demo_app_ic_receipt"
+        android:gravity="center"
+        android:text="@string/point_mainapp_demo_app_lab_reference"
+        android:textSize="@dimen/point_mainapp_demo_app_body_size"
+        app:drawableTint="@color/point_mainapp_demo_appPrimaryTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_appImageview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
