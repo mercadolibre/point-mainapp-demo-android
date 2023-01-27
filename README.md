@@ -22,9 +22,6 @@ For more information about in house distribution please check [the wiki](https:/
 
 Create branch or fork from *develop*, then push or create pull requests (if you don't have access) to that branch.
 
-**point_mainapp_demo** uses this branching model:
-
-https://furydocs.io/mobile-apps/guide/#/lang-en/development/02_development-flow?id=mobile-applications-development-flow
 
 ## Developing and contribuing
 
@@ -40,14 +37,6 @@ and if you want to check an specific module you can:
 
 ``` bash
 ./gradlew module:check
-```
-
-### Getting coverage report
-
-If you want to get a full Jacoco coverage report, you can run the following task:
-
-``` bash
-./gradlew jacocoFullReport
 ```
 
 ### Compiling locally
