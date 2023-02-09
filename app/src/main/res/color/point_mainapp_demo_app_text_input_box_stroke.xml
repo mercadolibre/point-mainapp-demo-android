@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/point_mainapp_demo_appPrimaryColor" android:state_focused="true" />
-    <item android:color="@color/point_mainapp_demo_appPrimaryTextColor" android:state_hovered="true" />
-    <item android:color="@color/point_mainapp_demo_appPrimaryTextColor" />
+    <item android:color="@color/primaryColor" android:state_focused="true" />
+    <item android:color="@color/primaryTextColor" android:state_hovered="true" />
+    <item android:color="@color/primaryTextColor" />
 </selector>

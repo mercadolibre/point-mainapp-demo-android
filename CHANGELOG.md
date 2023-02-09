@@ -1,13 +1,12 @@
-# [Unreleased]
+# v1.0.0
+## Added
+- Added support of bluetooth tools & Bluetooth UI settings.
+- Added Home activity and color scheme
+- Implemented payment flow
+- Initial template
 
 ## Changed
 - Removed all mercado libre plugins an dependecies
 
-# v1.1.0
-## Added
-- Implemented payment flow
-
-# v1.0.0
-## Added
-- Initial template
-- Added Home activity and color scheme
+## Changed
+- Removed all mercado libre plugins an dependecies

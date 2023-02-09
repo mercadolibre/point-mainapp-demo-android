@@ -2,12 +2,20 @@
     <string name="point_mainapp_demo_app_name">Demo Launcher Integration</string>
     <string name="point_mainapp_demo_app_lab_send_payment_action">Payment</string>
     <string name="point_mainapp_demo_app_title">Demo Launcher Integration App</string>
-    <string name="point_mainapp_demo_app_button_a">Button A</string>
-    <string name="point_mainapp_demo_app_button_b">Button B</string>
     <string name="point_mainapp_demo_app_lab_payment_amount">Amount</string>
     <string name="point_mainapp_demo_app_lab_payment_description">Description</string>
     <string name="point_mainapp_demo_app_go_to_payment">Go to payment</string>
     <string name="point_mainapp_demo_app_payment_success">The payment has been successful</string>
     <string name="point_mainapp_demo_app_lab_reference">Reference</string>
     <string name="point_mainapp_demo_app_lab_back_to_home_action">Back to home</string>
+
+    <!-- Bluetooth -->
+    <string name="point_mainapp_demo_app_button_bluetooth_tools">Bluetooth Tools</string>
+    <string name="point_mainapp_demo_app_button_bluetooth_ui_settings">Bluetooth Settings MP UI</string>
+    <string name="point_mainapp_demo_app_bluetooth_title">Conexión Bluetooth</string>
+    <string name="point_mainapp_demo_app_bluetooth">Bluetooth</string>
+    <string name="point_mainapp_demo_app_bluetooth_connect_reader_message">Conecta tu lector mediante Bluetooth con lectores de códigos de barra y teclados.</string>
+    <string name="point_mainapp_demo_app_bluetooth_pair_devices_label">Disposivitos vinculados</string>
+    <string name="point_mainapp_demo_app_bluetooth_discovery_devices_label">Disposivitos encontrados</string>
+
 </resources>
