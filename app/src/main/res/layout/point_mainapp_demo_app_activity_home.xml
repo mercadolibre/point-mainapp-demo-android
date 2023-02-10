@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/point_mainapp_demo_appPrimaryLightColor"
+    android:background="@color/primaryLightColor"
     tools:context=".view.home.HomeActivity">
 
     <TextView
         android:id="@+id/point_mainapp_demo_appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/point_mainapp_demo_app_3m"
+        android:layout_marginTop="@dimen/ui_3m"
         android:text="@string/point_mainapp_demo_app_title"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,29 +22,45 @@
         android:id="@+id/point_mainapp_demo_app_go_to_payment_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/point_mainapp_demo_app_6m"
-        android:layout_marginTop="@dimen/point_mainapp_demo_app_3m"
-        android:paddingVertical="@dimen/point_mainapp_demo_app_1_25m"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:layout_marginTop="@dimen/ui_3m"
+        android:paddingVertical="@dimen/ui_1_25m"
         android:text="@string/point_mainapp_demo_app_go_to_payment"
         android:textAllCaps="false"
-        app:cornerRadius="@dimen/point_mainapp_demo_app_1_25m"
+        app:cornerRadius="@dimen/ui_1_25m"
         app:icon="@drawable/point_mainapp_demo_app_ic_payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/point_mainapp_demo_appTitle" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/point_mainapp_demo_appButton2"
+        android:id="@+id/point_mainapp_demo_app_go_to_bluetooth_tools"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/point_mainapp_demo_app_6m"
-        android:layout_marginTop="@dimen/point_mainapp_demo_app_2m"
-        android:paddingVertical="@dimen/point_mainapp_demo_app_1_25m"
-        android:text="@string/point_mainapp_demo_app_button_b"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:paddingVertical="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_bluetooth"
+        android:text="@string/point_mainapp_demo_app_button_bluetooth_tools"
         android:textAllCaps="false"
-        app:cornerRadius="@dimen/point_mainapp_demo_app_1_25m"
+        app:cornerRadius="@dimen/ui_1_25m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_payment_button" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_go_to_bluetooth_ui_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:paddingVertical="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_bluetooth"
+        android:text="@string/point_mainapp_demo_app_button_bluetooth_ui_settings"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/ui_1_25m"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_bluetooth_tools" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

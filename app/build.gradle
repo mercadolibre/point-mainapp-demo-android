@@ -50,12 +50,20 @@ android {
 }
 
 dependencies {
-    implementation "androidx.core:core-ktx:$ktxVersion"
+
+    implementation files("libs/nativesdk-0.1.0.aar")
+
+    //AndroidX
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     implementation "com.google.android.material:material:$materialDesignVersion"
+    // Kotlin
+    implementation "androidx.core:core-ktx:$ktxVersion"
+    implementation "androidx.fragment:fragment-ktx:$ktxFragmentVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$ktxVersion"
+
+    //lifecycle extension
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //gson
     implementation "com.google.code.gson:gson:$gsonVersion"
-    implementation files("libs/nativesdk-0.1.0.aar")
 }

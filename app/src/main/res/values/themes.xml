@@ -2,27 +2,27 @@
     <!-- Base application theme. -->
     <style name="point_mainapp_demo_appTheme.main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/point_mainapp_demo_appPrimaryColor</item>
-        <item name="colorPrimaryVariant">@color/point_mainapp_demo_appPrimaryDarkColor</item>
-        <item name="colorOnPrimary">@color/point_mainapp_demo_appPrimaryLightColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
+        <item name="colorOnPrimary">@color/primaryLightColor</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/point_mainapp_demo_appSecondaryColor</item>
-        <item name="colorSecondaryVariant">@color/point_mainapp_demo_appSecondaryDarkColor</item>
-        <item name="colorOnSecondary">@color/point_mainapp_demo_appSecondaryLightColor</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorOnSecondary">@color/secondaryLightColor</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/point_mainapp_demo_appPrimaryTextColor</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
 
         <item name="textInputStyle">@style/point_mainapp_demo_appTheme.TextInputLayoutTheme</item>
     </style>
 
     <style name="point_mainapp_demo_appTheme.TextInputLayoutTheme" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="colorControlNormal">@color/point_mainapp_demo_appPrimaryColor</item>
-        <item name="colorControlActivated">@color/point_mainapp_demo_appPrimaryColor</item>
-        <item name="colorControlHighlight">@color/point_mainapp_demo_appPrimaryColor</item>
-        <item name="android:textColorHint">@color/point_mainapp_demo_appPrimaryTextColor</item>
-        <item name="startIconTint">@color/point_mainapp_demo_appPrimaryTextColor</item>
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="colorControlActivated">@color/primaryColor</item>
+        <item name="colorControlHighlight">@color/primaryColor</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
+        <item name="startIconTint">@color/primaryTextColor</item>
         <item name="boxStrokeColor">@color/point_mainapp_demo_app_text_input_box_stroke</item>
     </style>
 

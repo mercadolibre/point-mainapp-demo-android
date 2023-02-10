@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/point_mainapp_demo_appPrimaryLightColor"
+    android:background="@color/primaryLightColor"
     tools:context=".view.payment.launcher.PaymentLauncherActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sendPaymentActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/point_mainapp_demo_app_2m"
-        android:paddingHorizontal="@dimen/point_mainapp_demo_app_2m"
-        android:paddingVertical="@dimen/point_mainapp_demo_app_1_25m"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:paddingHorizontal="@dimen/ui_2m"
+        android:paddingVertical="@dimen/ui_1_25m"
         android:text="@string/point_mainapp_demo_app_lab_send_payment_action"
-        app:cornerRadius="@dimen/point_mainapp_demo_app_1_25m"
+        app:cornerRadius="@dimen/ui_1_25m"
         app:icon="@drawable/point_mainapp_demo_app_ic_payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +25,8 @@
         android:id="@+id/amountInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/point_mainapp_demo_app_2m"
-        android:layout_marginTop="@dimen/point_mainapp_demo_app_3m"
+        android:layout_marginHorizontal="@dimen/ui_2m"
+        android:layout_marginTop="@dimen/ui_3m"
         android:hint="@string/point_mainapp_demo_app_lab_payment_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:textColor="@color/point_mainapp_demo_appPrimaryTextColor" />
+            android:textColor="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,8 +46,8 @@
         android:id="@+id/descriptionInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/point_mainapp_demo_app_2m"
-        android:layout_marginTop="@dimen/point_mainapp_demo_app_1m"
+        android:layout_marginHorizontal="@dimen/ui_2m"
+        android:layout_marginTop="@dimen/ui_1m"
         android:hint="@string/point_mainapp_demo_app_lab_payment_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
             android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/point_mainapp_demo_appPrimaryTextColor" />
+            android:textColor="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
