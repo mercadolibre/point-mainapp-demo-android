@@ -3,14 +3,14 @@ package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.PaymentFlow
+import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
 
 /** Main activity class */
 class PaymentLauncherActivity : AppCompatActivity() {
 
     private var binding: PointMainappDemoAppActivityPaymentLauncherBinding? = null
-    private val paymentFlow = PaymentFlow()
+    private val paymentFlow = MPManager.paymentFlow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
         binding?.sendPaymentActionButton?.setOnClickListener {
             val amount = binding?.amountEditText?.text?.toString()
             val description = binding?.descriptionEditText?.text?.toString()
-            if (!amount.isNullOrEmpty() && !description.isNullOrEmpty()) {
+            if (!amount.isNullOrEmpty()) {
                 val intent = launchPaymentFlowIntent(
                     amount = amount,
                     description = description,
@@ -36,10 +36,20 @@ class PaymentLauncherActivity : AppCompatActivity() {
 
     private fun launchPaymentFlowIntent(
         amount: String,
-        description: String
+        description: String?
     ): Intent {
-        val uriSuccess = paymentFlow.buildUri("https://success", "callback_success", "{\"attr\": \"123\"}", "demo_app")
-        val uriError = paymentFlow.buildUri("https://error", "callback_error", "{\"attr\": \"345\"}", "demo_app")
-        return paymentFlow.launchPaymentFlowIntent(amount, description, uriSuccess, uriError, "123456")
+        val uriSuccess = paymentFlow.buildCallbackUri(
+            "mercadopago://launcher_native_app",
+            "callback_success",
+            hashMapOf("attr" to "123"),
+            "demo_app"
+        )
+        val uriError = paymentFlow.buildCallbackUri(
+            "mercadopago://launcher_native_app",
+            "callback_error",
+            hashMapOf("attr" to "456"),
+            "demo_app"
+        )
+        return paymentFlow.launchPaymentFlowIntent(amount, description, uriSuccess, uriError)
     }
 }

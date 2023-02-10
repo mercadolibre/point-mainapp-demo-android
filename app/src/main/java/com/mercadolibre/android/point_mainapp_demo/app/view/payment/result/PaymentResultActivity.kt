@@ -3,9 +3,9 @@ package com.mercadolibre.android.point_mainapp_demo.app.view.payment.result
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.Gson
+import androidx.core.content.ContextCompat
+import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.R
-import com.mercadolibre.android.point_mainapp_demo.app.data.PaymentSuccessResponse
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentResultBinding
 import com.mercadolibre.android.point_mainapp_demo.app.view.home.HomeActivity
 
@@ -24,11 +24,20 @@ class PaymentResultActivity : AppCompatActivity() {
 
     private fun configPaymentResult() {
         intent.data?.let { data ->
-            val queryPaymentSuccess = data.getQueryParameter("payment_success")
-            queryPaymentSuccess?.let {
-                val paymentResult = Gson().fromJson(it, PaymentSuccessResponse::class.java)
-                binding?.run {
-                    val reference = "${getString(R.string.point_mainapp_demo_app_lab_reference)}: ${paymentResult.paymentReference}"
+            val paymentFlowResult = MPManager.paymentFlow.parseResponse(data)
+            binding?.run {
+                if (paymentFlowResult.paymentStatusError.isEmpty()) {
+                    val reference =
+                        "${getString(R.string.point_mainapp_demo_app_lab_reference)}: ${paymentFlowResult.paymentReference}"
+                    pointMainappDemoAppReferenceText.text = reference
+                } else {
+                    pointMainappDemoAppTextview.text = getString(R.string.point_mainapp_demo_app_payment_error)
+                    with(pointMainappDemoAppImageview) {
+                        setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
+                        setColorFilter(ContextCompat.getColor(context, android.R.color.holo_red_light), android.graphics.PorterDuff.Mode.SRC_IN);
+                    }
+                    val reference =
+                        "${getString(R.string.point_mainapp_demo_app_lab_error_reference)}: ${paymentFlowResult.paymentStatusError}"
                     pointMainappDemoAppReferenceText.text = reference
                 }
             }

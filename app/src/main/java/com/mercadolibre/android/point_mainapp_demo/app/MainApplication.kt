@@ -11,11 +11,15 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = MPConfigBuilder(this)
+        val config = MPConfigBuilder(this, DEMO_APP_CLIENT_ID)
             .withBluetoothConfig()
             .withBluetoothUIConfig()
             .build()
 
         MPManager.initialize(this, config)
+    }
+
+    companion object {
+        private const val DEMO_APP_CLIENT_ID = "0011223344"
     }
 }
