@@ -7,6 +7,8 @@
     <string name="point_mainapp_demo_app_go_to_payment">Go to payment</string>
     <string name="point_mainapp_demo_app_payment_success">The payment has been successful</string>
     <string name="point_mainapp_demo_app_lab_reference">Reference</string>
+    <string name="point_mainapp_demo_app_payment_error">The payment failed</string>
+    <string name="point_mainapp_demo_app_lab_error_reference">Error </string>
     <string name="point_mainapp_demo_app_lab_back_to_home_action">Back to home</string>
 
     <!-- Bluetooth -->

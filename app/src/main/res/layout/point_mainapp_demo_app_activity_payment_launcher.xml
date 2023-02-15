@@ -37,7 +37,7 @@
             android:id="@+id/amountEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:textColor="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
