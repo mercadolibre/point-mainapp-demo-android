@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primaryLightColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.oauth.launcher.OauthActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/redirect_url_inputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui_2m"
+        android:layout_marginTop="@dimen/ui_3m"
+        android:hint="@string/point_mainapp_demo_app_lab_insert_redirect_url"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/point_mainapp_demo_app_ic_link">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/redirect_url_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/primaryTextColor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_oauth_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:paddingHorizontal="@dimen/ui_2m"
+        android:paddingVertical="@dimen/ui_1_25m"
+        android:text="@string/point_mainapp_demo_app_lab_send_oauth_action"
+        app:cornerRadius="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_oauth_verified"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/redirect_url_inputLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

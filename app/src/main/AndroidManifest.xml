@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mercadolibre.android.point_mainapp_demo.app"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mercadolibre.android.point_mainapp_demo.app">
 
     <application
         android:name=".MainApplication"
@@ -9,7 +9,9 @@
         android:label="@string/point_mainapp_demo_app_name"
         android:supportsRtl="true"
         android:theme="@style/point_mainapp_demo_appTheme.main">
-
+        <activity
+            android:name=".view.oauth.launcher.OauthActivity"
+            android:exported="false" />
         <activity
             android:name=".view.home.HomeActivity"
             android:exported="true">
@@ -18,25 +20,21 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".view.bluetooth.BluetoothTestActivity"
-            android:exported="false">
-        </activity>
-
+            android:exported="false"></activity>
         <activity
             android:name=".view.payment.result.PaymentResultActivity"
             android:exported="true"
             tools:ignore="AppLinkUrlError">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -48,10 +46,9 @@
                     android:scheme="mercadopago" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.payment.launcher.PaymentLauncherActivity"
             android:exported="false" />
-
     </application>
+
 </manifest>

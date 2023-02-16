@@ -20,4 +20,10 @@
     <string name="point_mainapp_demo_app_bluetooth_pair_devices_label">Disposivitos vinculados</string>
     <string name="point_mainapp_demo_app_bluetooth_discovery_devices_label">Disposivitos encontrados</string>
 
+    <!-- Oauth -->
+    <string name="point_mainapp_demo_app_lab_send_oauth_action">Oauth</string>
+    <string name="point_mainapp_demo_app_lab_insert_redirect_url">Insert redirect URL</string>
+    <string name="point_mainapp_demo_app_go_to_oauth">Go to Oauth</string>
+
+
 </resources>
