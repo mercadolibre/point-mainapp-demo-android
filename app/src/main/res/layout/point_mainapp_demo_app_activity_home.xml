@@ -71,7 +71,7 @@
         android:layout_marginTop="@dimen/ui_2m"
         android:paddingVertical="@dimen/ui_1_25m"
         app:icon="@drawable/point_mainapp_demo_app_ic_payments"
-        android:text="@string/point_mainapp_demo_app_button_bluetooth_ui_settings"
+        android:text="@string/point_mainapp_demo_app_button_refunds"
         android:textAllCaps="false"
         app:cornerRadius="@dimen/ui_1_25m"
         app:layout_constraintEnd_toEndOf="parent"
