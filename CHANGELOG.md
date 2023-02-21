@@ -1,3 +1,7 @@
+# v2.0.0
+## Added
+- [SMARTI-196] add flow of oauth
+
 # v1.0.0
 ## Added
 - Added support of bluetooth tools & Bluetooth UI settings.
