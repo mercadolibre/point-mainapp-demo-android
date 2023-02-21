@@ -14,12 +14,13 @@ class MainApplication : Application() {
         val config = MPConfigBuilder(this, DEMO_APP_CLIENT_ID)
             .withBluetoothConfig()
             .withBluetoothUIConfig()
+            .withOauthConfig()
             .build()
 
         MPManager.initialize(this, config)
     }
 
     companion object {
-        private const val DEMO_APP_CLIENT_ID = "0011223344"
+        private const val DEMO_APP_CLIENT_ID = "6867823624479788"
     }
 }

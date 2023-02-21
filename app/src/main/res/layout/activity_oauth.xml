@@ -6,7 +6,8 @@
     android:background="@color/primaryLightColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.oauth.launcher.OauthActivity">
+    tools:context=".view.oauth.launcher.OauthActivity"
+    tools:ignore="ResourceName">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/redirect_url_inputLayout"
@@ -18,6 +19,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:errorEnabled="true"
+        app:boxStrokeErrorColor="@color/errorColor"
+        app:errorTextAppearance="@style/point_mainapp_demo_appTheme.TextInputLayoutTheme.errorAppearance"
         app:startIconDrawable="@drawable/point_mainapp_demo_app_ic_link">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -25,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:text="https://webhook.site/dda248d6-c085-4fbd-8aa0-54f7ba298b4d"
             android:textColor="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>
