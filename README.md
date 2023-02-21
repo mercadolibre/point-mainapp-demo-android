@@ -5,7 +5,7 @@
 <p align="center">
 <a href='https://android-arsenal.com/api?level=21'><img alt='MIN API' src='https://img.shields.io/badge/min%20api-23-blue?style=for-the-badge'/></a>
 <a href='https://developer.android.com/studio/releases#4.2.1'><img alt='ANDROID STUDIO PLUGIN VERSION' src='https://img.shields.io/badge/android%20studio-4.2.1-blue?style=for-the-badge'/></a>
-<a href='https://docs.gradle.org/7.4.0/release-notes.html'><img alt='GRADLE VERSION' src='https://img.shields.io/badge/gradle-6.7.1-blue?style=for-the-badge'/></a>
+<a href='https://docs.gradle.org/7.4.0/release-notes.html'><img alt='GRADLE VERSION' src='https://img.shields.io/badge/gradle-7.4.0-blue?style=for-the-badge'/></a>
 </p>
 
 ## What is this?
