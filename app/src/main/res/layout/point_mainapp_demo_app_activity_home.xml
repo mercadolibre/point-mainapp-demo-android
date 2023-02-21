@@ -63,4 +63,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_bluetooth_tools" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_go_to_oauth_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:paddingVertical="@dimen/ui_1_25m"
+        android:text="@string/point_mainapp_demo_app_lab_send_oauth_action"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_oauth_verified"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_bluetooth_ui_settings" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

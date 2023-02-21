@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.oauth.launcher.OauthActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         configGoToPaymentButton()
         configGoToBluetoothTools()
         configGoToBluetoothSettingsUI()
+        configGoToOauthButton()
     }
 
     private fun configGoToPaymentButton() {
@@ -41,6 +43,14 @@ class HomeActivity : AppCompatActivity() {
     private fun configGoToBluetoothSettingsUI() {
         binding?.pointMainappDemoAppGoToBluetoothUiSettings?.setOnClickListener {
             MPManager.bluetoothUiSettings.launch(this@HomeActivity)
+        }
+    }
+
+    private fun configGoToOauthButton() {
+        binding?.pointMainappDemoAppGoToOauthButton?.setOnClickListener {
+            Intent(this, OauthActivity::class.java).run {
+                startActivity(this)
+            }
         }
     }
 }
