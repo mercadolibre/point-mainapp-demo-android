@@ -30,11 +30,31 @@
         android:hint="@string/point_mainapp_demo_app_lab_refund_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/accessTokenInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/paymentIdInputLayout"
         app:startIconDrawable="@drawable/point_mainapp_demo_app_ic_money">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/amountEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textColor="@color/primaryTextColor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/paymentIdInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui_2m"
+        android:layout_marginTop="@dimen/ui_3m"
+        android:hint="@string/point_mainapp_demo_app_lab_refund_payment_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accessTokenInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/paymentIdEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"

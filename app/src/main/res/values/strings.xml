@@ -25,6 +25,7 @@
     <string name="point_mainapp_demo_app_description_refunds">Refunds can be performed using the public MP API. The Access token must have permissions over the Seller Account using the OAuth Flow</string>
     <string name="point_mainapp_demo_app_lab_access_token">OAuth Access Token</string>
     <string name="point_mainapp_demo_app_lab_refund_amount">Amount to be refunded</string>
+    <string name="point_mainapp_demo_app_lab_refund_payment_id">Payment id</string>
     <string name="point_mainapp_demo_app_lab_send_refund_action">Refund</string>
 
 
