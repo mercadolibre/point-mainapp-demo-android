@@ -7,6 +7,7 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -20,6 +21,15 @@ class HomeActivity : AppCompatActivity() {
         configGoToPaymentButton()
         configGoToBluetoothTools()
         configGoToBluetoothSettingsUI()
+        configGoToRefundsUI()
+    }
+
+    private fun configGoToRefundsUI() {
+        binding?.pointMainappDemoAppGoToRefunds?.setOnClickListener {
+            Intent(this, RefundsActivity::class.java).run {
+                startActivity(this)
+            }
+        }
     }
 
     private fun configGoToPaymentButton() {
