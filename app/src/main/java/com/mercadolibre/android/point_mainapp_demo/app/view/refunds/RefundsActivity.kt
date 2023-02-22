@@ -21,9 +21,9 @@ class RefundsActivity : AppCompatActivity() {
 
     private fun configRefundsButton() {
         binding?.sendRefundActionButton?.setOnClickListener {
+            val paymentId = binding?.paymentIdEditText?.text?.toString()
             val amount = binding?.amountEditText?.text?.toString()
             val accessToken = binding?.accessTokenEditText?.text?.toString()
-            val paymentId = binding?.paymentIdEditText?.text?.toString()
             viewModel.performRefund(paymentId?.toLong() ?: 0L, amount?.toDouble() ?: 0.0, accessToken ?: "")
         }
     }
