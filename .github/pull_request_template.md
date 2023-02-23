@@ -22,12 +22,9 @@
 - [ ] I have validated and corrected code quality comments.
 - [ ] I selected the correct milestone.
 - [ ] I selected myself as PR owner.
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
 - [ ] Verify that you are merged with the latest in master
 - [ ] I have run `./gradlew check` and corrected what it recommends of my code.
 - [ ] I have validated the pull request name format ([SMARTI-XXXX] Jira ticket title).
-- [ ] I updated the testapp with my feature (new deeplinks, access to new activities).
 
 ## Screenshots (if applies)
 <!-- Control height of your picture with HTML tag -->
