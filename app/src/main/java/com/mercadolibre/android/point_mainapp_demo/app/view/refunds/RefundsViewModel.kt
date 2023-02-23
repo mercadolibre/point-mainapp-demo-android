@@ -11,15 +11,22 @@ import kotlinx.coroutines.launch
 
 class RefundsViewModel : ViewModel() {
 
-    private val _result = MutableLiveData<String>()
-    val result: LiveData<String> get() = _result
+    private val _successResult = MutableLiveData<String>()
+    val successResult: LiveData<String> get() = _successResult
+
+    private val _errorResult = MutableLiveData<String>()
+    val errorResult: LiveData<String> get() = _errorResult
 
     fun performRefund(paymentId: Long, accessToken: String) {
         viewModelScope.launch(Dispatchers.IO) {
             RefundsManager().refundPayment(paymentId, accessToken.appendBearer())
-                .catch { _result.value = it.message ?: "Unknown error" }
+                .catch { _errorResult.postValue(it.message.toString()) }
                 .collect {
-                    _result.postValue(it.body()?.paymentId?.toString() ?: it.errorBody().toString())
+                    if (it.body()?.paymentId != null) {
+                        _successResult.postValue(it.body()?.paymentId?.toString())
+                    } else {
+                        _errorResult.postValue(it.errorBody()?.string() ?: "Unknown Error")
+                    }
                 }
         }
     }

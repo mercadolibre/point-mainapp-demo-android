@@ -20,8 +20,11 @@ class RefundsActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.result.observe(this) { result ->
+        viewModel.successResult.observe(this) { result ->
             showRefundResult(result)
+        }
+        viewModel.errorResult.observe(this) { error ->
+            showRefundError(error)
         }
     }
 
@@ -36,5 +39,9 @@ class RefundsActivity : AppCompatActivity() {
     private fun showRefundResult(result: String) {
         binding?.refundsResult?.text =
             String.format(resources.getString(R.string.point_mainapp_demo_app_lab_refund_result_text, result))
+    }
+
+    private fun showRefundError(error: String) {
+        binding?.refundsResult?.text = error
     }
 }
