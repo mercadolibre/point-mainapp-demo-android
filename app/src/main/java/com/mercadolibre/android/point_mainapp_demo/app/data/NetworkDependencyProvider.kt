@@ -1,5 +1,7 @@
 package com.mercadolibre.android.point_mainapp_demo.app.data
 
+import com.mercadolibre.android.point_mainapp_demo.app.data.NetworkConstants.CONNECTION_TIMEOUT
+import com.mercadolibre.android.point_mainapp_demo.app.data.NetworkConstants.READ_TIMEOUT
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,8 +13,8 @@ object NetworkDependencyProvider {
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient
             .Builder()
-            .readTimeout(15, TimeUnit.SECONDS)
-            .connectTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
             .build()
     }
