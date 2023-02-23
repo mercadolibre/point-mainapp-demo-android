@@ -27,6 +27,5 @@
     <string name="point_mainapp_demo_app_lab_refund_amount">Amount to be refunded</string>
     <string name="point_mainapp_demo_app_lab_refund_payment_id">Payment id</string>
     <string name="point_mainapp_demo_app_lab_send_refund_action">Refund</string>
-
-
+    <string name="point_mainapp_demo_app_lab_refund_result_text">Payment %1$s refunded</string>
 </resources>

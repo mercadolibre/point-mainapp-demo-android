@@ -57,7 +57,7 @@
             android:id="@+id/accessTokenEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapCharacters"
+            android:inputType="textPassword"
             android:textColor="@color/primaryTextColor" />
 
     </com.google.android.material.textfield.TextInputLayout>

@@ -1,10 +1,9 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.refunds
 
-import android.content.Context
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityRefundsBinding
 
 class RefundsActivity : AppCompatActivity() {
@@ -16,7 +15,6 @@ class RefundsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = PointMainappDemoAppActivityRefundsBinding.inflate(layoutInflater)
         binding?.run { setContentView(root) }
-
         configRefundsButton()
         setupObservers()
     }
@@ -36,14 +34,7 @@ class RefundsActivity : AppCompatActivity() {
     }
 
     private fun showRefundResult(result: String) {
-        binding?.refundsResult?.text = result
-        closeKeyboard()
-    }
-
-    private fun closeKeyboard() {
-        this.currentFocus?.let { view ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-            imm?.hideSoftInputFromWindow(view.windowToken, 0)
-        }
+        binding?.refundsResult?.text =
+            String.format(resources.getString(R.string.point_mainapp_demo_app_lab_refund_result_text, result))
     }
 }
