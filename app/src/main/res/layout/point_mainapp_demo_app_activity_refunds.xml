@@ -19,28 +19,7 @@
         app:icon="@drawable/point_mainapp_demo_app_ic_payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/amountInputLayout" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/amountInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/ui_2m"
-        android:layout_marginTop="@dimen/ui_3m"
-        android:hint="@string/point_mainapp_demo_app_lab_refund_amount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/paymentIdInputLayout"
-        app:startIconDrawable="@drawable/point_mainapp_demo_app_ic_money">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/amountEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:textColor="@color/primaryTextColor" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@id/paymentIdInputLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/paymentIdInputLayout"
@@ -96,5 +75,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/refundsResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/ui_body_line_height_xs"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:layout_marginHorizontal="@dimen/ui_2m"
+        android:paddingHorizontal="@dimen/ui_2m"
+        android:paddingVertical="@dimen/ui_1_25m"
+        app:layout_constraintTop_toBottomOf="@id/sendRefundActionButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="result" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

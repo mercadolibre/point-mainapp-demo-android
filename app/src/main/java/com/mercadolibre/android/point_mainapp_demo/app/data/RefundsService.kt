@@ -11,7 +11,6 @@ interface RefundsService {
     @POST(NetworkConstants.REFUNDS_PATH)
     suspend fun createRefund(
         @Path("payment_id") paymentId: String,
-        @Body amount: Double,
         @Header("Authorization") token: String
     ): Response<RefundResponse>
 }

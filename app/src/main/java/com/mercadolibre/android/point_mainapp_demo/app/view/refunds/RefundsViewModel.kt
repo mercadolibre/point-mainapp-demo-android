@@ -1,6 +1,7 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.refunds
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mercadolibre.android.point_mainapp_demo.app.model.RefundsManager
@@ -9,18 +10,28 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class RefundsViewModel : ViewModel() {
-    fun performRefund(paymentId: Long, amount: Double, accessToken: String) {
-        Log.i(TAG, "Refund payment --> $paymentId, amount: $amount, AT: $accessToken")
+
+    private val _result = MutableLiveData<String>()
+    val result: LiveData<String> get() = _result
+
+    fun performRefund(paymentId: Long, accessToken: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            RefundsManager().refundPayment(paymentId, amount, accessToken)
-                .catch { Log.e("Refunds", it.message.toString()) }
+            RefundsManager().refundPayment(paymentId, accessToken.appendBearer())
+                .catch { _result.value = it.message ?: "Unknown error" }
                 .collect {
-                    Log.d("Refunds", it.body()?.paymentId?.toString() ?: it.raw().toString())
+                    _result.postValue(it.body()?.paymentId?.toString() ?: it.errorBody().toString())
                 }
         }
     }
 
+    private fun String.appendBearer(): String {
+        if (this.contains(BEARER_SUFFIX).not()) {
+            return BEARER_SUFFIX + this
+        }
+        return this
+    }
+
     companion object {
-        const val TAG = "RefundsFlow"
+        const val BEARER_SUFFIX = "Bearer "
     }
 }
