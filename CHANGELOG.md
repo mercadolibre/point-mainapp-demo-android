@@ -1,3 +1,7 @@
+# v1.1.0
+## Added
+- Add Refunds example using the public MP API
+
 # v1.0.0
 ## Added
 - Added Integration SDK v1.0.0
