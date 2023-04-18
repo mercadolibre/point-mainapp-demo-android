@@ -74,8 +74,15 @@ class BluetoothTestActivity : AppCompatActivity() {
     }
 
     private fun onclickListener() {
+        binding.pointMainappDemoBackArrow.setOnClickListener {
+            onBackPressed()
+        }
         binding.btIgnitor.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked.not()) adapterAvailableDevices.removeAll()
+            if (isChecked) {
+                viewModel.registerConnectObserver()
+            } else {
+                adapterAvailableDevices.removeAll()
+            }
             viewModel.ignitorBluetooth(isChecked)
         }
     }
@@ -98,6 +105,7 @@ class BluetoothTestActivity : AppCompatActivity() {
                     is IgnitorLaunchResult -> canLaunchGetPairDevices(events.result)
                     is PairingDevicesStatus -> handlerParingResult(events.pair)
                     Init -> Unit
+                    is ConnectDevicesResult -> adapterPairDevices.updateItemDevice(events.connectDevices)
                 }
             }
         }
@@ -140,6 +148,7 @@ class BluetoothTestActivity : AppCompatActivity() {
     private fun updateIgnitorBluetooth(state: Boolean) {
         binding.apply {
             btIgnitor.isChecked = state
+            canLaunchGetPairDevices(state)
         }
     }
 

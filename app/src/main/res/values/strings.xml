@@ -19,6 +19,8 @@
     <string name="point_mainapp_demo_app_bluetooth_connect_reader_message">Conecta tu lector mediante Bluetooth con lectores de códigos de barra y teclados.</string>
     <string name="point_mainapp_demo_app_bluetooth_pair_devices_label">Paired Devices</string>
     <string name="point_mainapp_demo_app_bluetooth_discovery_devices_label">Found Devices</string>
+    <string name="point_mainapp_demo_app__bluetooth_devices_connect">Conectado</string>
+
 
     <!-- Refunds -->
     <string name="point_mainapp_demo_app_button_refunds">Refunds UI</string>

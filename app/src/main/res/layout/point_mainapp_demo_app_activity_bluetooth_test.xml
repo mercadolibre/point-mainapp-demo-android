@@ -123,10 +123,18 @@
             android:text="@string/point_mainapp_demo_app_bluetooth_title"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/ui_title_line_height_s"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/point_mainapp_demo_back_arrow"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/point_mainapp_demo_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/point_mainapp_demo_app_white_arrow_back"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewPairDevices"

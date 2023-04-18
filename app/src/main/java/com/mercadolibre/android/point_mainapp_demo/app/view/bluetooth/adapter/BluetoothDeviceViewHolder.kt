@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.entities.BluetoothDeviceModel
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppItemDevicesBluetoothBinding
-import com.mercadolibre.android.point_mainapp_demo.app.util.gone
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 
 internal class BluetoothDeviceViewHolder(private val viewBinding: PointMainappDemoAppItemDevicesBluetoothBinding) :
@@ -24,8 +23,17 @@ internal class BluetoothDeviceViewHolder(private val viewBinding: PointMainappDe
 
     private fun renderPairDevices(item: BluetoothDeviceModel, callback: (String) -> Unit) {
         viewBinding.apply {
-            imageViewBluetoothOptions.visible()
-            textViewSecondaryText.visible()
+            imageViewBluetoothState.setImageResource(
+                if (item.isConnected) R.drawable.point_mainapp_demo_app_ic_bluetooth_connected else R.drawable.point_mainapp_demo_app_ic_bluetooth_available
+            )
+
+            if (item.isConnected) {
+                textViewSecondaryText.visible()
+                textViewSecondaryText.text = viewBinding.root.context.getString(
+                    R.string.point_mainapp_demo_app__bluetooth_devices_connect
+                )
+            }
+
             textViewPrimaryText.setOnClickListener {
                 callback(item.address)
             }
@@ -34,8 +42,6 @@ internal class BluetoothDeviceViewHolder(private val viewBinding: PointMainappDe
 
     private fun renderNotPairDevices(item: BluetoothDeviceModel, callback: (String) -> Unit) {
         viewBinding.apply {
-            imageViewBluetoothOptions.gone()
-            textViewSecondaryText.gone()
             imageViewBluetoothState.setImageResource(
                 R.drawable.point_mainapp_demo_app_ic_bluetooth_available
             )
