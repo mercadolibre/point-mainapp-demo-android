@@ -14,6 +14,8 @@ class BluetoothPrinterViewModel : ViewModel() {
     private val _printerEventLiveDataLiveData = MutableLiveData<PrinterEvents>()
     val printerEventLiveDataLiveData: LiveData<PrinterEvents> get() = _printerEventLiveDataLiveData
 
+    var isPasteLargeText = false
+
     fun makePrint(stringToPrint: String, addressDevices: String? = null) {
 
         if (stringToPrint.isEmpty()) {
