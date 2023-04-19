@@ -4,13 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
-import com.mercadolibre.android.point_mainapp_demo.app.databinding.ActivityPrinterTestBinding
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
-import kotlin.reflect.KClass
 
 class HomeActivity : AppCompatActivity() {
 

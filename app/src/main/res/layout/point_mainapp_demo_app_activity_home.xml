@@ -86,7 +86,7 @@
         android:layout_marginTop="@dimen/ui_2m"
         android:paddingVertical="@dimen/ui_1_25m"
         app:icon="@drawable/point_mainapp_demo_app_black_ic_print"
-        android:text="@string/point_mainapp_demo_app_button_refunds"
+        android:text="@string/point_mainapp_demo_app_home_print_label"
         android:textAllCaps="false"
         app:cornerRadius="@dimen/ui_1_25m"
         app:layout_constraintEnd_toEndOf="parent"
