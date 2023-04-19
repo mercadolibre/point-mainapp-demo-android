@@ -18,6 +18,13 @@ internal class BluetoothSettingsViewModel : ViewModel() {
     private val _bluetoothSettingLiveData = MutableStateFlow<BluetoothSettingsEvents>(BluetoothSettingsEvents.Init)
     val bluetoothSettingLiveData = _bluetoothSettingLiveData.asStateFlow()
 
+    fun registerConnectObserver() {
+        MPManager.bluetooth.connectObserver.registerObserver { _, bluetoothDeviceModel ->
+            _bluetoothSettingLiveData.value =
+                BluetoothSettingsEvents.ConnectDevicesResult(bluetoothDeviceModel)
+        }
+    }
+
     fun getCurrentStateBluetooth() {
         MPManager.bluetooth.ignitor.getCurrentState { state ->
             _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorCurrentState(state)

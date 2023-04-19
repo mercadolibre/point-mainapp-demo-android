@@ -16,4 +16,6 @@ internal sealed class BluetoothSettingsEvents {
     class DiscoveryDevicesFound(val devices: BluetoothDeviceModel) : BluetoothSettingsEvents()
     class DiscoveryDevicesUpdate(val devices: BluetoothDeviceModel) : BluetoothSettingsEvents()
     class PairingDevicesStatus(val pair: Pair<BluetoothBondState, BluetoothDeviceModel>) : BluetoothSettingsEvents()
+
+    class ConnectDevicesResult(val connectDevices: BluetoothDeviceModel) : BluetoothSettingsEvents()
 }

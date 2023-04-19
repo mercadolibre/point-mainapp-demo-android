@@ -1,6 +1,7 @@
 # v1.1.0
 ## Added
 - Add Refunds example using the public MP API
+- add observer connect manager bluetooth
 
 # v1.0.0
 ## Added

@@ -1,5 +1,6 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -25,19 +26,20 @@ class PaymentLauncherActivity : AppCompatActivity() {
             val amount = binding?.amountEditText?.text?.toString()
             val description = binding?.descriptionEditText?.text?.toString()
             if (!amount.isNullOrEmpty()) {
-                val intent = launchPaymentFlowIntent(
+                launchPaymentFlowIntent(
                     amount = amount,
                     description = description,
+                    context = this
                 )
-                startActivity(intent)
             }
         }
     }
 
     private fun launchPaymentFlowIntent(
         amount: String,
-        description: String?
-    ): Intent {
+        description: String?,
+        context: Context,
+    ) {
         val uriSuccess = paymentFlow.buildCallbackUri(
             "mercadopago://launcher_native_app",
             "callback_success",
@@ -50,6 +52,6 @@ class PaymentLauncherActivity : AppCompatActivity() {
             hashMapOf("attr" to "456"),
             "demo_app"
         )
-        return paymentFlow.launchPaymentFlowIntent(amount, description, uriSuccess, uriError)
+        paymentFlow.launchPaymentFlowActivity(amount, description, uriSuccess, uriError, context)
     }
 }
