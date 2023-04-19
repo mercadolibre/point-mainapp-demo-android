@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPrinterTestBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.hideKeyboard
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.contracts.PrinterEvents
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.viewmodels.BluetoothPrinterViewModel
 
@@ -43,6 +44,7 @@ class PrinterTestActivity : AppCompatActivity(), PrinterSelectorCallback {
 
             buttonMakePrint.setOnClickListener {
                 viewModel.makePrint(textFieldDataToPrint.text.toString())
+                hideKeyboard()
             }
         }
     }

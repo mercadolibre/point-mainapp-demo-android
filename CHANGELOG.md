@@ -2,6 +2,7 @@
 ## Added
 - Add Refunds example using the public MP API
 - add observer connect manager bluetooth
+- add printer example screen
 
 # v1.0.0
 ## Added
