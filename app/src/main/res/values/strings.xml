@@ -19,7 +19,8 @@
     <string name="point_mainapp_demo_app_bluetooth_connect_reader_message">Conecta tu lector mediante Bluetooth con lectores de códigos de barra y teclados.</string>
     <string name="point_mainapp_demo_app_bluetooth_pair_devices_label">Paired Devices</string>
     <string name="point_mainapp_demo_app_bluetooth_discovery_devices_label">Found Devices</string>
-    <string name="point_mainapp_demo_app__bluetooth_devices_connect">Conectado</string>
+    <string name="point_mainapp_demo_app_bluetooth_devices_connect">Conectado</string>
+    <string name="point_mainapp_demo_app_to_print_label">Agregar texto a imprimir</string>
 
 
     <!-- Refunds -->
@@ -30,4 +31,5 @@
     <string name="point_mainapp_demo_app_lab_refund_payment_id">Payment id</string>
     <string name="point_mainapp_demo_app_lab_send_refund_action">Refund</string>
     <string name="point_mainapp_demo_app_lab_refund_result_text">Payment %1$s refunded</string>
+    <string name="point_mainapp_demo_app_make_print_label">Make print</string>
 </resources>
