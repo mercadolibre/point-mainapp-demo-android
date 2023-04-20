@@ -1,6 +1,9 @@
 package com.mercadolibre.android.point_mainapp_demo.app.util
 
+import android.app.Activity
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 
 internal fun View.gone() {
     this.visibility = View.GONE
@@ -12,4 +15,13 @@ internal fun View.visible() {
 
 internal fun View.invisible() {
     this.visibility = View.INVISIBLE
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
+}
+
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }

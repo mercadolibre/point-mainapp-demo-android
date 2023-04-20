@@ -30,7 +30,7 @@ internal class BluetoothDeviceViewHolder(private val viewBinding: PointMainappDe
             if (item.isConnected) {
                 textViewSecondaryText.visible()
                 textViewSecondaryText.text = viewBinding.root.context.getString(
-                    R.string.point_mainapp_demo_app__bluetooth_devices_connect
+                    R.string.point_mainapp_demo_app_bluetooth_devices_connect
                 )
             }
 
