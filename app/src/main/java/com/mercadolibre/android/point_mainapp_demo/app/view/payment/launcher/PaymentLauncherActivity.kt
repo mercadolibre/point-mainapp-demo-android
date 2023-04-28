@@ -22,15 +22,20 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun configPaymentButton() {
-        binding?.sendPaymentActionButton?.setOnClickListener {
-            val amount = binding?.amountEditText?.text?.toString()
-            val description = binding?.descriptionEditText?.text?.toString()
-            if (!amount.isNullOrEmpty()) {
-                launchPaymentFlowIntent(
-                    amount = amount,
-                    description = description,
-                    context = this
-                )
+        binding?.apply {
+            sendPaymentActionButton.setOnClickListener {
+                val amount = binding?.amountEditText?.text?.toString()
+                val description = binding?.descriptionEditText?.text?.toString()
+                if (!amount.isNullOrEmpty()) {
+                    launchPaymentFlowIntent(
+                        amount = amount,
+                        description = description,
+                        context = this@PaymentLauncherActivity
+                    )
+                }
+            }
+            pointMainappDemoBackArrow.setOnClickListener {
+                onBackPressed()
             }
         }
     }
@@ -41,16 +46,16 @@ class PaymentLauncherActivity : AppCompatActivity() {
         context: Context,
     ) {
         val uriSuccess = paymentFlow.buildCallbackUri(
-            "mercadopago://launcher_native_app",
-            "callback_success",
-            hashMapOf("attr" to "123"),
-            "demo_app"
+            "mercadopago://smart_integrations/payment_result",
+            "success",
+            hashMapOf("message" to "testSuccess"),
+            "demo.app"
         )
         val uriError = paymentFlow.buildCallbackUri(
-            "mercadopago://launcher_native_app",
-            "callback_error",
-            hashMapOf("attr" to "456"),
-            "demo_app"
+            "mercadopago://smart_integrations/payment_result",
+            "error",
+            hashMapOf("message" to "testError"),
+            "demo.app"
         )
         paymentFlow.launchPaymentFlowActivity(amount, description, uriSuccess, uriError, context)
     }

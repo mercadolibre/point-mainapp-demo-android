@@ -14,6 +14,11 @@ class HomeActivity : AppCompatActivity() {
 
     private var binding: PointMainappDemoAppActivityHomeBinding? = null
 
+    override fun onResume() {
+        super.onResume()
+        MPManager.bluetooth.messengerValidator.invoke(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PointMainappDemoAppActivityHomeBinding.inflate(layoutInflater)
@@ -56,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun <T>launchActivity(destination: Class<T>) {
+    private fun <T> launchActivity(destination: Class<T>) {
         Intent(this, destination).run {
             startActivity(this)
         }

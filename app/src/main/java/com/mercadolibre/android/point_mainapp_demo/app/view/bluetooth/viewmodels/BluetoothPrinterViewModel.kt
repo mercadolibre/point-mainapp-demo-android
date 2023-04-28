@@ -43,7 +43,7 @@ class BluetoothPrinterViewModel : ViewModel() {
                     _printerEventLiveDataLiveData.postValue(PrinterEvents.LaunchPrinterSelector(listPrinter))
                 }
             } else {
-                _printerEventLiveDataLiveData.postValue(PrinterEvents.OutPutResult(result))
+                _printerEventLiveDataLiveData.postValue(PrinterEvents.OutputResult(result))
             }
         }
     }

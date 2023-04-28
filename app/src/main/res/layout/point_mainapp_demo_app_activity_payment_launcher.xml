@@ -7,6 +7,15 @@
     android:background="@color/primaryLightColor"
     tools:context=".view.payment.launcher.PaymentLauncherActivity">
 
+    <ImageView
+        android:id="@+id/point_mainapp_demo_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/point_mainapp_demo_app_white_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sendPaymentActionButton"
         android:layout_width="wrap_content"
@@ -30,7 +39,7 @@
         android:hint="@string/point_mainapp_demo_app_lab_payment_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/point_mainapp_demo_back_arrow"
         app:startIconDrawable="@drawable/point_mainapp_demo_app_ic_money">
 
         <com.google.android.material.textfield.TextInputEditText

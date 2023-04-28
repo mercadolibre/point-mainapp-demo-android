@@ -41,10 +41,12 @@ class PrinterTestActivity : AppCompatActivity(), PrinterSelectorCallback {
                     textFieldDataToPrint.setText("")
                 }
             }
-
             buttonMakePrint.setOnClickListener {
                 viewModel.makePrint(textFieldDataToPrint.text.toString())
                 hideKeyboard()
+            }
+            pointMainappDemoBackArrow.setOnClickListener {
+                onBackPressed()
             }
         }
     }
@@ -55,7 +57,7 @@ class PrinterTestActivity : AppCompatActivity(), PrinterSelectorCallback {
                 is PrinterEvents.IsLoading -> binding.progressIndicator.isVisible = event.isVisible
                 is PrinterEvents.LaunchPrinterSelector -> PrinterSelectorDialog.newInstance(event.printerList)
                     .show(supportFragmentManager, PrinterSelectorDialog::class.simpleName)
-                is PrinterEvents.OutPutResult -> makeSnackBar(event.resultMessage)
+                is PrinterEvents.OutputResult -> makeSnackBar(event.resultMessage)
                 PrinterEvents.DataEmpty -> makeSnackBar(getString(R.string.point_mainapp_demo_app_error_msg_data_empty))
             }
         }
