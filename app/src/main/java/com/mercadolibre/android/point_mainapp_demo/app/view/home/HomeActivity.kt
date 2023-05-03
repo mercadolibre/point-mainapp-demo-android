@@ -1,10 +1,14 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.home
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.coroutineScope
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
+import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
@@ -24,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         configGoToBluetoothSettingsUI()
         configGoToRefundsUI()
         configGoToPrinterTest()
+        onPrinterBitmap()
     }
 
     private fun configGoToRefundsUI() {
@@ -53,6 +58,17 @@ class HomeActivity : AppCompatActivity() {
     private fun configGoToPrinterTest() {
         binding?.pointMainappDemoAppGoToPrinterTest?.setOnClickListener {
             launchActivity(PrinterTestActivity::class.java)
+        }
+    }
+
+    private fun onPrinterBitmap() {
+        binding?.pointMainappDemoAppGoToPrinterBitmap?.setOnClickListener {
+            val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_ticked)
+            lifecycle.coroutineScope.launchWhenCreated {
+                MPManager.bitmapPrinter.makePrint(bitmap) {
+                    toast("Result printer: $it")
+                }
+            }
         }
     }
 

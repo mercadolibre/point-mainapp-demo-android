@@ -2,8 +2,10 @@ package com.mercadolibre.android.point_mainapp_demo.app.util
 
 import android.app.Activity
 import android.content.Context
+import android.os.Message
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 
 internal fun View.gone() {
     this.visibility = View.GONE
@@ -24,4 +26,8 @@ fun Activity.hideKeyboard() {
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Context.toast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
