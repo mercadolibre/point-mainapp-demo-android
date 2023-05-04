@@ -2,9 +2,12 @@ package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
+import com.mercadolibre.android.point_integration_sdk.nativesdk.resolver.validate.amount.exception.IllegalAmountException
+import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
 
 /** Main activity class */
@@ -25,12 +28,32 @@ class PaymentLauncherActivity : AppCompatActivity() {
         binding?.sendPaymentActionButton?.setOnClickListener {
             val amount = binding?.amountEditText?.text?.toString()
             val description = binding?.descriptionEditText?.text?.toString()
-            if (!amount.isNullOrEmpty()) {
-                launchPaymentFlowIntent(
-                    amount = amount,
-                    description = description,
-                    context = this
-                )
+            try {
+                amount?.let {
+                    launchPaymentFlowIntent(
+                        amount = it,
+                        description = description,
+                        context = this
+                    )
+                }
+
+            } catch (e: IllegalAmountException) {
+                setLayoutError(e.message)
+            }
+        }
+    }
+
+    private fun setLayoutError(message: String?) {
+
+        binding?.amountInputLayout?.error = message
+
+        listenerIconError()
+    }
+
+    private fun listenerIconError() {
+        binding?.amountInputLayout?.apply {
+            setErrorIconOnClickListener {
+                isErrorEnabled = false
             }
         }
     }
