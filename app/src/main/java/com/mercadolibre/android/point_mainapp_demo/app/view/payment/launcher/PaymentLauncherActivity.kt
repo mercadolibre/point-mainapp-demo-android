@@ -1,13 +1,10 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.resolver.validate.amount.exception.IllegalAmountException
-import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
 
 /** Main activity class */
@@ -25,6 +22,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun configPaymentButton() {
+
         binding?.sendPaymentActionButton?.setOnClickListener {
             val amount = binding?.amountEditText?.text?.toString()
             val description = binding?.descriptionEditText?.text?.toString()
@@ -51,6 +49,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun listenerIconError() {
+
         binding?.amountInputLayout?.apply {
             setErrorIconOnClickListener {
                 isErrorEnabled = false
