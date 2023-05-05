@@ -108,4 +108,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_printer_test" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_go_to_camera_scanner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:layout_marginTop="@dimen/ui_2m"
+        android:paddingVertical="@dimen/ui_1_25m"
+        android:text="@string/point_mainapp_demo_app_cammera_scanner_main_title"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_qr_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainapp_demo_app_home_print_image_bitmap" />
 </androidx.constraintlayout.widget.ConstraintLayout>

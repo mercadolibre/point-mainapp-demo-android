@@ -57,6 +57,9 @@
         <activity
             android:name=".view.refunds.RefundsActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.camera.CameraScannerActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

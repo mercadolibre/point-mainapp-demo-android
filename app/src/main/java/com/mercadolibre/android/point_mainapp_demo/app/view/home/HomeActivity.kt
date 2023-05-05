@@ -7,6 +7,7 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.camera.CameraScannerActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
@@ -26,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
         configGoToRefundsUI()
         configGoToPrinterTest()
         onPrinterBitmap()
+        configGoToCameraScanner()
     }
 
     private fun configGoToRefundsUI() {
@@ -61,6 +63,12 @@ class HomeActivity : AppCompatActivity() {
     private fun onPrinterBitmap() {
         binding?.mainappDemoAppHomePrintImageBitmap?.setOnClickListener {
             launchActivity(PrinterBitmapActivity::class.java)
+        }
+    }
+
+    private fun configGoToCameraScanner() {
+        binding?.pointMainappDemoAppGoToCameraScanner?.setOnClickListener {
+            launchActivity(CameraScannerActivity::class.java)
         }
     }
 
