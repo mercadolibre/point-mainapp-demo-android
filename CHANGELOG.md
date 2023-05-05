@@ -1,3 +1,7 @@
+# v1.2.0
+## Added
+- Added maximum and minimum amount validation functionality.
+
 # v1.1.0
 ## Added
 - Add Refunds example using the public MP API
