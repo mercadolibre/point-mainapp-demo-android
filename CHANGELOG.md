@@ -1,3 +1,7 @@
+# v1.3.0
+## Added
+- Launch payment flow with payment method like parameter
+
 # v1.2.0
 ## Added
 - Add ticket printing functionality in bitmap format.

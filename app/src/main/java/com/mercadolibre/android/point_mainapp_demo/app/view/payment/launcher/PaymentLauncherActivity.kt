@@ -45,6 +45,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 clearPaymentMethodList = clearPaymentMethodList.not()
                 if (clearPaymentMethodList) {
                     getPaymentMethodActionButton.text = getString(R.string.point_mainapp_demo_app_lab_get_payment_method_action)
+                    lastPaymentMethodSelected = null
                     paymentMethodAdapter.clear()
                 } else {
                     getPaymentMethodActionButton.text = getString(R.string.point_mainapp_demo_app_clear_label)
