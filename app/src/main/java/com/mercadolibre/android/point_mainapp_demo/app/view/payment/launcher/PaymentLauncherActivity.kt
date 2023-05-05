@@ -8,7 +8,6 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.resolver.validate.amount.exception.IllegalAmountException
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
-import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 
@@ -32,7 +31,11 @@ class PaymentLauncherActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.recyclerviewPaymentMethod.apply {
-            layoutManager = LinearLayoutManager(this@PaymentLauncherActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(
+                this@PaymentLauncherActivity,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
             adapter = paymentMethodAdapter
         }
 
@@ -40,36 +43,51 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun configPaymentButton() {
+
         binding.apply {
+
             getPaymentMethodActionButton.setOnClickListener {
+
                 clearPaymentMethodList = clearPaymentMethodList.not()
                 if (clearPaymentMethodList) {
-                    getPaymentMethodActionButton.text = getString(R.string.point_mainapp_demo_app_lab_get_payment_method_action)
+                    getPaymentMethodActionButton.text =
+                        getString(R.string.point_mainapp_demo_app_lab_get_payment_method_action)
                     lastPaymentMethodSelected = null
                     paymentMethodAdapter.clear()
                 } else {
-                    getPaymentMethodActionButton.text = getString(R.string.point_mainapp_demo_app_clear_label)
+
+                    getPaymentMethodActionButton.text =
+                        getString(R.string.point_mainapp_demo_app_clear_label)
                     configPaymentMethodList()
                 }
 
-            }
+                sendPaymentActionButton.setOnClickListener {
 
-            sendPaymentActionButton.setOnClickListener {
-                val amount = binding.amountEditText.text?.toString()
-                val description = binding.descriptionEditText.text?.toString()
-                if (!amount.isNullOrEmpty()) {
-                    launchPaymentFlowIntent(
-                        amount = amount,
-                        description = description,
-                        context = this@PaymentLauncherActivity
-                    )
+                    val amount = amountEditText.text?.toString()
+                    val description = binding.descriptionEditText.text?.toString()
+
+                    try {
+
+                        amount?.let {
+                            launchPaymentFlowIntent(
+                                amount = it,
+                                description = description,
+                                context = this@PaymentLauncherActivity
+                            )
+                        }
+
+                    } catch (e: IllegalAmountException) {
+
+                        setLayoutError(e.message)
+                    }
                 }
             }
         }
     }
 
     private fun configPaymentMethodList() {
-        val paymentMethodList = paymentTool.getPaymentMethods().map { PaymentMethodModel(name = it.name) }
+        val paymentMethodList =
+            paymentTool.getPaymentMethods().map { PaymentMethodModel(name = it.name) }
         paymentMethodAdapter.submitList(paymentMethodList)
     }
 
@@ -90,10 +108,33 @@ class PaymentLauncherActivity : AppCompatActivity() {
             hashMapOf("attr" to "456"),
             "demo_app"
         )
-        try {
-            paymentFlow.launchPaymentFlowActivity(amount, description, uriSuccess, uriError, context, lastPaymentMethodSelected)
-        } catch (e: IllegalAmountException) {
-            toast(e.message.orEmpty())
+
+        paymentFlow.launchPaymentFlowActivity(
+            amount,
+            description,
+            uriSuccess,
+            uriError,
+            context,
+            lastPaymentMethodSelected
+        )
+    }
+
+    private fun setLayoutError(message: String?) {
+
+        binding.amountInputLayout.apply {
+            isCounterEnabled = true
+            error = message
+        }
+
+        listenerIconError()
+    }
+
+    private fun listenerIconError() {
+
+        binding.amountInputLayout.apply {
+            setErrorIconOnClickListener {
+                isErrorEnabled = false
+            }
         }
     }
 }

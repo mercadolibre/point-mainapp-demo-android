@@ -26,4 +26,8 @@
         <item name="boxStrokeColor">@color/point_mainapp_demo_app_text_input_box_stroke</item>
     </style>
 
+    <style name="point_mainapp_demo_appTheme.TextInputLayoutTheme.errorAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/design_default_color_error</item>
+    </style>
+
 </resources>
