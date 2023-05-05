@@ -2,7 +2,6 @@ package com.mercadolibre.android.point_mainapp_demo.app.util
 
 import android.app.Activity
 import android.content.Context
-import android.os.Message
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -29,5 +28,5 @@ fun Context.hideKeyboard(view: View) {
 }
 
 fun Context.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
