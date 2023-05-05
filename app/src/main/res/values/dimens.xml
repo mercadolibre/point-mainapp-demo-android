@@ -25,6 +25,7 @@
 
     <dimen name="ui_title_size">24sp</dimen>
     <dimen name="ui_body_size">14sp</dimen>
+    <dimen name="ui_medium_body_size">16sp</dimen>
 
     <dimen name="ui_title_line_height_l">35sp</dimen>
     <dimen name="ui_title_line_height_m">30sp</dimen>

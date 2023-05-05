@@ -14,6 +14,7 @@ class MainApplication : Application() {
         val config = MPConfigBuilder(this, DEMO_APP_CLIENT_ID)
             .withBluetoothConfig()
             .withBluetoothUIConfig()
+            .withBitmapPrinterConfig()
             .build()
 
         MPManager.initialize(this, config)
