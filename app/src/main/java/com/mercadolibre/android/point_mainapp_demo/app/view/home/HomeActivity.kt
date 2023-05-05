@@ -8,6 +8,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappD
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
         configGoToBluetoothSettingsUI()
         configGoToRefundsUI()
         configGoToPrinterTest()
+        onPrinterBitmap()
     }
 
     private fun configGoToRefundsUI() {
@@ -53,6 +55,12 @@ class HomeActivity : AppCompatActivity() {
     private fun configGoToPrinterTest() {
         binding?.pointMainappDemoAppGoToPrinterTest?.setOnClickListener {
             launchActivity(PrinterTestActivity::class.java)
+        }
+    }
+
+    private fun onPrinterBitmap() {
+        binding?.mainappDemoAppHomePrintImageBitmap?.setOnClickListener {
+            launchActivity(PrinterBitmapActivity::class.java)
         }
     }
 
