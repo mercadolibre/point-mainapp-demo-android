@@ -5,8 +5,8 @@
 # v1.2.0
 ## Added
 - Add ticket printing functionality in bitmap format.
-
 - Added maximum and minimum amount validation functionality.
+
 # v1.1.0
 ## Added
 - Add Refunds example using the public MP API
