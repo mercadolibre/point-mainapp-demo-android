@@ -43,4 +43,8 @@
     <string name="point_mainapp_demo_app_home_result_failure_description_printer_bitmap">Printing failed for this reason: %s</string>
     <string name="point_mainapp_demo_app_text_button_printer_bitmap">Print image</string>
 
+    <!-- Camera Scanner -->
+    <string name="point_mainapp_demo_app_cammera_scanner_main_title">QR Scanner</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_title">Start Scanner</string>
+
 </resources>

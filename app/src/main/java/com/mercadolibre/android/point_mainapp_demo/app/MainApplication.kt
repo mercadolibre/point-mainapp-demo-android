@@ -15,6 +15,7 @@ class MainApplication : Application() {
             .withBluetoothConfig()
             .withBluetoothUIConfig()
             .withBitmapPrinterConfig()
+            .withCameraScanner()
             .build()
 
         MPManager.initialize(this, config)
