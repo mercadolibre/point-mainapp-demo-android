@@ -1,0 +1,1 @@
+sourceset_dependencies='{":nativesdk:dokkaHtml/androidTestMds":[],":nativesdk:dokkaHtml/androidTestRelease":[],":nativesdk:dokkaHtml/debug":[],":nativesdk:dokkaHtml/main":[],":nativesdk:dokkaHtml/mds":[],":nativesdk:dokkaHtml/release":[]}'
