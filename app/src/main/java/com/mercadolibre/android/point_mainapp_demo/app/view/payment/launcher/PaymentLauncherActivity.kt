@@ -98,13 +98,13 @@ class PaymentLauncherActivity : AppCompatActivity() {
     ) {
         val uriSuccess = paymentFlow.buildCallbackUri(
             "mercadopago://launcher_native_app",
-            "callback_success",
+            "success",
             hashMapOf("attr" to "123"),
             "demo_app"
         )
         val uriError = paymentFlow.buildCallbackUri(
             "mercadopago://launcher_native_app",
-            "callback_error",
+            "error",
             hashMapOf("attr" to "456"),
             "demo_app"
         )
