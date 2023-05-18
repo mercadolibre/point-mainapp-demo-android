@@ -112,7 +112,6 @@ class BluetoothTestActivity : AppCompatActivity() {
     }
 
     private fun handlerParingResult(pair: Pair<BluetoothBondState, BluetoothDeviceModel>) {
-        binding.progressbarDiscoveryStarted.gone()
         val bondState = pair.first
         val bluetoothDevice = pair.second
 
@@ -136,6 +135,12 @@ class BluetoothTestActivity : AppCompatActivity() {
                 Toast.makeText(this, "pair devices", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.apply {
+            groupDiscoveryDevices.isVisible = adapterAvailableDevices.currentList.isNotEmpty()
+            progressbarDiscoveryStarted.gone()
+        }
+
     }
 
     private fun pairDevicesResult(list: List<BluetoothDeviceModel>) {
