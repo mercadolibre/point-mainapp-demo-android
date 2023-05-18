@@ -25,7 +25,7 @@ class PaymentResultActivity : AppCompatActivity() {
     private fun configPaymentResult() {
         intent.data?.let { data ->
             val paymentFlowResult = MPManager.paymentFlow.parseResponse(data)
-            binding?.run {
+            binding?.apply {
                 if (paymentFlowResult.paymentStatusError.isEmpty()) {
                     val reference =
                         "${getString(R.string.point_mainapp_demo_app_lab_reference)}: ${paymentFlowResult.paymentReference}"
