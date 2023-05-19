@@ -41,7 +41,7 @@ internal class BluetoothDevicesAdapter(private val callback: (String) -> Unit) :
 
     internal fun findDevice(bluetoothDevice: BluetoothDeviceModel) =
         currentList.find {
-            it.id == bluetoothDevice.id
+            it.address == bluetoothDevice.address
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = BluetoothDeviceViewHolder.from(parent)

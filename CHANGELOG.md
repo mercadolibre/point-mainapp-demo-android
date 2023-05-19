@@ -3,6 +3,7 @@
 - Launch payment flow with payment method like parameter
 - Launch QR Scanner functionality
 ## Fixed
+- Fixed animation when paring or unpair devices
 - Error with successfully approved payment.
 
 # v1.2.0
