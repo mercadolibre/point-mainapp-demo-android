@@ -45,9 +45,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
     private fun configPaymentButton() {
 
         binding.apply {
-
             getPaymentMethodActionButton.setOnClickListener {
-
                 clearPaymentMethodList = clearPaymentMethodList.not()
                 if (clearPaymentMethodList) {
                     getPaymentMethodActionButton.text =
@@ -55,31 +53,24 @@ class PaymentLauncherActivity : AppCompatActivity() {
                     lastPaymentMethodSelected = null
                     paymentMethodAdapter.clear()
                 } else {
-
                     getPaymentMethodActionButton.text =
                         getString(R.string.point_mainapp_demo_app_clear_label)
                     configPaymentMethodList()
                 }
-
-                sendPaymentActionButton.setOnClickListener {
-
-                    val amount = amountEditText.text?.toString()
-                    val description = binding.descriptionEditText.text?.toString()
-
-                    try {
-
-                        amount?.let {
-                            launchPaymentFlowIntent(
-                                amount = it,
-                                description = description,
-                                context = this@PaymentLauncherActivity
-                            )
-                        }
-
-                    } catch (e: IllegalAmountException) {
-
-                        setLayoutError(e.message)
+            }
+            sendPaymentActionButton.setOnClickListener {
+                val amount = amountEditText.text?.toString()
+                val description = binding.descriptionEditText.text?.toString()
+                try {
+                    amount?.let {
+                        launchPaymentFlowIntent(
+                            amount = it,
+                            description = description,
+                            context = this@PaymentLauncherActivity
+                        )
                     }
+                } catch (e: IllegalAmountException) {
+                    setLayoutError(e.message)
                 }
             }
         }

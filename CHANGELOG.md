@@ -1,3 +1,7 @@
+# V1.4.0
+## Fixed
+- Fixed on click listener in payment button
+
 # v1.3.0
 ## Added
 - Launch payment flow with payment method like parameter
