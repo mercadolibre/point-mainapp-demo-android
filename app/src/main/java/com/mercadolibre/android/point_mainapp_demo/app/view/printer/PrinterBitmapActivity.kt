@@ -1,23 +1,23 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.printer
 
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.R
-import com.mercadolibre.android.point_mainapp_demo.app.databinding.ActivityPrinterBitmapBinding
+import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPrinterBitmapBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import kotlinx.coroutines.launch
 
 class PrinterBitmapActivity : AppCompatActivity() {
 
-    private var binding: ActivityPrinterBitmapBinding? = null
+    private var binding: PointMainappDemoAppActivityPrinterBitmapBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPrinterBitmapBinding.inflate(layoutInflater)
+        binding = PointMainappDemoAppActivityPrinterBitmapBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
         onPrintImageBitmap()
@@ -46,7 +46,7 @@ class PrinterBitmapActivity : AppCompatActivity() {
 
     private fun printImageBitmap() {
 
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_datafono)
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.point_mainapp_demo_app_ic_datafono)
 
         lifecycle.coroutineScope.launch {
             MPManager.bitmapPrinter.makePrint(bitmap) {
