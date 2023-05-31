@@ -1,3 +1,7 @@
+# v2.0.0
+## Modified
+- Update kotlin version
+
 # V1.4.0
 ## Fixed
 - Fixed on click listener in payment button
