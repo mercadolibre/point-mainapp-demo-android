@@ -55,8 +55,10 @@ class PrinterTestActivity : AppCompatActivity(), PrinterSelectorCallback {
                 is PrinterEvents.IsLoading -> binding.progressIndicator.isVisible = event.isVisible
                 is PrinterEvents.LaunchPrinterSelector -> PrinterSelectorDialog.newInstance(event.printerList)
                     .show(supportFragmentManager, PrinterSelectorDialog::class.simpleName)
+
                 is PrinterEvents.OutputResult -> makeSnackBar(event.resultMessage)
-                PrinterEvents.DataEmpty -> makeSnackBar(getString(R.string.point_mainapp_demo_app_error_msg_data_empty))
+                is PrinterEvents.DataEmpty -> makeSnackBar(getString(R.string.point_mainapp_demo_app_error_msg_data_empty))
+                is PrinterEvents.Error -> event.error.message?.let { message -> makeSnackBar(message) }
             }
         }
     }
