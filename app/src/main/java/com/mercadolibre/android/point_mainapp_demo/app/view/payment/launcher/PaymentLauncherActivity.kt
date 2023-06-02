@@ -61,25 +61,22 @@ class PaymentLauncherActivity : AppCompatActivity() {
             sendPaymentActionButton.setOnClickListener {
                 val amount = amountEditText.text?.toString()
                 val description = binding.descriptionEditText.text?.toString()
-                try {
-                    amount?.let {
-                        launchPaymentFlowIntent(
-                            amount = it,
-                            description = description,
-                            context = this@PaymentLauncherActivity
-                        )
-                    }
-                } catch (e: IllegalAmountException) {
-                    setLayoutError(e.message)
+                amount?.let {
+                    launchPaymentFlowIntent(
+                        amount = it,
+                        description = description,
+                        context = this@PaymentLauncherActivity
+                    )
                 }
             }
         }
     }
 
     private fun configPaymentMethodList() {
-        val paymentMethodList =
-            paymentTool.getPaymentMethods().map { PaymentMethodModel(name = it.name) }
-        paymentMethodAdapter.submitList(paymentMethodList)
+        paymentTool.getPaymentMethods { result ->
+            val paymentMethodList = result.map { PaymentMethodModel(name = it.name) }
+            paymentMethodAdapter.submitList(paymentMethodList)
+        }
     }
 
     private fun launchPaymentFlowIntent(
@@ -107,7 +104,9 @@ class PaymentLauncherActivity : AppCompatActivity() {
             uriError,
             context,
             lastPaymentMethodSelected
-        )
+        ) { responseException ->
+            responseException.error?.message.let { errorMessage -> setLayoutError(errorMessage) }
+        }
     }
 
     private fun setLayoutError(message: String?) {

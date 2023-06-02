@@ -46,5 +46,11 @@
     <!-- Camera Scanner -->
     <string name="point_mainapp_demo_app_cammera_scanner_main_title">QR Scanner</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_title">Start Scanner</string>
+    <string name="point_mainapp_demo_app_smart_info_main_title">Smart info</string>
 
+    <!-- Smart info -->
+    <string name="point_mainapp_demo_app_serial_number_text">Serial number: %s</string>
+    <string name="point_mainapp_demo_app_brand_name_text">Brand name: %s</string>
+    <string name="point_mainapp_demo_app_model_name_text">Model name: %s</string>
+    <string name="point_mainapp_demo_app_sdk_version_text">SDK version: %s</string>
 </resources>

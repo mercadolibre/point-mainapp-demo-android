@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
+import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.contracts.states.BluetoothPrinterResult
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.contracts.PrinterEvents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,29 +28,31 @@ class BluetoothPrinterViewModel : ViewModel() {
         _printerEventLiveDataLiveData.value = PrinterEvents.IsLoading(true)
         viewModelScope.launch(Dispatchers.IO) {
             addressDevices?.let { address ->
-                MPManager.bluetooth.printer.makePrint(stringToPrint, address) { results ->
-                    resultBehavior(results)
+                MPManager.bluetooth.printer.makePrint(stringToPrint, address) { response ->
+                    response.doIfSuccess { result ->
+                        resultBehavior(result)
+                    }
                 }
-            } ?: MPManager.bluetooth.printer.makePrint(stringToPrint) { results ->
-                resultBehavior(results)
+            } ?: MPManager.bluetooth.printer.makePrint(stringToPrint) { response ->
+                response.doIfSuccess { result ->
+                    resultBehavior(result)
+                }
             }
         }
     }
 
-    private fun resultBehavior(result: String) {
+    private fun resultBehavior(makePrintResult: BluetoothPrinterResult) {
         viewModelScope.launch(Dispatchers.IO) {
             _printerEventLiveDataLiveData.postValue(PrinterEvents.IsLoading(false))
-            if (result == NEED_SELECTION_DEVICE) {
-                MPManager.bluetooth.discover.getPairPrinterDevices { listPrinter ->
-                    _printerEventLiveDataLiveData.postValue(PrinterEvents.LaunchPrinterSelector(listPrinter))
+            if (makePrintResult == BluetoothPrinterResult.NEED_SELECTION_DEVICE) {
+                MPManager.bluetooth.discover.getPairPrinterDevices { response ->
+                    response.doIfSuccess { listPrinter ->
+                        _printerEventLiveDataLiveData.postValue(PrinterEvents.LaunchPrinterSelector(listPrinter))
+                    }
                 }
             } else {
-                _printerEventLiveDataLiveData.postValue(PrinterEvents.OutputResult(result))
+                _printerEventLiveDataLiveData.postValue(PrinterEvents.OutputResult(makePrintResult.name))
             }
         }
-    }
-
-    companion object {
-        const val NEED_SELECTION_DEVICE = "NEED_SELECTION_DEVICE"
     }
 }

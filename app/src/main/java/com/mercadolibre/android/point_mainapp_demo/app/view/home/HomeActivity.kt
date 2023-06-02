@@ -8,6 +8,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappD
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.camera.CameraScannerActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
         configGoToPrinterTest()
         onPrinterBitmap()
         configGoToCameraScanner()
+        configGoToSmartInfo()
     }
 
     private fun configGoToRefundsUI() {
@@ -72,7 +74,13 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun <T>launchActivity(destination: Class<T>) {
+    private fun configGoToSmartInfo() {
+        binding?.pointMainappDemoAppGoToInfo?.setOnClickListener {
+            launchActivity(SmartInfoActivity::class.java)
+        }
+    }
+
+    private fun <T> launchActivity(destination: Class<T>) {
         Intent(this, destination).run {
             startActivity(this)
         }
