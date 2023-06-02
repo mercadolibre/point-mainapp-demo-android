@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.contracts.states.DiscoveryEventsResult
 import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.entities.BluetoothDeviceModel
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.contracts.BluetoothSettingsEvents
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,32 +21,64 @@ internal class BluetoothSettingsViewModel : ViewModel() {
     val bluetoothSettingLiveData = _bluetoothSettingLiveData.asStateFlow()
 
     fun registerConnectObserver() {
-        MPManager.bluetooth.connectObserver.registerObserver { _, bluetoothDeviceModel ->
-            _bluetoothSettingLiveData.value =
-                BluetoothSettingsEvents.ConnectDevicesResult(bluetoothDeviceModel)
+        MPManager.bluetooth.connectObserver.registerObserver { result ->
+            result
+                .doIfSuccess { pair ->
+                    val bluetoothDeviceModel = pair.first
+                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.ConnectDevicesResult(bluetoothDeviceModel)
+                }.doIfError { exception ->
+                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                }
         }
     }
 
     fun getCurrentStateBluetooth() {
-        MPManager.bluetooth.ignitor.getCurrentState { state ->
-            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorCurrentState(state)
+        MPManager.bluetooth.ignitor.getCurrentState { response ->
+            response
+                .doIfSuccess { result ->
+                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorCurrentState(result)
+                }.doIfError { exception ->
+                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                }
         }
     }
 
     fun ignitorBluetooth(ignitor: Boolean) {
         MPManager.bluetooth.ignitor.run {
             if (ignitor) {
-                turnOn { result -> _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorLaunchResult(result) }
+                turnOn { response ->
+                    response
+                        .doIfSuccess { result ->
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorLaunchResult(result)
+                        }
+                        .doIfError { exception ->
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                        }
+                }
             } else {
-                turnOff { result -> _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorLaunchResult(result) }
+                turnOff { response ->
+                    response
+                        .doIfSuccess { result ->
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorLaunchResult(result)
+                        }
+                        .doIfError { exception ->
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                        }
+                }
             }
         }
     }
 
     fun getPairDevices() {
         viewModelScope.launch(Dispatchers.IO) {
-            MPManager.bluetooth.discover.getPairDevices { result ->
-                _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryPairDevicesResult(result)
+            MPManager.bluetooth.discover.getPairDevices { response ->
+                response
+                    .doIfSuccess { result ->
+                        _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryPairDevicesResult(result)
+                    }
+                    .doIfError { exception ->
+                        _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                    }
             }
         }
     }
@@ -54,6 +88,10 @@ internal class BluetoothSettingsViewModel : ViewModel() {
             MPManager.bluetooth.discover.startDiscovery(object : DiscoveryEventsResult {
                 override fun discoveryStarted() {
                     _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryStarted
+                }
+
+                override fun internalError(error: Exception) {
+                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(error)
                 }
 
                 override fun discoveryEnded() {
@@ -76,14 +114,25 @@ internal class BluetoothSettingsViewModel : ViewModel() {
         Log.i(TAG, "pairingDevices: devices address --> $address, needPair --> $needPair")
         viewModelScope.launch(Dispatchers.IO) {
             if (needPair) {
-                MPManager.bluetooth.paring.pairDevices(address) { pairingStatus ->
-                    Log.i(TAG, "pairDevices: callback response ${pairingStatus.first}")
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.PairingDevicesStatus(pairingStatus)
+                MPManager.bluetooth.paring.pairDevices(address) { response ->
+                    response
+                        .doIfSuccess { resultPair ->
+                            Log.i(TAG, "pairDevices: callback response ${resultPair.first}")
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.PairingDevicesStatus(resultPair)
+                        }
+                        .doIfError { exception ->
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                        }
                 }
             } else {
-                MPManager.bluetooth.paring.unPairDevices(address) { pairingStatus ->
-                    Log.i(TAG, "unPairDevices: callback response ${pairingStatus.first}")
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.PairingDevicesStatus(pairingStatus)
+                MPManager.bluetooth.paring.unPairDevices(address) { response ->
+                    response
+                        .doIfSuccess { resultPair ->
+                            Log.i(TAG, "unPairDevices: callback response ${resultPair.first}")
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.PairingDevicesStatus(resultPair)
+                        }.doIfError { exception ->
+                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                        }
                 }
             }
         }

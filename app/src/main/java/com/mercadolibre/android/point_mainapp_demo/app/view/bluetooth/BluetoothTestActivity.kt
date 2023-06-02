@@ -18,9 +18,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.adapter.Bl
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.contracts.BluetoothSettingsEvents.*
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.viewmodels.BluetoothSettingsViewModel
 
-/**
- * test activity bluetooth.
- * */
+/** test activity bluetooth. */
 class BluetoothTestActivity : AppCompatActivity() {
 
     private val binding: PointMainappDemoAppActivityBluetoothTestBinding by lazy {
@@ -98,6 +96,7 @@ class BluetoothTestActivity : AppCompatActivity() {
                         binding.groupDiscoveryDevices.visible()
                         it.addItemDevice(events.devices)
                     }
+
                     is DiscoveryDevicesUpdate -> adapterAvailableDevices.updateItemDevice(events.devices)
                     DiscoveryStarted -> binding.progressbarDiscoveryStarted.visible()
                     is DiscoveryPairDevicesResult -> pairDevicesResult(events.devicesList)
@@ -106,6 +105,7 @@ class BluetoothTestActivity : AppCompatActivity() {
                     is PairingDevicesStatus -> handlerParingResult(events.pair)
                     Init -> Unit
                     is ConnectDevicesResult -> adapterPairDevices.updateItemDevice(events.connectDevices)
+                    is Error -> events.error.message?.let { message -> showMessage(message) }
                 }
             }
         }
@@ -126,6 +126,7 @@ class BluetoothTestActivity : AppCompatActivity() {
                 } ?: adapterAvailableDevices.addItemDevice(bluetoothDevice)
                 Toast.makeText(this, "devices forget", Toast.LENGTH_SHORT).show()
             }
+
             BluetoothBondState.BONDING -> devicesFoundInAvailableList?.let {
                 adapterAvailableDevices.updateItemDevice(it)
             }
@@ -140,7 +141,6 @@ class BluetoothTestActivity : AppCompatActivity() {
             groupDiscoveryDevices.isVisible = adapterAvailableDevices.currentList.isNotEmpty()
             progressbarDiscoveryStarted.gone()
         }
-
     }
 
     private fun pairDevicesResult(list: List<BluetoothDeviceModel>) {
@@ -169,5 +169,9 @@ class BluetoothTestActivity : AppCompatActivity() {
                 adapterPairDevices.submitList(emptyList())
             }
         }
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this@BluetoothTestActivity, message, Toast.LENGTH_SHORT).show()
     }
 }

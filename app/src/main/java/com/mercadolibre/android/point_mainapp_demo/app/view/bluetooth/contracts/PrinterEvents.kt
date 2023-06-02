@@ -7,4 +7,6 @@ sealed class PrinterEvents {
     class OutputResult(val resultMessage: String) : PrinterEvents()
     class LaunchPrinterSelector(val printerList: List<BluetoothDeviceModel>) : PrinterEvents()
     object DataEmpty : PrinterEvents()
+
+    class Error(val error: Exception) : PrinterEvents()
 }

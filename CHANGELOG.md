@@ -2,9 +2,16 @@
 ## Modified
 - Update kotlin version
 
-# V1.4.0
 ## Fixed
 - Fixed on click listener in payment button
+
+## Added
+- Coroutines have been implemented in the content resolvers and other layers, such as use cases and the implementations of the features available in the SDK.
+- Used Smart App content provider to update hardware buttons state
+- Implemented the feature that allows to obtain the SDK and device information.
+- Backward compatibility in callbacks when building the paymentFlow deeplink in the SDK.
+- Implement generic result to handler sdk answer
+- Error handling when inserting a non-numeric amount format.
 
 # v1.3.0
 ## Added

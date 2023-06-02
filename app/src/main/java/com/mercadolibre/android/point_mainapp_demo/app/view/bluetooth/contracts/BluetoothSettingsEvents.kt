@@ -17,4 +17,6 @@ internal sealed class BluetoothSettingsEvents {
     class DiscoveryDevicesUpdate(val devices: BluetoothDeviceModel) : BluetoothSettingsEvents()
     class PairingDevicesStatus(val pair: Pair<BluetoothBondState, BluetoothDeviceModel>) : BluetoothSettingsEvents()
     class ConnectDevicesResult(val connectDevices: BluetoothDeviceModel) : BluetoothSettingsEvents()
+
+    class Error(val error: Exception) : BluetoothSettingsEvents()
 }
