@@ -5,9 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPrinterBitmapBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
+import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import kotlinx.coroutines.launch
 
@@ -49,15 +52,21 @@ class PrinterBitmapActivity : AppCompatActivity() {
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.point_mainapp_demo_app_ic_datafono)
 
         lifecycle.coroutineScope.launch {
-            MPManager.bitmapPrinter.makePrint(bitmap) {
-                onResultPrinterBitmap(it)
+            MPManager.bitmapPrinter.makePrint(bitmap) { response ->
+                response
+                    .doIfSuccess { result ->
+                        onResultPrinterBitmap(result)
+                    }
+                    .doIfError { error ->
+                        toast(error.message.orEmpty())
+                    }
             }
         }
     }
 
     private fun onResultPrinterBitmap(message: String) {
 
-        when(message) {
+        when (message) {
 
             PRINT_SUCCESS -> onResultSuccess()
             else -> onResultFailure(message)
@@ -79,7 +88,8 @@ class PrinterBitmapActivity : AppCompatActivity() {
         binding?.apply {
             progressCircular.gone()
             iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
-            descriptionPrinterBitmap.text = getString(R.string.point_mainapp_demo_app_home_result_failure_description_printer_bitmap, message)
+            descriptionPrinterBitmap.text =
+                getString(R.string.point_mainapp_demo_app_home_result_failure_description_printer_bitmap, message)
             printImageBitmap.text = TEXT_BUTTON_ACTION
         }
     }

@@ -5,9 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
-import com.mercadolibre.android.point_integration_sdk.nativesdk.resolver.validate.amount.exception.IllegalAmountException
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 
@@ -73,9 +75,15 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun configPaymentMethodList() {
-        paymentTool.getPaymentMethods { result ->
-            val paymentMethodList = result.map { PaymentMethodModel(name = it.name) }
-            paymentMethodAdapter.submitList(paymentMethodList)
+        paymentTool.getPaymentMethods { response ->
+            response
+                .doIfSuccess { result ->
+                    val paymentMethodList = result.map { PaymentMethodModel(name = it.name) }
+                    paymentMethodAdapter.submitList(paymentMethodList)
+                }
+                .doIfError { error ->
+                    toast(error.message.orEmpty())
+                }
         }
     }
 
@@ -104,8 +112,10 @@ class PaymentLauncherActivity : AppCompatActivity() {
             uriError,
             context,
             lastPaymentMethodSelected
-        ) { responseException ->
-            responseException.error?.message.let { errorMessage -> setLayoutError(errorMessage) }
+        ) { response ->
+            response.doIfError { error ->
+                error.message?.let { errorMessage -> setLayoutError(errorMessage) }
+            }
         }
     }
 

@@ -1,3 +1,7 @@
+# v2.1.0
+## Added
+- MP Generic Response has been implemented in the following features: Payment Flow, Payment Methods, Smart Information, Printer, Camera Scanner.
+
 # v2.0.0
 ## Modified
 - Update kotlin version
