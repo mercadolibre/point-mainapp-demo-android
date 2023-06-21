@@ -30,27 +30,29 @@ class CameraScannerActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         MPManager.cameraScanner.handleQrResponse(resultCode, data)
             .doIfSuccess { qrResult ->
-                binding.pointMainappDemoAppStateImg.visibility = View.VISIBLE
-                when (qrResult.status) {
-                    CameraScannerStatus.Ok -> {
-                        val result = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_success)
-                            .format(qrResult.message)
-                        binding.pointMainappDemoAppCameraScannerResult.text = result
-                        binding.pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_check_white)
-                    }
+                binding.run {
+                    pointMainappDemoAppStateImg.visibility = View.VISIBLE
+                    when (qrResult.status) {
+                        CameraScannerStatus.Ok -> {
+                            val result = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_success)
+                                .format(qrResult.message)
+                            pointMainappDemoAppCameraScannerResult.text = result
+                            pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_check_white)
+                        }
 
-                    CameraScannerStatus.Error -> {
-                        val error = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_error)
-                            .format(qrResult.message)
-                        binding.pointMainappDemoAppCameraScannerResult.text = error
-                        binding.pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
-                    }
+                        CameraScannerStatus.Error -> {
+                            val error = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_error)
+                                .format(qrResult.message)
+                            pointMainappDemoAppCameraScannerResult.text = error
+                            pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
+                        }
 
-                    CameraScannerStatus.Unknown -> {
-                        val message = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_undefined)
-                            .format(qrResult.message)
-                        binding.pointMainappDemoAppCameraScannerResult.text = message
-                        binding.pointMainappDemoAppStateImg.visibility = View.GONE
+                        CameraScannerStatus.Unknown -> {
+                            val message = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_undefined)
+                                .format(qrResult.message)
+                            pointMainappDemoAppCameraScannerResult.text = message
+                            pointMainappDemoAppStateImg.visibility = View.GONE
+                        }
                     }
                 }
             }
