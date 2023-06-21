@@ -33,17 +33,23 @@ class CameraScannerActivity : AppCompatActivity() {
                 binding.pointMainappDemoAppStateImg.visibility = View.VISIBLE
                 when (qrResult.status) {
                     CameraScannerStatus.Ok -> {
-                        binding.pointMainappDemoAppCameraScannerResult.text = "Lectura Exitosa: ${qrResult.message}"
+                        val result = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_success)
+                            .format(qrResult.message)
+                        binding.pointMainappDemoAppCameraScannerResult.text = result
                         binding.pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_check_white)
                     }
 
                     CameraScannerStatus.Error -> {
-                        binding.pointMainappDemoAppCameraScannerResult.text = "Error: ${qrResult.message}"
+                        val error = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_error)
+                            .format(qrResult.message)
+                        binding.pointMainappDemoAppCameraScannerResult.text = error
                         binding.pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
                     }
 
                     CameraScannerStatus.Unknown -> {
-                        "Indefinido: ${qrResult.message}"
+                        val message = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_undefined)
+                            .format(qrResult.message)
+                        binding.pointMainappDemoAppCameraScannerResult.text = message
                         binding.pointMainappDemoAppStateImg.visibility = View.GONE
                     }
                 }
