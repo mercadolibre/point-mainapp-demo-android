@@ -6,8 +6,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.camera.provider.entities.CameraScannerStatus
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
+import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityCameraScannerBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 
 class CameraScannerActivity : AppCompatActivity() {
 
@@ -25,24 +28,36 @@ class CameraScannerActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val qrResult = MPManager.cameraScanner.handleQrResponse(resultCode, data)
-        binding.pointMainappDemoAppStateImg.visibility = View.VISIBLE
-        when (qrResult.status) {
-            CameraScannerStatus.Ok -> {
-                binding.pointMainappDemoAppCameraScannerResult.text = "Lectura Exitosa: ${qrResult.message}"
-                binding.pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_check_white)
-            }
+        MPManager.cameraScanner.handleQrResponse(resultCode, data)
+            .doIfSuccess { qrResult ->
+                binding.run {
+                    pointMainappDemoAppStateImg.visibility = View.VISIBLE
+                    when (qrResult.status) {
+                        CameraScannerStatus.Ok -> {
+                            val result = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_success)
+                                .format(qrResult.message)
+                            pointMainappDemoAppCameraScannerResult.text = result
+                            pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_check_white)
+                        }
 
-            CameraScannerStatus.Error -> {
-                binding.pointMainappDemoAppCameraScannerResult.text = "Error: ${qrResult.message}"
-                binding.pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
-            }
+                        CameraScannerStatus.Error -> {
+                            val error = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_error)
+                                .format(qrResult.message)
+                            pointMainappDemoAppCameraScannerResult.text = error
+                            pointMainappDemoAppStateImg.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
+                        }
 
-            CameraScannerStatus.Unknown -> {
-                "Indefinido: ${qrResult.message}"
-                binding.pointMainappDemoAppStateImg.visibility = View.GONE
-
+                        CameraScannerStatus.Unknown -> {
+                            val message = getString(R.string.point_mainapp_demo_app_cammera_scanner_start_scan_undefined)
+                                .format(qrResult.message)
+                            pointMainappDemoAppCameraScannerResult.text = message
+                            pointMainappDemoAppStateImg.visibility = View.GONE
+                        }
+                    }
+                }
             }
-        }
+            .doIfError { error ->
+                toast(error.message.orEmpty())
+            }
     }
 }
