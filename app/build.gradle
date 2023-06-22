@@ -33,6 +33,23 @@ android {
         }
     }
 
+    productFlavors {
+        flavorDimensions "integration"
+
+        miniapp {
+            versionNameSuffix "-miniapp"
+        }
+        mainapp {
+            versionNameSuffix "-mainapp"
+        }
+    }
+
+    sourceSets {
+        miniapp {
+            manifest.srcFile 'src/miniapp/AndroidManifest.xml'
+        }
+    }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -51,8 +68,8 @@ android {
 
 dependencies {
 
-    implementation files("libs/nativesdk-EXPERIMENTAL-2.1.0.aar")
-
+    mainappImplementation files("libs/nativesdk-mainapp-2.1.0.aar")
+    miniappImplementation files("libs/nativesdk-miniapp-2.1.0.aar")
     // AndroidX
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
