@@ -7,15 +7,12 @@
         <activity
             android:name=".view.home.HomeActivity"
             android:exported="true">
-            <intent-filter tools:node="removeAll">
+            <intent-filter tools:node="removeAll" />
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="smart_integrations"
-                    android:pathPattern="/launch_app"
-                    android:scheme="mercadopago" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
