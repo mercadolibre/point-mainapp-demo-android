@@ -1,3 +1,11 @@
+# v2.2.0
+## Added
+- Beat implementation the new way of tracking flow events.
+- Remove the Timber library and replace the event log with the new implementation.
+- Added smartPos version number in app info.
+- Change name parameter SmartDevice.
+- Removed coroutines dependency in the printer functionalities.
+
 # v2.1.0
 ## Added
 - MP Generic Response has been implemented in the following features: Payment Flow, Payment Methods, Smart Information, Printer, Camera Scanner.
