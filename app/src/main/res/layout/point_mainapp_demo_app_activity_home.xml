@@ -26,132 +26,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_hide_to_miniapp_flavor"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_actions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:constraint_referenced_ids="point_mainapp_demo_app_go_to_bluetooth_tools,point_mainapp_demo_app_go_to_bluetooth_ui_settings,point_mainapp_demo_app_go_to_refunds,point_mainapp_demo_app_go_to_printer_test,point_mainapp_demo_app_go_to_camera_scanner" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_payment_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_3m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_go_to_payment"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_ic_payments"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/point_mainapp_demo_appTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_appTitle"
+            tools:listitem="@layout/point_mainapp_demo_app_item_home_action"
+            tools:itemCount="5"
+            />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_bluetooth_tools"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_button_bluetooth_tools"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_ic_bluetooth"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_payment_button" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_bluetooth_ui_settings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_button_bluetooth_ui_settings"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_ic_bluetooth"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_bluetooth_tools" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_refunds"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_button_refunds"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_ic_payments"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_bluetooth_ui_settings" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_printer_test"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_home_print_label"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_black_ic_print"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_refunds" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mainapp_demo_app_home_print_image_bitmap"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_home_printer_bitmap"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_black_ic_print"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_go_to_printer_test" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_camera_scanner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_cammera_scanner_main_title"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_ic_qr_code"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mainapp_demo_app_home_print_image_bitmap" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/point_mainapp_demo_app_go_to_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/ui_6m"
-            android:layout_marginTop="@dimen/ui_2m"
-            android:paddingVertical="@dimen/ui_1_25m"
-            android:text="@string/point_mainapp_demo_app_smart_info_main_title"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/ui_1_25m"
-            app:icon="@drawable/point_mainapp_demo_app_ic_info"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/point_mainapp_demo_app_go_to_camera_scanner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

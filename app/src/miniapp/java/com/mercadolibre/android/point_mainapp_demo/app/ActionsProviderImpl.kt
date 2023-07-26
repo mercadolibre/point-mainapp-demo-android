@@ -1,8 +1,8 @@
 package com.mercadolibre.android.point_mainapp_demo.app
 
 import android.content.Context
-import com.mercadolibre.android.point_mainapp_demo.app.actions.ActionModel
-import com.mercadolibre.android.point_mainapp_demo.app.actions.ActionTypes
+import com.mercadolibre.android.point_mainapp_demo.app.actions.model.ActionModel
+import com.mercadolibre.android.point_mainapp_demo.app.actions.model.ActionTypes
 import com.mercadolibre.android.point_mainapp_demo.app.actions.ActionsProvicer
 import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
