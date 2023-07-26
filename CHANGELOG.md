@@ -2,6 +2,7 @@
 ## Added
 - MP Generic Response has been implemented in the following features: Payment Flow, Payment Methods, Smart Information, Printer, Camera Scanner.
 - Added flavor to support demo app examples for natives MainApps & MiniApps.
+- hide unnecessary functionality for mini apps flavors
 
 ## Fixed
 - Fixed error related to sdk version no available into smart information option.

@@ -26,6 +26,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_hide_to_miniapp_flavor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="point_mainapp_demo_app_go_to_bluetooth_tools,point_mainapp_demo_app_go_to_bluetooth_ui_settings,point_mainapp_demo_app_go_to_refunds,point_mainapp_demo_app_go_to_printer_test,point_mainapp_demo_app_go_to_camera_scanner" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/point_mainapp_demo_app_go_to_payment_button"
             android:layout_width="0dp"

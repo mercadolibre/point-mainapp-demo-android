@@ -2,8 +2,12 @@ package com.mercadolibre.android.point_mainapp_demo.app.view.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.mercadolibre.android.point_integration_sdk.nativesdk.BuildConfig
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
+import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
@@ -21,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = PointMainappDemoAppActivityHomeBinding.inflate(layoutInflater)
         binding?.run { setContentView(root) }
-
+        if (BuildConfig.FLAVOR.contains("miniapp")) binding?.groupHideToMiniappFlavor?.visibility = View.GONE
         configGoToPaymentButton()
         configGoToBluetoothTools()
         configGoToBluetoothSettingsUI()
