@@ -27,17 +27,8 @@ class BluetoothPrinterViewModel : ViewModel() {
         }
 
         _printerEventLiveDataLiveData.value = PrinterEvents.IsLoading(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            addressDevices?.let { address ->
-                MPManager.bluetooth.printer.makePrint(stringToPrint, address) { response ->
-                    response
-                        .doIfSuccess { result ->
-                            resultBehavior(result)
-                        }.doIfError { exception ->
-                            _printerEventLiveDataLiveData.value = PrinterEvents.Error(exception)
-                        }
-                }
-            } ?: MPManager.bluetooth.printer.makePrint(stringToPrint) { response ->
+        addressDevices?.let { address ->
+            MPManager.bluetooth.printer.print(stringToPrint, address) { response ->
                 response
                     .doIfSuccess { result ->
                         resultBehavior(result)
@@ -45,6 +36,13 @@ class BluetoothPrinterViewModel : ViewModel() {
                         _printerEventLiveDataLiveData.value = PrinterEvents.Error(exception)
                     }
             }
+        } ?: MPManager.bluetooth.printer.print(stringToPrint) { response ->
+            response
+                .doIfSuccess { result ->
+                    resultBehavior(result)
+                }.doIfError { exception ->
+                    _printerEventLiveDataLiveData.value = PrinterEvents.Error(exception)
+                }
         }
     }
 

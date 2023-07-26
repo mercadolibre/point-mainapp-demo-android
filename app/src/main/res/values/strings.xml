@@ -56,5 +56,6 @@
     <string name="point_mainapp_demo_app_brand_name_text">Brand name: %s</string>
     <string name="point_mainapp_demo_app_model_name_text">Model name: %s</string>
     <string name="point_mainapp_demo_app_sdk_version_text">SDK version: %s</string>
+    <string name="point_mainapp_demo_app_payment_module_version_text">Payment module version: %s</string>
     <string name="point_mainapp_demo_app_smart_info_title">Smart info</string>
 </resources>

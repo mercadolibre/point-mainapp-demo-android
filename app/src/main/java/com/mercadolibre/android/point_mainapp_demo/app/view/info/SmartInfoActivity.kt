@@ -31,17 +31,21 @@ class SmartInfoActivity : AppCompatActivity() {
                         val serialNumber = getString(R.string.point_mainapp_demo_app_serial_number_text).format(serialNumber)
                         val brandName = getString(R.string.point_mainapp_demo_app_brand_name_text).format(brandName)
                         val modelName = getString(R.string.point_mainapp_demo_app_model_name_text).format(modelName)
+                        val paymentModuleVersion = getString(R.string.point_mainapp_demo_app_payment_module_version_text)
+                            .format(paymentModuleVersion)
 
                         binding?.run {
                             mainappDemoAppSerialNumberText.text = serialNumber
                             mainappDemoAppBrandNameText.text = brandName
                             mainappDemoAppModelNameText.text = modelName
+                            mainappDemoAppPaymentModuleVersionText.text = paymentModuleVersion
                         }
                     }
 
                     with(smartInformation.integration) {
                         val sdkVersion = getString(R.string.point_mainapp_demo_app_sdk_version_text).format(nativeSdkVersion)
                         binding?.mainappDemoAppSdkVersionText?.text = sdkVersion
+
                     }
                 }
                 .doIfError { error ->
