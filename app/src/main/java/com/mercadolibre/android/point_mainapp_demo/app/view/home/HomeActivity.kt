@@ -3,80 +3,45 @@ package com.mercadolibre.android.point_mainapp_demo.app.view.home
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
+import com.mercadolibre.android.point_mainapp_demo.app.ActionsProviderImpl
+import com.mercadolibre.android.point_mainapp_demo.app.actions.contract.HomeActions
+import com.mercadolibre.android.point_mainapp_demo.app.actions.view.HomeActionAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
-import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
-import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
-import com.mercadolibre.android.point_mainapp_demo.app.view.camera.CameraScannerActivity
-import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
-import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
-import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
-import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
 
 class HomeActivity : AppCompatActivity() {
 
-    private var binding: PointMainappDemoAppActivityHomeBinding? = null
+    private val binding: PointMainappDemoAppActivityHomeBinding by lazy {
+        PointMainappDemoAppActivityHomeBinding.inflate(layoutInflater)
+    }
+
+    private val actionAdapter: HomeActionAdapter by lazy {
+        HomeActionAdapter(::handlerActionItem)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = PointMainappDemoAppActivityHomeBinding.inflate(layoutInflater)
-        binding?.run { setContentView(root) }
-
-        configGoToPaymentButton()
-        configGoToBluetoothTools()
-        configGoToBluetoothSettingsUI()
-        configGoToRefundsUI()
-        configGoToPrinterTest()
-        onPrinterBitmap()
-        configGoToCameraScanner()
-        configGoToSmartInfo()
+        binding.run { setContentView(root) }
+        actionAdapter.submitList(ActionsProviderImpl.getActions(this@HomeActivity))
+        setRecyclerView()
     }
 
-    private fun configGoToRefundsUI() {
-        binding?.pointMainappDemoAppGoToRefunds?.setOnClickListener {
-            launchActivity(RefundsActivity::class.java)
+    private fun setRecyclerView() {
+        binding.rvActions.apply {
+            layoutManager = LinearLayoutManager(
+                this@HomeActivity,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            adapter = actionAdapter
         }
     }
 
-    private fun configGoToPaymentButton() {
-        binding?.pointMainappDemoAppGoToPaymentButton?.setOnClickListener {
-            launchActivity(PaymentLauncherActivity::class.java)
-        }
-    }
-
-    private fun configGoToBluetoothTools() {
-        binding?.pointMainappDemoAppGoToBluetoothTools?.setOnClickListener {
-            launchActivity(BluetoothTestActivity::class.java)
-        }
-    }
-
-    private fun configGoToBluetoothSettingsUI() {
-        binding?.pointMainappDemoAppGoToBluetoothUiSettings?.setOnClickListener {
-            MPManager.bluetoothUiSettings.launch(this@HomeActivity)
-        }
-    }
-
-    private fun configGoToPrinterTest() {
-        binding?.pointMainappDemoAppGoToPrinterTest?.setOnClickListener {
-            launchActivity(PrinterTestActivity::class.java)
-        }
-    }
-
-    private fun onPrinterBitmap() {
-        binding?.mainappDemoAppHomePrintImageBitmap?.setOnClickListener {
-            launchActivity(PrinterBitmapActivity::class.java)
-        }
-    }
-
-    private fun configGoToCameraScanner() {
-        binding?.pointMainappDemoAppGoToCameraScanner?.setOnClickListener {
-            launchActivity(CameraScannerActivity::class.java)
-        }
-    }
-
-    private fun configGoToSmartInfo() {
-        binding?.pointMainappDemoAppGoToInfo?.setOnClickListener {
-            launchActivity(SmartInfoActivity::class.java)
+    private fun handlerActionItem(action: HomeActions) {
+        when (action) {
+            is HomeActions.LaunchActivity -> launchActivity(action.activity)
+            is HomeActions.LaunchBtUi -> action.actionManager.bluetoothUiSettings.launch(this@HomeActivity)
         }
     }
 
