@@ -2,14 +2,14 @@ package com.mercadolibre.android.point_mainapp_demo.app
 
 import android.content.Context
 import androidx.appcompat.content.res.AppCompatResources
-import com.mercadolibre.android.point_mainapp_demo.app.actions.contract.ActionsProvicer
+import com.mercadolibre.android.point_mainapp_demo.app.actions.contract.ActionsProvider
 import com.mercadolibre.android.point_mainapp_demo.app.actions.contract.HomeActions
 import com.mercadolibre.android.point_mainapp_demo.app.actions.model.ActionModel
 import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
 
-object ActionsProviderImpl : ActionsProvicer {
+object ActionsProviderImpl : ActionsProvider {
 
     override fun getActions(context: Context): List<ActionModel> {
         return listOf(
