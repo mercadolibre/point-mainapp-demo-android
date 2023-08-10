@@ -52,29 +52,21 @@ class PrinterBitmapActivity : AppCompatActivity() {
         MPManager.bitmapPrinter.print(bitmap) { response ->
             response
                 .doIfSuccess { result ->
-                    onResultPrinterBitmap(result)
+                    onResultSuccess(result)
                 }
                 .doIfError { error ->
+                    onResultFailure(error.message.orEmpty())
                     toast(error.message.orEmpty())
                 }
         }
     }
 
-    private fun onResultPrinterBitmap(message: String) {
-
-        when (message) {
-
-            PRINT_SUCCESS -> onResultSuccess()
-            else -> onResultFailure(message)
-        }
-    }
-
-    private fun onResultSuccess() {
+    private fun onResultSuccess(result: String) {
 
         binding?.apply {
             progressCircular.gone()
             iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_ic_done)
-            descriptionPrinterBitmap.text = getString(R.string.point_mainapp_demo_app_home_result_successful_description_printer_bitmap)
+            descriptionPrinterBitmap.text = getString(R.string.point_mainapp_demo_app_home_result_successful_description_printer_bitmap, result)
             printImageBitmap.text = TEXT_BUTTON_ACTION
         }
     }
@@ -92,6 +84,5 @@ class PrinterBitmapActivity : AppCompatActivity() {
 
     companion object {
         private const val TEXT_BUTTON_ACTION = "Go to start"
-        private const val PRINT_SUCCESS = "Success"
     }
 }

@@ -1,3 +1,7 @@
+# v2.2.1
+## Fixed
+- Exception mapping when printing image by bitmap.
+
 # v2.2.0
 ## Added
 - Beat implementation the new way of tracking flow events.
