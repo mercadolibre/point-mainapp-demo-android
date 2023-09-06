@@ -5,8 +5,29 @@ apply plugin: 'kotlin-android'
 apply plugin: 'jacoco'
 apply from: rootProject.file('jacoco.gradle')
 
+def keystorePropertiesFile = file("keystore.properties")
+def keystoreProperties = new Properties()
+
 android {
     compileSdk project.compileSdkVersion.toInteger()
+
+    signingConfigs {
+        release {
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+                keyAlias keystoreProperties['releaseKeyAlias']
+                keyPassword keystoreProperties['releaseKeyPassword']
+                storeFile file(keystoreProperties['releaseKeyStore'])
+                storePassword keystoreProperties['releaseStorePassword']
+            } else {
+                logger.warn('#### Warning:release keystore not found. Default development-only debug keystore will be used ####')
+                storeFile file('debug_keystore')
+                storePassword 'android'
+                keyPassword 'android'
+                keyAlias = 'androiddebugkey'
+            }
+        }
+    }
 
     defaultConfig {
         applicationId project.applicationId
@@ -38,9 +59,11 @@ android {
 
         miniapp {
             versionNameSuffix "-miniapp"
+            signingConfig signingConfigs.release
         }
         mainapp {
             versionNameSuffix "-mainapp"
+            signingConfig signingConfigs.release
         }
     }
 

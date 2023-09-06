@@ -1,6 +1,7 @@
 # v2.2.1
 ## Fixed
 - Exception mapping when printing image by bitmap.
+- Added signature keystore configuration for release build.
 
 # v2.2.0
 ## Added
