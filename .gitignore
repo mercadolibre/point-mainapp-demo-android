@@ -90,3 +90,7 @@ Temporary Items
 ## Java dumps
 *.hprof
 rp
+
+#keystores
+app/demoapp.keystore
+app/keystore.properties
