@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mercadolibre.android.point_mainapp_demo.app"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.mercadolibre.android.point_mainapp_demo.app">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MainApplication"
@@ -9,6 +11,9 @@
         android:label="@string/point_mainapp_demo_app_name"
         android:supportsRtl="true"
         android:theme="@style/point_mainapp_demo_appTheme.main">
+        <activity
+            android:name=".view.payment.launcher.PaymentFlowInstallmentsActivity"
+            android:exported="false" />
         <activity
             android:name=".view.info.SmartInfoActivity"
             android:exported="false" />
@@ -62,7 +67,5 @@
             android:name=".view.camera.CameraScannerActivity"
             android:exported="false" />
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

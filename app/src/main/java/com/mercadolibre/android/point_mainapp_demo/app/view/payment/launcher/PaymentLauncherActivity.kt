@@ -1,16 +1,21 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
+import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYMENT_METHOD
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 
 /** Main activity class */
@@ -63,15 +68,33 @@ class PaymentLauncherActivity : AppCompatActivity() {
             sendPaymentActionButton.setOnClickListener {
                 val amount = amountEditText.text?.toString()
                 val description = binding.descriptionEditText.text?.toString()
-                amount?.let {
-                    launchPaymentFlowIntent(
-                        amount = it,
-                        description = description,
-                        context = this@PaymentLauncherActivity
+                if (lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD.name.lowercase()) {
+                    launchActivity(
+                        PaymentFlowInstallmentsActivity::class.java,
+                        bundleOf(
+                            PAYMENT_METHOD to lastPaymentMethodSelected,
+                            AMOUNT to amount
+                        )
                     )
+                } else {
+                    amount?.let {
+                        launchPaymentFlowIntent(
+                            amount = it,
+                            description = description,
+                            context = this@PaymentLauncherActivity
+                        )
+                    }
                 }
             }
         }
+    }
+
+    private fun launchActivity(destination: Class<*>, bundle: Bundle? = null) {
+        val intent = Intent(Intent(this, destination))
+        bundle?.let {
+            intent.putExtras(bundle)
+        }
+        startActivity(intent)
     }
 
     private fun configPaymentMethodList() {
