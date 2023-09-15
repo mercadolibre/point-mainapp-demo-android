@@ -8,15 +8,17 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentFlowData
+import com.mercadolibre.android.point_integration_sdk.nativesdk.utils.ifLet
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentFlowInstallmetsBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
-import com.mercadolibre.android.point_mainapp_demo.app.util.ifLet
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentInstallmentAdapter
 
 class PaymentFlowInstallmentsActivity : AppCompatActivity() {
 
-    private lateinit var binding: PointMainappDemoAppActivityPaymentFlowInstallmetsBinding
+    private val binding: PointMainappDemoAppActivityPaymentFlowInstallmetsBinding by lazy {
+        PointMainappDemoAppActivityPaymentFlowInstallmetsBinding.inflate(layoutInflater)
+    }
 
     private val paymentFlow = MPManager.paymentFlow
 
@@ -26,7 +28,6 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = PointMainappDemoAppActivityPaymentFlowInstallmetsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         amount = intent.getStringExtra(AMOUNT)
         paymentMethod = intent.getStringExtra(PAYMENT_METHOD)

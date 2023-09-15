@@ -1,14 +1,13 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.ActionsProviderImpl
 import com.mercadolibre.android.point_mainapp_demo.app.actions.contract.HomeActions
 import com.mercadolibre.android.point_mainapp_demo.app.actions.view.HomeActionAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.launchActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -42,12 +41,6 @@ class HomeActivity : AppCompatActivity() {
         when (action) {
             is HomeActions.LaunchActivity -> launchActivity(action.activity)
             is HomeActions.LaunchBtUi -> action.actionManager.bluetoothUiSettings.launch(this@HomeActivity)
-        }
-    }
-
-    private fun <T> launchActivity(destination: Class<T>) {
-        Intent(this, destination).run {
-            startActivity(this)
         }
     }
 }

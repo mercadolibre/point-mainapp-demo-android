@@ -1,7 +1,6 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -12,6 +11,7 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.do
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.launchActivity
 import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
@@ -87,14 +87,6 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun launchActivity(destination: Class<*>, bundle: Bundle? = null) {
-        val intent = Intent(Intent(this, destination))
-        bundle?.let {
-            intent.putExtras(bundle)
-        }
-        startActivity(intent)
     }
 
     private fun configPaymentMethodList() {

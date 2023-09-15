@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:backgroundTint="@color/blackColorItem"
+    android:backgroundTint="@color/dark_grey"
     app:cardCornerRadius="@dimen/ui_075m"
     app:cardElevation="@dimen/ui_3m"
     android:layout_marginTop="@dimen/ui_050m"
