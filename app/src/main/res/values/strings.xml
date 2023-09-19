@@ -59,4 +59,5 @@
     <string name="point_mainapp_demo_app_payment_module_version_text">Payment module version: %s</string>
     <string name="point_mainapp_demo_app_smart_info_title">Smart info</string>
     <string name="point_mainapp_demo_app_btn_go_back">Go back</string>
+    <string name="point_mainapp_demo_app_version_name">Version app: %s</string>
 </resources>
