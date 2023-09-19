@@ -1,14 +1,15 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_mainapp_demo.app.ActionsProviderImpl
+import com.mercadolibre.android.point_mainapp_demo.app.BuildConfig
+import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.actions.contract.HomeActions
 import com.mercadolibre.android.point_mainapp_demo.app.actions.view.HomeActionAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityHomeBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.launchActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -25,6 +26,13 @@ class HomeActivity : AppCompatActivity() {
         binding.run { setContentView(root) }
         actionAdapter.submitList(ActionsProviderImpl.getActions(this@HomeActivity))
         setRecyclerView()
+        getVersionName()
+    }
+
+    private fun getVersionName() {
+        val versionName = BuildConfig.VERSION_NAME
+        binding.pointMainappDemoAppVersion.text =
+            getString(R.string.point_mainapp_demo_app_version_name, versionName)
     }
 
     private fun setRecyclerView() {
@@ -42,12 +50,6 @@ class HomeActivity : AppCompatActivity() {
         when (action) {
             is HomeActions.LaunchActivity -> launchActivity(action.activity)
             is HomeActions.LaunchBtUi -> action.actionManager.bluetoothUiSettings.launch(this@HomeActivity)
-        }
-    }
-
-    private fun <T> launchActivity(destination: Class<T>) {
-        Intent(this, destination).run {
-            startActivity(this)
         }
     }
 }
