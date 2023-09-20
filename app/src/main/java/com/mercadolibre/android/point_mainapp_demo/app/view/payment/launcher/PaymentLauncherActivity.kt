@@ -68,7 +68,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
             sendPaymentActionButton.setOnClickListener {
                 val amount = amountEditText.text?.toString()
                 val description = binding.descriptionEditText.text?.toString()
-                if (lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD.name.lowercase()) {
+                if (lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD.name.lowercase() && !amount.isNullOrEmpty()) {
                     launchActivity(
                         PaymentFlowInstallmentsActivity::class.java,
                         bundleOf(

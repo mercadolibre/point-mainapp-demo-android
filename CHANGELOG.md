@@ -3,6 +3,9 @@
 - adding installments functionality to the MLB seller.
 - furyDoc on installments functionality for MLB seller.
 
+## Fixed
+- solution to the exception when returning from the payment flow with installments.
+
 # v2.2.1
 ## Fixed
 - Exception mapping when printing image by bitmap.
