@@ -88,13 +88,13 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
             paymentMethod = paymentMethod,
             installments = installment?.toIntOrNull(),
             intentSuccess = paymentFlow.buildCallbackUri(
-                callback = "mercadopago://smart_integrations/payment_result",
+                callback = "mercadopago://launcher_native_app",
                 methodCallback = "success",
                 metadata = hashMapOf("message" to "testSuccess"),
                 appID = "demo.app"
             ),
             intentError = paymentFlow.buildCallbackUri(
-                callback = "mercadopago://smart_integrations/payment_result",
+                callback = "mercadopago://launcher_native_app",
                 methodCallback = "error",
                 metadata = hashMapOf("message" to "testError"),
                 appID = "demo.app"
