@@ -1,9 +1,6 @@
-# v2.3.0
+# v2.4.0
 ## Fixed
 - adding installments functionality to the MLB seller.
-- furyDoc on installments functionality for MLB seller.
-
-## Fixed
 - solution to the exception when returning from the payment flow with installments.
 
 # v2.2.1
