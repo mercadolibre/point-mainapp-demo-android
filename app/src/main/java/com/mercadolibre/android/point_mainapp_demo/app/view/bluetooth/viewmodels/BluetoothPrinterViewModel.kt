@@ -50,7 +50,7 @@ class BluetoothPrinterViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _printerEventLiveDataLiveData.postValue(PrinterEvents.IsLoading(false))
             if (makePrintResult == BluetoothPrinterResult.NEED_SELECTION_DEVICE) {
-                MPManager.bluetooth.discover.getPairPrinterDevices { response ->
+                MPManager.bluetooth.discover.getPairedDevices { response ->
                     response
                         .doIfSuccess { listPrinter ->
                             _printerEventLiveDataLiveData.postValue(PrinterEvents.LaunchPrinterSelector(listPrinter))

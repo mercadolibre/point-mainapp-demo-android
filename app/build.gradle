@@ -91,8 +91,8 @@ android {
 
 dependencies {
 
-    mainappImplementation files("libs/nativesdk-mainapp-2.4.0.aar")
-    miniappImplementation files("libs/nativesdk-miniapp-2.4.0.aar")
+    mainappImplementation files("libs/nativesdk-mainapp-2.5.0.aar")
+    miniappImplementation files("libs/nativesdk-miniapp-2.5.0.aar")
     // AndroidX
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
