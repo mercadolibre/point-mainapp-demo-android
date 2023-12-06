@@ -1,3 +1,7 @@
+# v2.5.0
+## added
+- Update of the SDK library with the implementation of modularization.
+
 # v2.3.0
 ## Fixed
 - adding installments functionality to the MLB seller.

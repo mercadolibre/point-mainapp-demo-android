@@ -3,21 +3,18 @@ package com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.viewmodel
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
-import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.contracts.states.DiscoveryEventsResult
-import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.entities.BluetoothDeviceModel
+import com.mercadolibre.android.point_integration_sdk.nativesdk.bluetoothclient.provider.contracts.states.BluetoothDiscoveryState
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.contracts.BluetoothSettingsEvents
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 internal class BluetoothSettingsViewModel : ViewModel() {
 
-    private val _bluetoothSettingLiveData = MutableStateFlow<BluetoothSettingsEvents>(BluetoothSettingsEvents.Init)
+    private val _bluetoothSettingLiveData =
+        MutableStateFlow<BluetoothSettingsEvents>(BluetoothSettingsEvents.Init)
     val bluetoothSettingLiveData = _bluetoothSettingLiveData.asStateFlow()
 
     fun registerConnectObserver() {
@@ -25,7 +22,8 @@ internal class BluetoothSettingsViewModel : ViewModel() {
             result
                 .doIfSuccess { pair ->
                     val bluetoothDeviceModel = pair.first
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.ConnectDevicesResult(bluetoothDeviceModel)
+                    _bluetoothSettingLiveData.value =
+                        BluetoothSettingsEvents.ConnectDevicesResult(bluetoothDeviceModel)
                 }.doIfError { exception ->
                     _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
                 }
@@ -36,7 +34,8 @@ internal class BluetoothSettingsViewModel : ViewModel() {
         MPManager.bluetooth.ignitor.getCurrentState { response ->
             response
                 .doIfSuccess { result ->
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorCurrentState(result)
+                    _bluetoothSettingLiveData.value =
+                        BluetoothSettingsEvents.IgnitorCurrentState(result)
                 }.doIfError { exception ->
                     _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
                 }
@@ -49,20 +48,24 @@ internal class BluetoothSettingsViewModel : ViewModel() {
                 turnOn { response ->
                     response
                         .doIfSuccess { result ->
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorLaunchResult(result)
+                            _bluetoothSettingLiveData.value =
+                                BluetoothSettingsEvents.IgnitorLaunchResult(result)
                         }
                         .doIfError { exception ->
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                            _bluetoothSettingLiveData.value =
+                                BluetoothSettingsEvents.Error(exception)
                         }
                 }
             } else {
                 turnOff { response ->
                     response
                         .doIfSuccess { result ->
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.IgnitorLaunchResult(result)
+                            _bluetoothSettingLiveData.value =
+                                BluetoothSettingsEvents.IgnitorLaunchResult(result)
                         }
                         .doIfError { exception ->
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                            _bluetoothSettingLiveData.value =
+                                BluetoothSettingsEvents.Error(exception)
                         }
                 }
             }
@@ -70,70 +73,71 @@ internal class BluetoothSettingsViewModel : ViewModel() {
     }
 
     fun getPairDevices() {
-        viewModelScope.launch(Dispatchers.IO) {
-            MPManager.bluetooth.discover.getPairDevices { response ->
-                response
-                    .doIfSuccess { result ->
-                        _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryPairDevicesResult(result)
-                    }
-                    .doIfError { exception ->
-                        _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
-                    }
-            }
+
+        MPManager.bluetooth.discover.getPairedDevices { response ->
+            response
+                .doIfSuccess { result ->
+                    _bluetoothSettingLiveData.value =
+                        BluetoothSettingsEvents.DiscoveryPairDevicesResult(result)
+                }
+                .doIfError { exception ->
+                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
+                }
         }
     }
 
     fun startBluetoothDiscovery() {
-        viewModelScope.launch(Dispatchers.IO) {
-            MPManager.bluetooth.discover.startDiscovery(object : DiscoveryEventsResult {
-                override fun discoveryStarted() {
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryStarted
+        MPManager.bluetooth.discover.startDiscovery { mpResponse ->
+            mpResponse.doIfSuccess { discoveryState ->
+                when (discoveryState.type) {
+                    BluetoothDiscoveryState.Type.STARTED -> onBluetoothType(BluetoothSettingsEvents.DiscoveryStarted)
+                    BluetoothDiscoveryState.Type.ENDED -> onBluetoothType(BluetoothSettingsEvents.DiscoveryEnded)
+                    BluetoothDiscoveryState.Type.DEVICE_FOUND -> discoveryState.device?.let { device ->
+                        onBluetoothType(BluetoothSettingsEvents.DiscoveryDevicesFound(device))
+                    }
+
+                    BluetoothDiscoveryState.Type.DEVICE_CHANGE -> discoveryState.device?.let { device ->
+                        onBluetoothType(BluetoothSettingsEvents.DiscoveryDevicesUpdate(device))
+                    }
                 }
 
-                override fun internalError(error: Exception) {
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(error)
-                }
-
-                override fun discoveryEnded() {
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryEnded
-                }
-
-                override fun devicesFound(devices: BluetoothDeviceModel) {
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryDevicesFound(devices)
-                }
-
-                override fun devicesUpdate(devices: BluetoothDeviceModel) {
-                    _bluetoothSettingLiveData.value = BluetoothSettingsEvents.DiscoveryDevicesUpdate(devices)
-                }
-            })
+            }.doIfError { error ->
+                onBluetoothType(BluetoothSettingsEvents.Error(error))
+            }
         }
+    }
+
+    private fun onBluetoothType(discoveryStarted: BluetoothSettingsEvents) {
+        _bluetoothSettingLiveData.value = discoveryStarted
     }
 
     @SuppressLint("LogConditional")
     fun pairingDevices(address: String, needPair: Boolean) {
         Log.i(TAG, "pairingDevices: devices address --> $address, needPair --> $needPair")
-        viewModelScope.launch(Dispatchers.IO) {
-            if (needPair) {
-                MPManager.bluetooth.paring.pairDevices(address) { response ->
-                    response
-                        .doIfSuccess { resultPair ->
-                            Log.i(TAG, "pairDevices: callback response ${resultPair.first}")
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.PairingDevicesStatus(resultPair)
-                        }
-                        .doIfError { exception ->
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
-                        }
-                }
-            } else {
-                MPManager.bluetooth.paring.unPairDevices(address) { response ->
-                    response
-                        .doIfSuccess { resultPair ->
-                            Log.i(TAG, "unPairDevices: callback response ${resultPair.first}")
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.PairingDevicesStatus(resultPair)
-                        }.doIfError { exception ->
-                            _bluetoothSettingLiveData.value = BluetoothSettingsEvents.Error(exception)
-                        }
-                }
+        if (needPair) {
+            MPManager.bluetooth.paring.pairDevice(address) { response ->
+                response
+                    .doIfSuccess { resultPair ->
+                        Log.i(TAG, "pairDevices: callback response ${resultPair.first}")
+                        _bluetoothSettingLiveData.value =
+                            BluetoothSettingsEvents.PairingDevicesStatus(resultPair)
+                    }
+                    .doIfError { exception ->
+                        _bluetoothSettingLiveData.value =
+                            BluetoothSettingsEvents.Error(exception)
+                    }
+            }
+        } else {
+            MPManager.bluetooth.paring.unPairDevice(address) { response ->
+                response
+                    .doIfSuccess { resultPair ->
+                        Log.i(TAG, "unPairDevices: callback response ${resultPair.first}")
+                        _bluetoothSettingLiveData.value =
+                            BluetoothSettingsEvents.PairingDevicesStatus(resultPair)
+                    }.doIfError { exception ->
+                        _bluetoothSettingLiveData.value =
+                            BluetoothSettingsEvents.Error(exception)
+                    }
             }
         }
     }
