@@ -1,3 +1,7 @@
+# v2.5.1
+## added
+- Update sdk library
+
 # v2.5.0
 ## added
 - Update of the SDK library with the implementation of modularization.
