@@ -10,12 +10,16 @@
 
 ## What is this?
 
-This is a demostration application that use the **Mercadopago Integration SDK** to connect a thirty party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
+This is a demo application that use the **Mercadopago Integration SDK** to connect a thirty party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
 
-To download the **Integration Kit**, go to the **Releases** section, and selecting the last version into the assets you can download:
+## How to download the Integration Kit?
+
+To download the **Integration Kit**, go to the **Releases** section, select the last available version and go into the assets to find:
 - SDK Integration lib(aar)
 - MainApp Demo (apk)
 - SDK documentation (zip)
+
+For more information, check [the MainApp playbook](https://www.mercadopago.com.br/developers/es/docs/main-apps/landing)
 
 ## Contributing
 
