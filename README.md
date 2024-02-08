@@ -1,4 +1,4 @@
-# point_mainapp_demo Android Library
+# point_mainapp_demo Android Application
 
 ## Project status
 
@@ -10,7 +10,12 @@
 
 ## What is this?
 
-TODO: complete with project description
+This is a demostration application that use the **Mercadopago Integration SDK** to connect a thirty party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
+
+To download the **Integration Kit**, go to the **Releases** section, and selecting the last version into the assets you can download:
+- SDK Integration lib(aar)
+- MainApp Demo (apk)
+- SDK documentation (zip)
 
 ## Contributing
 
@@ -21,7 +26,6 @@ For more information about in house distribution please check [the wiki](https:/
 ## Repo usage
 
 Create branch or fork from *develop*, then push or create pull requests (if you don't have access) to that branch.
-
 
 ## Developing and contribuing
 
