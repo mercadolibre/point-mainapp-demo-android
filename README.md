@@ -10,7 +10,7 @@
 
 ## What is this?
 
-This is a demo application that use the **Mercadopago Integration SDK** to connect a thirty party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
+This is a demo application that use the **Mercadopago Integration SDK** to connect a third-party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
 
 ## How to download the Integration Kit?
 
