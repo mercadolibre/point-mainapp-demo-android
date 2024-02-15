@@ -14,10 +14,10 @@ This repository contains a demo application that utilizes the Third-Party Integr
 
 ## How to download the Third-Apps Integration Kit?
 
-To download the **Third-Apps Integration Kit**, navigate to the [Releases](https://github.com/mercadolibre/point-mainapp-demo-android/releases) section. Choose the latest available version and access the assets to locate the *Third-Apps-integration-kit.zip*
+To download the **Third-Apps Integration Kit**, navigate to the [Releases](https://github.com/mercadolibre/point-mainapp-demo-android/releases) section. Choose the latest available version and access the assets to locate the *Third-Apps-integration-kit.zip*.
 Upon unzipping the file, you'll find the following files:
-- *nativesdk-mainapp-X.X.X.aar* : Library for importing into your project.
-- *documentation-mainapp-SDK-X.X.X.zip* : Comprehensive documentation detailing available methods and classes of the SDK.
-- *demo-mainapp-X.X.X.apk* : A demo application enabling testing of all SDK functionalities.
+- **nativesdk-mainapp-X.X.X.aar** : Library for importing into your project.
+- **documentation-mainapp-SDK-X.X.X.zip** : Comprehensive documentation detailing available methods and classes of the SDK.
+- **demo-mainapp-X.X.X.apk** : A demo application enabling testing of all SDK functionalities.
 
 For additional details, check [the MainApp playbook](https://www.mercadopago.com.br/developers/es/docs/main-apps/landing)
