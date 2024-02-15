@@ -10,11 +10,11 @@
 
 ## What is this?
 
-This is a demo application that use the **Mercadopago Integration SDK** to connect a third-party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
+In this repo, you can find a a demo application that use the **Third-Apps integration kit** to connect a third-party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
 
-## How to download the Integration Kit?
+## How to download the Third-Apps Integration Kit?
 
-To download the **Third-Apps Integration Kit**, go to the **[Releases](https://github.com/mercadolibre/point-mainapp-demo-android/releases)** section, select the last available version and go into the assets to find the *Third-Apps-integration-kit.zip*
+To download the **Third-Apps Integration Kit**, go to the [Releases](https://github.com/mercadolibre/point-mainapp-demo-android/releases) section, select the last available version and go into the assets to find the *Third-Apps-integration-kit.zip*
 When unzip the file, you will find the following files:
 - *nativesdk-mainapp-X.X.X.aar* : Library to import into your project.
 - *documentation-mainapp-SDK-X.X.X.zip* : Documentation about available methods and classes of the SDK.
