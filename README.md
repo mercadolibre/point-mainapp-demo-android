@@ -1,4 +1,4 @@
-# point_mainapp_demo Android Application
+# Third-Apps Integration Kit
 
 ## Project status
 
@@ -10,91 +10,14 @@
 
 ## What is this?
 
-This is a demo application that use the **Mercadopago Integration SDK** to connect a third-party app with the **MercadoPago presencial Payments ecosystem** and specific **hardware capabilities** like Camera for Barcode Reader, embedded Printer, bluetooth, and others.
+This repository contains a demo application that utilizes the Third-Party Integration Kit to establish connections between a third-party application and the MercadoPago Payments ecosystem. This integration facilitates the utilization of specific hardware capabilities such as camera for barcode reading, embedded printers, Bluetooth, and more.
 
-## How to download the Integration Kit?
+## How to download the Third-Apps Integration Kit?
 
-To download the **Integration Kit**, go to the **Releases** section, select the last available version and go into the assets to find:
-- SDK Integration lib(aar)
-- MainApp Demo (apk)
-- SDK documentation (zip)
+To download the **Third-Apps Integration Kit**, navigate to the [Releases](https://github.com/mercadolibre/point-mainapp-demo-android/releases) section. Choose the latest available version and access the assets to locate the *Third-Apps-integration-kit.zip*.
+Upon unzipping the file, you'll find the following files:
+- **nativesdk-mainapp-X.X.X.aar** : Library for importing into your project.
+- **documentation-mainapp-SDK-X.X.X.zip** : Comprehensive documentation detailing available methods and classes of the SDK.
+- **demo-mainapp-X.X.X.apk** : A demo application enabling testing of all SDK functionalities.
 
-For more information, check [the MainApp playbook](https://www.mercadopago.com.br/developers/es/docs/main-apps/landing)
-
-## Contributing
-
-This is not written in rock like you must be guessing so write us and let's make everyone's life a little easier.
-
-For more information about in house distribution please check [the wiki](https://sites.google.com/mercadolibre.com/mobile/arquitectura/in-house-distribution-mds)
-
-## Repo usage
-
-Create branch or fork from *develop*, then push or create pull requests (if you don't have access) to that branch.
-
-## Developing and contribuing
-
-### Running checks
-
-We run [SCA](https://github.com/Monits/static-code-analysis-plugin) checks for static code analysis and some built in Android lints among all tests. To run everything:
-
-``` bash
-./gradlew check
-```
-
-and if you want to check an specific module you can:
-
-``` bash
-./gradlew module:check
-```
-
-### Compiling locally
-
-#### app
-
-For testing your module locally you can run the integrated **app**. If you want to build it:
-
-``` bash
-./gradlew app:assembleDebug
-```
-
-or if you have already a device connected to **adb**:
-
-``` bash
-./gradlew app:installDebug
-```
-
-### Deploying
-
-For deploying you **must** create a branch named _release/X.Y_ where X.Y is the major and minor number to be published. Once you have created it, push your changes and run the command `fury create-version`.
-
-## FAQ
-
-### Having issues accessing to files though URI?
-
-If you are having a `NullPointerException`, this is because you are missing the provider in your manifest to provide your app the permission to access to files. Add this snippet to your `AndroidManifest.xml` from your app file:
-
-``` xml
-
-<!-- Needed for secure management of files. It is not longer permitted to access a file with file:///-->
-<!-- https://developer.android.com/reference/android/support/v4/content/FileProvider.html -->
-<provider
-    android:name="android.support.v4.content.FileProvider"
-    android:authorities="${applicationId}.provider"
-    android:exported="false"
-    android:grantUriPermissions="true">
-    <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/resource_file_provider_path" />
-</provider>
-```
-
-And create `resource_file_provider_path.xml` under `res/xml`, which content should be:
-
-``` xml
-
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <external-path name="external_files" path="."/>
-</paths>
-
-```
+For additional details, check [the MainApp playbook](https://www.mercadopago.com.br/developers/es/docs/main-apps/landing)
