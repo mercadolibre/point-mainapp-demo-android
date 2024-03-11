@@ -1,3 +1,7 @@
+# NFC controller implementation
+## Added
+- [SMARTI-1197] NFC controller implementation detection card.
+
 # v2.5.1
 ## added
 - Update sdk library
