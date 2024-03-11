@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/point_mainapp_demo_appTheme.main">
         <activity
+            android:name=".view.nfc.WriteNfcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.nfc.ReadNfcActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.nfc.NfcActionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.nfc.DetectCartActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.payment.launcher.PaymentFlowInstallmentsActivity"
             android:exported="false" />
         <activity

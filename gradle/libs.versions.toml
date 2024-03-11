@@ -9,6 +9,9 @@ appCompat = "1.2.0"
 # Test libs
 ##################################################################################
 testing = "13.+"
+material = "1.11.0"
+org-jetbrains-kotlin-android = "1.7.21"
+constraintlayout = "2.1.4"
 
 
 [libraries]
@@ -17,3 +20,7 @@ testing = "13.+"
 # Misc libs
 ##################################################################################
 misc-appCompat = { module ="androidx.appcompat:appcompat", version.ref = "appCompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+[plugins]
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }

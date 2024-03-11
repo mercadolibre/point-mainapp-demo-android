@@ -10,6 +10,8 @@ import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothT
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.camera.CameraScannerActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.nfc.DetectCartActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.nfc.NfcActionActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
@@ -57,6 +59,11 @@ object ActionsProviderImpl : ActionsProvider {
                 icon = AppCompatResources.getDrawable(context, R.drawable.point_mainapp_demo_app_ic_info),
                 action = HomeActions.LaunchActivity(SmartInfoActivity::class.java)
             ),
+            ActionModel(
+                title = "Nfc actions",
+                icon = AppCompatResources.getDrawable(context, R.drawable.point_mainapp_demo_app_ic_nfc),
+                action = HomeActions.LaunchActivity(NfcActionActivity::class.java)
+            )
         )
     }
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor"
+    tools:context=".view.nfc.ReadNfcActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_nfc_reader"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/point_mainapp_demo_app_radius_100"
+        android:padding="8dp"
+        android:src="@drawable/point_mainapp_demo_app_ic_reader_card"
+        android:tint="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="@+id/text_nfc_reader"
+        app:layout_constraintEnd_toStartOf="@+id/text_nfc_reader"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_nfc_reader" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_nfc_reader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/point_mainapp_demo_app__nfc_read_card_action"
+        android:textAlignment="center"
+        android:textColor="@color/secondaryTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/point_mainapp_demo_app_runding_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_nfc_reader_card"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/point_mainapp_demo_app_radius_100"
+        android:padding="@dimen/ui_1_5m"
+        android:src="@drawable/point_mainapp_demo_app_ic_nfc"
+        android:tint="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_nfc_reader_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_nfc_reader_card"
+        tools:text="Detectando tarjeta NFC.." />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_nfc_read_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:cornerRadius="25dp"
+        android:padding="@dimen/ui_2m"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:icon="@drawable/point_mainapp_demo_app_white_arrow_back"
+        android:backgroundTint="@color/primaryLightColor"
+        android:text="close the process"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

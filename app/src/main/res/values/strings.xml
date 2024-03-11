@@ -60,4 +60,8 @@
     <string name="point_mainapp_demo_app_smart_info_title">Smart info</string>
     <string name="point_mainapp_demo_app_btn_go_back">Go back</string>
     <string name="point_mainapp_demo_app_version_name">Version app: %s</string>
+    <string name="point_mainapp_demo_app_detection_nfc_text">Detection card NFC</string>
+    <string name="point_mainapp_demo_app_nfc_description_action">Select the option of the NFC action you want to execute.</string>
+    <string name="point_mainapp_demo_app__nfc_read_card_action">Read card NFC</string>
+    <string name="point_mainapp_demo_app_nfc_write_card_action">Write card NFC</string>
 </resources>
