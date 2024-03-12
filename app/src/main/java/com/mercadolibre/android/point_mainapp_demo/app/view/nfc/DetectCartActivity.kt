@@ -89,13 +89,12 @@ class DetectCartActivity : AppCompatActivity() {
 
     private fun setViews(title: String, description: String) {
         binding.apply {
+            "$title\n$description".also { textNfcDetectionDescription.text = it }
             when (title) {
-                DETECTING -> {
-                    "$title\n$description".also { textNfcDetectionDescription.text = it }
-                }
+
+                DETECTING -> imageNfcDetectionCard.setImageResource(R.drawable.point_mainapp_demo_app_ic_nfc)
 
                 SUCCESS -> {
-                    "$title\n$description".also { textNfcDetectionDescription.text = it }
                     imageNfcDetectionCard.setImageResource(R.drawable.point_mainapp_demo_app_ic_check_white)
                     cardViewNfcReader.visible()
                     cardViewNfcWriter.visible()
@@ -103,10 +102,7 @@ class DetectCartActivity : AppCompatActivity() {
                     operationLedOff()
                 }
 
-                else -> {
-                    "$title\n$description".also { textNfcDetectionDescription.text = it }
-                    imageNfcDetectionCard.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
-                }
+                else -> imageNfcDetectionCard.setImageResource(R.drawable.point_mainapp_demo_app_ic_error)
             }
         }
 
