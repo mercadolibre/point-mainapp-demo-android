@@ -15,6 +15,7 @@ class MainApplication : Application() {
             .withBluetoothConfig()
             .withBluetoothUIConfig()
             .withBitmapPrinterConfig()
+            .withNfcConfig()
             .withCameraScanner()
             .build()
 

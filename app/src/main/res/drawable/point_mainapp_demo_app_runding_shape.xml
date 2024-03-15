@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/secondaryTextColor" /> <!-- Color de fondo, puedes cambiarlo según tus preferencias -->
+    <corners
+        android:topLeftRadius="40dp"
+        android:topRightRadius="40dp"
+        />
+</shape>
