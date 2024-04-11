@@ -1,6 +1,5 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -8,13 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
+import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentFlowRequestData
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.hideKeyboard
 import com.mercadolibre.android.point_mainapp_demo.app.util.launchActivity
 import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.DESCRIPTION
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYMENT_METHOD
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 
@@ -24,11 +26,11 @@ class PaymentLauncherActivity : AppCompatActivity() {
     lateinit var binding: PointMainappDemoAppActivityPaymentLauncherBinding
     private val paymentFlow = MPManager.paymentFlow
     private val paymentTool = MPManager.paymentMethodsTools
-    private var lastPaymentMethodSelected: String? = null
+    private var lastPaymentMethodSelected: PaymentMethod? = null
     private var clearPaymentMethodList: Boolean = true
     private val paymentMethodAdapter by lazy {
         PaymentMethodAdapter {
-            lastPaymentMethodSelected = it
+            lastPaymentMethodSelected = PaymentMethod.valueOf(it)
         }
     }
 
@@ -53,6 +55,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
 
         binding.apply {
             getPaymentMethodActionButton.setOnClickListener {
+                hideKeyboard()
                 clearPaymentMethodList = clearPaymentMethodList.not()
                 if (clearPaymentMethodList) {
                     getPaymentMethodActionButton.text =
@@ -68,26 +71,38 @@ class PaymentLauncherActivity : AppCompatActivity() {
             sendPaymentActionButton.setOnClickListener {
                 val amount = amountEditText.text?.toString()
                 val description = binding.descriptionEditText.text?.toString()
-                if (lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD.name.lowercase() && !amount.isNullOrEmpty()) {
-                    launchActivity(
-                        PaymentFlowInstallmentsActivity::class.java,
-                        bundleOf(
-                            PAYMENT_METHOD to lastPaymentMethodSelected,
-                            AMOUNT to amount
-                        )
-                    )
-                } else {
-                    amount?.let {
-                        launchPaymentFlowIntent(
-                            amount = it,
-                            description = description,
-                            context = this@PaymentLauncherActivity
-                        )
-                    }
-                }
+                launchPaymentFlow(amount, description)
             }
         }
     }
+
+    private fun launchPaymentFlow(amount: String?, description: String?) {
+        when {
+            amount.isNullOrEmpty() -> {
+                setLayoutError(ERROR_INVALID_AMOUNT)
+            }
+
+            isCreditCard() -> {
+                launchActivity(
+                    PaymentFlowInstallmentsActivity::class.java,
+                    bundleOf(
+                        PAYMENT_METHOD to lastPaymentMethodSelected?.name,
+                        AMOUNT to amount,
+                        DESCRIPTION to description
+                    )
+                )
+            }
+
+            else -> {
+                launchPaymentFlowIntent(
+                    amount = amount,
+                    description = description
+                )
+            }
+        }
+    }
+
+    private fun isCreditCard() = lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD
 
     private fun configPaymentMethodList() {
         paymentTool.getPaymentMethods { response ->
@@ -104,8 +119,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
 
     private fun launchPaymentFlowIntent(
         amount: String,
-        description: String?,
-        context: Context,
+        description: String?
     ) {
         val uriSuccess = paymentFlow.buildCallbackUri(
             "mercadopago://launcher_native_app",
@@ -121,12 +135,14 @@ class PaymentLauncherActivity : AppCompatActivity() {
         )
 
         paymentFlow.launchPaymentFlowActivity(
-            amount,
-            description,
-            uriSuccess,
-            uriError,
-            context,
-            lastPaymentMethodSelected
+            PaymentFlowRequestData(
+                amount.toDouble(),
+                description,
+                uriSuccess,
+                uriError,
+                lastPaymentMethodSelected
+            ),
+            this
         ) { response ->
             response.doIfError { error ->
                 error.message?.let { errorMessage -> setLayoutError(errorMessage) }
@@ -151,5 +167,9 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 isErrorEnabled = false
             }
         }
+    }
+
+    companion object {
+        private const val ERROR_INVALID_AMOUNT = "Amount is null or empty"
     }
 }

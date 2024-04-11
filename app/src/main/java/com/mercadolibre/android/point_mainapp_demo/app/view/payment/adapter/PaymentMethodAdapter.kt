@@ -26,7 +26,7 @@ internal class PaymentMethodAdapter(private val callback: (String) -> Unit) :
     override fun onBindViewHolder(holder: PaymentMethodViewHolder, position: Int) {
         holder.render(currentList[position]) {
             selectedItem(it)
-            callback(it.lowercase())
+            callback(it)
         }
     }
 }
