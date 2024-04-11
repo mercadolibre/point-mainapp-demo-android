@@ -1,3 +1,14 @@
+# v2.6.3
+## Fixed
+- Internal MP improvement.
+
+# v2.6.2
+## Added
+- Update sdk library with some technical improvements.
+  - Updated Client Id for Sdk initialization.
+  - Added example of use of new payment launch method.
+  - Added hide keyboard when on UI get payment methods.
+
 # v2.5.1
 ## added
 - Update sdk library

@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
-import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentFlowData
+import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentFlowRequestData
+import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
 import com.mercadolibre.android.point_integration_sdk.nativesdk.utils.ifLet
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentFlowInstallmetsBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
@@ -22,23 +23,27 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
 
     private val paymentFlow = MPManager.paymentFlow
 
-    private var amount: String? = null
-
-    private var paymentMethod: String? = null
+    private val amount by lazy { intent.getStringExtra(AMOUNT) }
+    private val paymentMethod by lazy { intent.getStringExtra(PAYMENT_METHOD) }
+    private val description by lazy { intent.getStringExtra(DESCRIPTION) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        amount = intent.getStringExtra(AMOUNT)
-        paymentMethod = intent.getStringExtra(PAYMENT_METHOD)
+
         setView()
         val adapter = PaymentInstallmentAdapter { installmentAmount ->
             ifLet(amount, paymentMethod) { (amountValue, paymentMethodValue) ->
-                paymentFlowInstallment(
+                val paymentFlowRequestData = buildBasePaymentFlowRequestData(
                     amountValue,
+                    description,
                     paymentMethodValue,
-                    installmentAmount.installment.toString()
-                )
+                ).apply {
+                    installmentAmount.installment?.let {
+                        setInstallmentsForCreditCard(it)
+                    }
+                }
+                launchPaymentInstallment(paymentFlowRequestData)
             }
         }
         getRecyclerView(adapter)
@@ -58,10 +63,12 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
                     adapter.submitList(installments)
                     setRecyclerView(adapter)
                 }.doIfError {
-                    paymentFlowInstallment(
+                    val paymentFlowRequestData = buildBasePaymentFlowRequestData(
                         amount = amountValue,
-                        paymentMethod = paymentMethodValue
+                        description = description,
+                        paymentMethodValue = paymentMethodValue
                     )
+                    launchPaymentInstallment(paymentFlowRequestData)
                 }
             }, amountValue)
         }
@@ -78,33 +85,30 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
         }
     }
 
-    private fun paymentFlowInstallment(
+    private fun buildBasePaymentFlowRequestData(
         amount: String,
-        paymentMethod: String,
-        installment: String? = null
-    ) {
-        val paymentFlowData = PaymentFlowData(
-            amount = amount,
-            paymentMethod = paymentMethod,
-            installments = installment?.toIntOrNull(),
-            intentSuccess = paymentFlow.buildCallbackUri(
-                callback = "mercadopago://launcher_native_app",
-                methodCallback = "success",
-                metadata = hashMapOf("message" to "testSuccess"),
-                appID = "demo.app"
-            ),
-            intentError = paymentFlow.buildCallbackUri(
-                callback = "mercadopago://launcher_native_app",
-                methodCallback = "error",
-                metadata = hashMapOf("message" to "testError"),
-                appID = "demo.app"
-            )
+        description: String? = null,
+        paymentMethodValue: String? = null
+    ) = PaymentFlowRequestData(
+        amount = amount.toDouble(),
+        description = description,
+        paymentMethod = paymentMethodValue?.run { PaymentMethod.valueOf(this) },
+        intentSuccess = paymentFlow.buildCallbackUri(
+            callback = "mercadopago://launcher_native_app",
+            methodCallback = "success",
+            metadata = hashMapOf("message" to "testSuccess"),
+            appID = "demo.app"
+        ),
+        intentError = paymentFlow.buildCallbackUri(
+            callback = "mercadopago://launcher_native_app",
+            methodCallback = "error",
+            metadata = hashMapOf("message" to "testError"),
+            appID = "demo.app"
         )
-        launchPaymentInstallment(paymentFlowData)
-    }
+    )
 
-    private fun launchPaymentInstallment(paymentFlowData: PaymentFlowData) {
-        paymentFlow.launchPaymentFlowActivity(paymentFlowData, this) { response ->
+    private fun launchPaymentInstallment(paymentFlowRequestData: PaymentFlowRequestData) {
+        paymentFlow.launchPaymentFlowActivity(paymentFlowRequestData, this) { response ->
             response.doIfError {
                 setOnError(it.message)
             }
@@ -126,6 +130,7 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
 
     companion object {
         internal const val AMOUNT = "amount"
+        internal const val DESCRIPTION = "description"
         internal const val PAYMENT_METHOD = "payment_method"
         internal const val TOTAL_AMOUNT = "Total Amount"
     }

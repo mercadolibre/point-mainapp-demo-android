@@ -30,7 +30,6 @@ android {
     }
 
     defaultConfig {
-        applicationId project.applicationId
         minSdk project.minSdkVersion.toInteger()
         targetSdk project.targetSdkVersion.toInteger()
         versionCode project.versionCode.toInteger()
@@ -58,10 +57,12 @@ android {
         flavorDimensions "integration"
 
         miniapp {
+            applicationId project.miniAppAplicationId
             versionNameSuffix "-miniapp"
             signingConfig signingConfigs.release
         }
         mainapp {
+            applicationId project.mainAppAplicationId
             versionNameSuffix "-mainapp"
             signingConfig signingConfigs.release
         }
@@ -97,8 +98,8 @@ android {
 
 dependencies {
 
-    mainappImplementation files("libs/nativesdk-mainapp-2.5.1.aar")
-    miniappImplementation files("libs/nativesdk-miniapp-2.5.1.aar")
+    mainappImplementation files("libs/nativesdk-mainapp-2.6.3.aar")
+    miniappImplementation files("libs/nativesdk-miniapp-2.6.3.aar")
     // AndroidX
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
