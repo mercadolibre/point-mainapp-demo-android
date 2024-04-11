@@ -30,7 +30,6 @@ android {
     }
 
     defaultConfig {
-        applicationId project.applicationId
         minSdk project.minSdkVersion.toInteger()
         targetSdk project.targetSdkVersion.toInteger()
         versionCode project.versionCode.toInteger()
@@ -58,10 +57,12 @@ android {
         flavorDimensions "integration"
 
         miniapp {
+            applicationId project.miniAppAplicationId
             versionNameSuffix "-miniapp"
             signingConfig signingConfigs.release
         }
         mainapp {
+            applicationId project.mainAppAplicationId
             versionNameSuffix "-mainapp"
             signingConfig signingConfigs.release
         }
