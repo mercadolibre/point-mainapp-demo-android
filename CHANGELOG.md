@@ -1,3 +1,7 @@
+# v2.7.0
+## Added
+- Added traceability for all SDK functionalities.
+
 # v2.6.3
 ## Fixed
 - Internal MP improvement.
