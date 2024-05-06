@@ -1,3 +1,7 @@
+# v2.7.1
+## Added
+- Added traceability to payment functionalities.
+
 # v2.7.0
 ## Added
 - Added traceability for all SDK functionalities.
