@@ -21,14 +21,18 @@ class CameraScannerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.pointMainappDemoAppCameraScannerInitBtn.setOnClickListener {
+        binding.pointMainappDemoAppCameraQrScannerInitBtn.setOnClickListener {
             MPManager.cameraScanner.initQRCodeScanner(this)
+        }
+
+        binding.pointMainappDemoAppCameraBarcodeScannerInitBtn.setOnClickListener {
+            MPManager.cameraScanner.initBarcodeScanner(this)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        MPManager.cameraScanner.handleQrResponse(resultCode, data)
+        MPManager.cameraScanner.handleScannerResponse(resultCode, data)
             .doIfSuccess { qrResult ->
                 binding.run {
                     pointMainappDemoAppStateImg.visibility = View.VISIBLE

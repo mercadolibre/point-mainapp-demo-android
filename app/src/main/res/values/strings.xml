@@ -44,8 +44,9 @@
     <string name="point_mainapp_demo_app_text_button_printer_bitmap">Print image</string>
 
     <!-- Camera Scanner -->
-    <string name="point_mainapp_demo_app_cammera_scanner_main_title">QR Scanner</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_title">Start Scanner</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_main_title">Camera Scanner</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_qr_title">Start QR Scanner</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_barcode_title">Start barcode Scanner</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_success">Successful reading: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_error">Error: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_undefined">Undefined: %s</string>
