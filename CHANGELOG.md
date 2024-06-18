@@ -1,7 +1,8 @@
 # v2.8.0
 ## Added
 - The functionality for reading barcodes was added.
-- Added functionality to obtain the client Id from the manifest
+- Added functionality to obtain the client Id from the manifest.
+- Added field to enable or disable oauth.
 
 # v2.7.0
 ## Added
