@@ -66,6 +66,12 @@
         <activity
             android:name=".view.camera.CameraScannerActivity"
             android:exported="false" />
+        <meta-data
+            android:name="com.mercadolibre.android.sdk.CLIENT_ID"
+            android:value="193213529837179L" />
+        <meta-data
+            android:name="com.mercadolibre.android.sdk.OAUTH_ENABLED"
+            android:value="false" />
     </application>
 
 </manifest>
