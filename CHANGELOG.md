@@ -1,3 +1,11 @@
+# v2.8.2
+## Fixed
+- Implement sending payment flow response data to PTM
+
+# v2.8.1
+## Fixed
+- Fixed screen orientation changing when using barcode feature.
+
 # v2.8.0
 ## Added
 - The functionality for reading barcodes was added.
