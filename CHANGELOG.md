@@ -1,4 +1,4 @@
-# v2.8.1
+# v2.8.2
 ## Fixed
 - Implement sending payment flow response data to PTM
 
