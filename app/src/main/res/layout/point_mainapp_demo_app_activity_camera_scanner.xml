@@ -35,7 +35,22 @@
         app:icon="@drawable/point_mainapp_demo_app_ic_payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_camera_scanner_title" />
+        app:layout_constraintTop_toBottomOf="@id/point_mainapp_demo_app_camera_scanner_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_camera_qr_scanner_new_init_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="@dimen/ui_1_25m"
+        android:text="@string/point_mainapp_demo_app_cammera_scanner_new_start_scan_qr_title"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_payments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/point_mainapp_demo_app_camera_qr_scanner_init_btn" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/point_mainapp_demo_app_camera_barcode_scanner_init_btn"
@@ -50,29 +65,60 @@
         app:icon="@drawable/point_mainapp_demo_app_ic_payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_camera_qr_scanner_init_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_new_camera_barcode_scanner_init_btn" />
 
-    <TextView
-        android:id="@+id/point_mainapp_demo_app_camera_scanner_result"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_new_camera_barcode_scanner_init_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
+        android:layout_marginHorizontal="@dimen/ui_6m"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="@dimen/ui_1_25m"
+        android:text="@string/point_mainapp_demo_app_cammera_scanner_new_start_barcode_title"
+        android:textAllCaps="false"
+        app:cornerRadius="@dimen/ui_1_25m"
+        app:icon="@drawable/point_mainapp_demo_app_ic_payments"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_state_img" />
+        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_camera_qr_scanner_new_init_btn" />
 
     <ImageView
         android:id="@+id/point_mainapp_demo_app_state_img"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/point_mainapp_demo_app_camera_scanner_result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_camera_barcode_scanner_init_btn"
         app:srcCompat="@drawable/point_mainapp_demo_app_ic_check_white" />
+
+    <TextView
+        android:id="@+id/point_mainapp_demo_app_camera_scanner_result"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:textAlignment="center"
+        tools:text="Successful reading: %s"
+        app:layout_constraintBottom_toTopOf="@+id/point_mainapp_demo_app_camera_scanner_back_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/point_mainapp_demo_app_camera_scanner_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/point_mainapp_demo_app_camera_scanner_back_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Return to scanner"
+        app:icon="@drawable/point_mainapp_demo_app_white_arrow_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
