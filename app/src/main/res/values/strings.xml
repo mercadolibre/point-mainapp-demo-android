@@ -45,10 +45,10 @@
 
     <!-- Camera Scanner -->
     <string name="point_mainapp_demo_app_cammera_scanner_main_title">Camera Scanner</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_qr_title">Start QR Scanner</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_new_start_scan_qr_title">launch new QR Scan</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_start_barcode_title">Start barcode Scanner</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_new_start_barcode_title">launch new barcode Scan</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_qr_title">Start 2D Scanner (deeplink)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_new_start_scan_qr_title">Start 2D Scanner (callback)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_barcode_title">Start 1D Scanner (deeplink)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_new_start_barcode_title">Start 1D Scanner (callback)</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_success">Successful reading: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_error">Error: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_undefined">Undefined: %s</string>
