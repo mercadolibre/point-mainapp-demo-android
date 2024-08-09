@@ -20,9 +20,7 @@ class CameraScannerActivity : AppCompatActivity() {
         PointMainappDemoAppActivityCameraScannerBinding.inflate(layoutInflater)
     }
 
-    private val cameraScanner by lazy {
-        MPManager.cameraScanner
-    }
+    private val cameraScanner = MPManager.cameraScanner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
