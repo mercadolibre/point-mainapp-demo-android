@@ -26,6 +26,7 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
     private val amount by lazy { intent.getStringExtra(AMOUNT) }
     private val paymentMethod by lazy { intent.getStringExtra(PAYMENT_METHOD) }
     private val description by lazy { intent.getStringExtra(DESCRIPTION) }
+    private val printOnTerminal by lazy { intent.getBooleanExtra(PRINT_ON_TERMINAL, false) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +105,8 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
             methodCallback = "error",
             metadata = hashMapOf("message" to "testError"),
             appID = "demo.app"
-        )
+        ),
+        printOnTerminal = printOnTerminal
     )
 
     private fun launchPaymentInstallment(paymentFlowRequestData: PaymentFlowRequestData) {
@@ -133,5 +135,6 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
         internal const val DESCRIPTION = "description"
         internal const val PAYMENT_METHOD = "payment_method"
         internal const val TOTAL_AMOUNT = "Total Amount"
+        internal const val PRINT_ON_TERMINAL = "print_on_terminal"
     }
 }

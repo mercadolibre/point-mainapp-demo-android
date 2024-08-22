@@ -18,6 +18,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.Paym
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.DESCRIPTION
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYMENT_METHOD
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PRINT_ON_TERMINAL
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 
 /** Main activity class */
@@ -28,6 +29,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
     private val paymentTool = MPManager.paymentMethodsTools
     private var lastPaymentMethodSelected: PaymentMethod? = null
     private var clearPaymentMethodList: Boolean = true
+    private var isPrintOnTerminal: Boolean = true
     private val paymentMethodAdapter by lazy {
         PaymentMethodAdapter {
             lastPaymentMethodSelected = PaymentMethod.valueOf(it)
@@ -49,7 +51,13 @@ class PaymentLauncherActivity : AppCompatActivity() {
         }
 
         configPaymentButton()
+        isAutomaticPrintOnTerminal()
     }
+
+    private fun isAutomaticPrintOnTerminal() =
+        binding.checkboxIsAutomaticPrinting.setOnCheckedChangeListener { _, isChecked ->
+            isPrintOnTerminal = isChecked
+        }
 
     private fun configPaymentButton() {
 
@@ -88,7 +96,8 @@ class PaymentLauncherActivity : AppCompatActivity() {
                     bundleOf(
                         PAYMENT_METHOD to lastPaymentMethodSelected?.name,
                         AMOUNT to amount,
-                        DESCRIPTION to description
+                        DESCRIPTION to description,
+                        PRINT_ON_TERMINAL to isPrintOnTerminal
                     )
                 )
             }
@@ -140,7 +149,8 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 description,
                 uriSuccess,
                 uriError,
-                lastPaymentMethodSelected
+                lastPaymentMethodSelected,
+                printOnTerminal = isPrintOnTerminal
             ),
             this
         ) { response ->
