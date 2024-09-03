@@ -1,6 +1,6 @@
 # v2.9.0
 ## Added
-
+- implementation of new strategy to launch the scanner camera.
 
 # v2.8.2
 ## Fixed
