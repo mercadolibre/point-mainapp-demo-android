@@ -1,6 +1,11 @@
 # v2.9.0
 ## Added
-- implementation of new strategy to launch the scanner camera.
+- send through messenger custom tag to custom print 2.0
+- change string to serializable voucher in payment method model
+- Migrate the UserValidation class to an Interface.
+- change of strategy in the launch of the deeplink for the camera scanner in reading QR and barcode codes.
+- Adjust CameraScannerStatus enumerator class to avoid breaking changes
+- implement payment flow with messenger and monitoring of event
 
 # v2.8.2
 ## Fixed

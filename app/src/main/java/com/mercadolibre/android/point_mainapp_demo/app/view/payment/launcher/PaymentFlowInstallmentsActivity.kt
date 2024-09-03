@@ -110,7 +110,7 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
     )
 
     private fun launchPaymentInstallment(paymentFlowRequestData: PaymentFlowRequestData) {
-        paymentFlow.launchPaymentFlowActivity(paymentFlowRequestData, this) { response ->
+        paymentFlow.launchPaymentFlow(paymentFlowRequestData) { response ->
             response.doIfError {
                 setOnError(it.message)
             }
