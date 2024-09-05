@@ -1,6 +1,6 @@
 <resources>
     <string name="point_mainapp_demo_app_name">Demo Launcher Integration</string>
-    <string name="point_mainapp_demo_app_lab_send_payment_action">Payment</string>
+    <string name="point_mainapp_demo_app_lab_send_payment_action">Launch Payment</string>
     <string name="point_mainapp_demo_app_lab_get_payment_method_action">Get Payment method</string>
     <string name="point_mainapp_demo_app_title">Demo Launcher Integration App</string>
     <string name="point_mainapp_demo_app_lab_payment_amount">Amount</string>
@@ -45,8 +45,10 @@
 
     <!-- Camera Scanner -->
     <string name="point_mainapp_demo_app_cammera_scanner_main_title">Camera Scanner</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_qr_title">Start QR Scanner</string>
-    <string name="point_mainapp_demo_app_cammera_scanner_start_barcode_title">Start barcode Scanner</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_scan_qr_title">Start 2D Scanner (deeplink)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_new_start_scan_qr_title">Start 2D Scanner (callback)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_start_barcode_title">Start 1D Scanner (deeplink)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_new_start_barcode_title">Start 1D Scanner (callback)</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_success">Successful reading: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_error">Error: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_undefined">Undefined: %s</string>
@@ -61,4 +63,7 @@
     <string name="point_mainapp_demo_app_smart_info_title">Smart info</string>
     <string name="point_mainapp_demo_app_btn_go_back">Go back</string>
     <string name="point_mainapp_demo_app_version_name">Version app: %s</string>
+
+    <!-- payment flow -->
+    <string name="point_mainapp_demo_app_description_is_automatic_printing">Do you want to disable automatic printing in the terminal?</string>
 </resources>
