@@ -94,18 +94,6 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
         amount = amount.toDouble(),
         description = description,
         paymentMethod = paymentMethodValue?.run { PaymentMethod.valueOf(this) },
-        intentSuccess = paymentFlow.buildCallbackUri(
-            callback = "mercadopago://launcher_native_app",
-            methodCallback = "success",
-            metadata = hashMapOf("message" to "testSuccess"),
-            appID = "demo.app"
-        ),
-        intentError = paymentFlow.buildCallbackUri(
-            callback = "mercadopago://launcher_native_app",
-            methodCallback = "error",
-            metadata = hashMapOf("message" to "testError"),
-            appID = "demo.app"
-        ),
         printOnTerminal = printOnTerminal
     )
 

@@ -124,20 +124,12 @@ class PaymentLauncherActivity : AppCompatActivity() {
     private fun launchPaymentFlowIntent(
         amount: String, description: String?
     ) {
-        val uriSuccess = paymentFlow.buildCallbackUri(
-            "mercadopago://launcher_native_app", "success", hashMapOf("attr" to "123"), "demo_app"
-        )
-        val uriError = paymentFlow.buildCallbackUri(
-            "mercadopago://launcher_native_app", "error", hashMapOf("attr" to "456"), "demo_app"
-        )
 
         paymentFlow.launchPaymentFlow(
             PaymentFlowRequestData(
                 amount.toDouble(),
                 description,
-                uriSuccess,
-                uriError,
-                lastPaymentMethodSelected,
+                paymentMethod = lastPaymentMethodSelected,
                 printOnTerminal = isPrintOnTerminal
             )
         ) { response ->
