@@ -1,3 +1,7 @@
+# v2.9.1
+## Fixed
+- Update message print onterminal
+
 # v2.9.0
 ## Added
 - send through messenger custom tag to custom print 2.0
