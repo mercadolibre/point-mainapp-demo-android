@@ -1,8 +1,7 @@
 # v2.9.2
 ## Added
-- Update sdk library with some technical improvements.
-  - User validation and MessageDatasourceImpl initialization improvements in Bitmap Printer, Payment Flow, Bluetooth, and SmartInformation.
-  
+- Update sdk library with some technical improvements. 
+
 # v2.9.1
 ## Fixed
 - Update message print onterminal
