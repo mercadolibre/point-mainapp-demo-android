@@ -46,6 +46,7 @@
     <string name="point_mainapp_demo_app_text_button_printer_bitmap">Print image</string>
 
     <!-- custom tag -->
+    <string name="point_mainapp_demo_app_home_printer_custom_tag">Custom tag test</string>
     <string name="point_mainapp_demo_app_text_button_printer_custom_tag">Print custom tag</string>
     <string name="point_mainapp_demo_app_home_descption_printer_custom_tag">To print a custom tag. You can paste custom tag or DTE using scrcpy Only chile</string>
     <string name="point_mainapp_demo_app_home_print_pdf417_in_boleta_custom_tag">If you want to print a PDF417 in Boleta check here</string>
