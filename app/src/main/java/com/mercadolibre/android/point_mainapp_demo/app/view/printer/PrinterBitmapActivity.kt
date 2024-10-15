@@ -20,7 +20,6 @@ class PrinterBitmapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = PointMainappDemoAppActivityPrinterBitmapBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
         onPrintImageBitmap()
     }
 
