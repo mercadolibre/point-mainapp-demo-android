@@ -23,6 +23,11 @@
         <activity
             android:name=".view.bluetooth.printer.PrinterTestActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".view.printer.PrinterCustomTagActivity"
+            android:exported="false" />
+
         <activity
             android:name=".view.home.HomeActivity"
             android:exported="true">

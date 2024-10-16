@@ -28,6 +28,14 @@ object ActionsProviderImpl : ActionsProvider {
                 icon = AppCompatResources.getDrawable(context, R.drawable.point_mainapp_demo_app_ic_info),
                 action = HomeActions.LaunchActivity(SmartInfoActivity::class.java)
             ),
+            ActionModel(
+                title = context.getString(R.string.point_mainapp_demo_app_home_printer_custom_tag),
+                icon = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.point_mainapp_demo_app_black_ic_print
+                ),
+                action = HomeActions.LaunchActivity(PrinterCustomTagActivity::class.java)
+            )
         )
     }
 }
