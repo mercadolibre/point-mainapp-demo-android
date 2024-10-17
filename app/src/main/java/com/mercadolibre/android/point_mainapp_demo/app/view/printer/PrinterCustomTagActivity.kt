@@ -35,7 +35,6 @@ class PrinterCustomTagActivity : AppCompatActivity() {
         onPrintCustomTag()
         onGetPaymentMethod()
         setupRecyclerView()
-        hideKeyboard()
     }
 
     private fun setupRecyclerView() {
@@ -76,7 +75,6 @@ class PrinterCustomTagActivity : AppCompatActivity() {
     }
 
     private fun ActivityPrinterCustomTagBinding.onClickGetPaymentMethodAction() {
-        hideKeyboard()
         clearPaymentMethodList = clearPaymentMethodList.not()
         if (clearPaymentMethodList) {
             getPaymentMethodCustomTag.text =
@@ -108,6 +106,8 @@ class PrinterCustomTagActivity : AppCompatActivity() {
         val printPdf417InBoleta = binding.checkboxPrintPdf417Boleta.isChecked
         MPManager.bitmapPrinter.print(
             content,
+            lastPaymentMethodSelected,
+            printPdf417InBoleta,
         ) { response ->
             response
                 .doIfSuccess { result ->
