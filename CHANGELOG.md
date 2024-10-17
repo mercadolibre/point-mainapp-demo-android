@@ -1,6 +1,12 @@
+# v3.0.1
+
+## Added
+- [SMARTI-1693] Improve UX the custom tag activity test
+- [SMARTI-1595] Implement Activity to test Custom tag print
+
 # v2.9.2
 ## Added
-- Update sdk library with some technical improvements. 
+- Update sdk library with some technical improvements.
 
 # v2.9.1
 ## Fixed
