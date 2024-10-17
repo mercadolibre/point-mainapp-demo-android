@@ -12,9 +12,11 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.Pay
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
+import com.mercadolibre.android.point_mainapp_demo.app.util.gone
 import com.mercadolibre.android.point_mainapp_demo.app.util.hideKeyboard
 import com.mercadolibre.android.point_mainapp_demo.app.util.launchActivity
 import com.mercadolibre.android.point_mainapp_demo.app.util.toast
+import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.DESCRIPTION
@@ -83,29 +85,21 @@ class PaymentLauncherActivity : AppCompatActivity() {
         }
     }
 
-    private fun launchPaymentFlow(amount: String?, description: String?) {
-        when {
-            amount.isNullOrEmpty() -> {
-                ERROR_INVALID_AMOUNT.setLayoutError()
-            }
+    private fun launchPaymentFlow(amount: String?, description: String?) = when {
+        amount.isNullOrEmpty() -> ERROR_INVALID_AMOUNT.setLayoutError()
 
-            isCreditCard() -> {
-                launchActivity(
-                    PaymentFlowInstallmentsActivity::class.java, bundleOf(
-                        PAYMENT_METHOD to lastPaymentMethodSelected?.name,
-                        AMOUNT to amount,
-                        DESCRIPTION to description,
-                        PRINT_ON_TERMINAL to isPrintOnTerminal
-                    )
-                )
-            }
+        isCreditCard() -> launchActivity(
+            PaymentFlowInstallmentsActivity::class.java, bundleOf(
+                PAYMENT_METHOD to lastPaymentMethodSelected?.name,
+                AMOUNT to amount,
+                DESCRIPTION to description,
+                PRINT_ON_TERMINAL to isPrintOnTerminal
+            )
+        )
 
-            else -> {
-                launchPaymentFlowIntent(
-                    amount = amount, description = description
-                )
-            }
-        }
+        else -> launchPaymentFlowIntent(
+            amount = amount, description = description
+        )
     }
 
     private fun isCreditCard() = lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD
@@ -113,18 +107,18 @@ class PaymentLauncherActivity : AppCompatActivity() {
     private fun configPaymentMethodList() {
         paymentTool.getPaymentMethods { response ->
             response.doIfSuccess { result ->
-                    val paymentMethodList = result.map { PaymentMethodModel(name = it.name) }
-                    paymentMethodAdapter.submitList(paymentMethodList)
-                }.doIfError { error ->
-                    toast(error.message.orEmpty())
-                }
+                val paymentMethodList = result.map { PaymentMethodModel(name = it.name) }
+                paymentMethodAdapter.submitList(paymentMethodList)
+            }.doIfError { error ->
+                toast(error.message.orEmpty())
+            }
         }
     }
 
     private fun launchPaymentFlowIntent(
         amount: String, description: String?
     ) {
-
+        binding.paymentProgressBar.visible()
         paymentFlow.launchPaymentFlow(
             PaymentFlowRequestData(
                 amount.toDouble(),
@@ -133,6 +127,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 printOnTerminal = isPrintOnTerminal
             )
         ) { response ->
+            binding.paymentProgressBar.gone()
             response.doIfSuccess {
                 showSnackBar(MESSAGE_PAYMENT_SUCCESS.format(it.paymentReference))
             }.doIfError {

@@ -35,6 +35,7 @@ class PrinterCustomTagActivity : AppCompatActivity() {
         onPrintCustomTag()
         onGetPaymentMethod()
         setupRecyclerView()
+        hideKeyboard()
     }
 
     private fun setupRecyclerView() {
