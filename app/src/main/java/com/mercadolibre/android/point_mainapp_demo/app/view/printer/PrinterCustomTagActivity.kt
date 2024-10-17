@@ -13,6 +13,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.util.hideKeyboard
 import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.dialog.SelectionPaymentMethodDialogFragment
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 
 class PrinterCustomTagActivity : AppCompatActivity() {
@@ -23,28 +24,14 @@ class PrinterCustomTagActivity : AppCompatActivity() {
         ActivityPrinterCustomTagBinding.inflate(layoutInflater)
     }
 
-    private val paymentMethodAdapter by lazy {
-        PaymentMethodAdapter {
-            lastPaymentMethodSelected = it
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         onPrintCustomTag()
         onGetPaymentMethod()
-        setupRecyclerView()
+        setupPaymentMethodSelectedTextView()
         hideKeyboard()
-    }
-
-    private fun setupRecyclerView() {
-        binding.recyclerviewPaymentMethod.apply {
-            layoutManager = LinearLayoutManager(
-                this@PrinterCustomTagActivity, LinearLayoutManager.HORIZONTAL, false
-            )
-            adapter = paymentMethodAdapter
-        }
     }
 
     private fun onPrintCustomTag() {
@@ -70,35 +57,51 @@ class PrinterCustomTagActivity : AppCompatActivity() {
                 groupPrintImageCustomTag.gone()
                 printImageCustomTag()
             } else {
-                finish()
+                onRestartPrintAction()
             }
+        }
+    }
+
+    private fun setupPaymentMethodSelectedTextView() {
+        binding.textViewPaymentMethodSelected.apply {
+            lastPaymentMethodSelected?.let { lastPaymentMethodSelected ->
+                visible()
+                text = String.format(
+                    getString(R.string.point_mainapp_demo_app_home_print_payment_method_selected_custom_tag),
+                    lastPaymentMethodSelected
+                )
+            } ?: gone()
         }
     }
 
     private fun ActivityPrinterCustomTagBinding.onClickGetPaymentMethodAction() {
+        getPaymentMethodAction()
+    }
+
+    private fun ActivityPrinterCustomTagBinding.getPaymentMethodAction() {
         clearPaymentMethodList = clearPaymentMethodList.not()
         if (clearPaymentMethodList) {
-            getPaymentMethodCustomTag.text =
-                getString(R.string.point_mainapp_demo_app_lab_get_payment_method_action)
-            lastPaymentMethodSelected = null
-            paymentMethodAdapter.clear()
+            clearPaymentMethodAction()
         } else {
-            getPaymentMethodCustomTag.text =
-                getString(R.string.point_mainapp_demo_app_clear_label)
-            configPaymentMethodList()
+            getPaymentMethodCustomTag.text = getString(R.string.point_mainapp_demo_app_clear_label)
+            launchPaymentMethodDialog()
         }
     }
 
+    private fun ActivityPrinterCustomTagBinding.clearPaymentMethodAction() {
+        getPaymentMethodCustomTag.text =
+            getString(R.string.point_mainapp_demo_app_lab_get_payment_method_action)
+        lastPaymentMethodSelected = null
+        setupPaymentMethodSelectedTextView()
+    }
 
-    private fun configPaymentMethodList() {
-        MPManager.paymentMethodsTools.getPaymentMethods { response ->
-            response.doIfSuccess { result ->
-                val paymentMethodList = result.map { PaymentMethodModel(name = it.name) }
-                paymentMethodAdapter.submitList(paymentMethodList)
-            }.doIfError { error ->
-                toast(error.message.orEmpty())
-            }
+    private fun launchPaymentMethodDialog() {
+        val dialog = SelectionPaymentMethodDialogFragment.newInstance()
+        dialog.onListenerPaymentMethod = { paymentMethod ->
+            lastPaymentMethodSelected = paymentMethod
+            setupPaymentMethodSelectedTextView()
         }
+        dialog.show(supportFragmentManager, "SelectionPaymentMethodDialogFragment")
     }
 
 
@@ -116,13 +119,24 @@ class PrinterCustomTagActivity : AppCompatActivity() {
                 }
                 .doIfError { error ->
                     onResultFailure(error.message.orEmpty())
-                    toast(error.message.orEmpty())
                 }
         }
     }
 
-    private fun onResultSuccess(result: String) {
+    private fun onRestartPrintAction() {
+        binding.apply {
+            inputText.text?.clear()
+            iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_black_ic_print)
+            descriptionPrinterBitmap.text =
+                getString(R.string.point_mainapp_demo_app_home_descption_printer_custom_tag)
+            progressCircular.gone()
+            groupPrintImageCustomTag.visible()
+            printImageCustomTag.text =
+                getString(R.string.point_mainapp_demo_app_text_button_printer_custom_tag)
+        }
+    }
 
+    private fun onResultSuccess(result: String) {
         binding.apply {
             progressCircular.gone()
             iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_ic_done)
@@ -149,6 +163,6 @@ class PrinterCustomTagActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val TEXT_BUTTON_ACTION = "Go to start"
+        private const val TEXT_BUTTON_ACTION = "Replay"
     }
 }
