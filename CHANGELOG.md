@@ -1,8 +1,11 @@
-# v3.0.1
-
+# v4.0.0
 ## Added
-- [SMARTI-1693] Improve UX the custom tag activity test
-- [SMARTI-1595] Implement Activity to test Custom tag print
+- Updated sdk library with unified version to SmartApps
+
+# v3.0.1
+## Added
+- Improve UX the custom tag activity test
+- Implement Activity to test Custom tag print
 
 # v2.9.2
 ## Added
