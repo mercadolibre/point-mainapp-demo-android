@@ -1,6 +1,7 @@
 # v4.0.0
 ## Added
 - Updated sdk library with unified version to SmartApps
+- Moved bitmap print to raw resources, and replaced with new image with addition blank bottom space.
 
 # v3.0.1
 ## Added
