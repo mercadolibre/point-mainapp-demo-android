@@ -37,7 +37,8 @@ class PrinterTestActivity : AppCompatActivity(), PrinterSelectorCallback {
                     buttonLoremImsup.text = getString(R.string.point_mainapp_demo_app_clear_label)
                     textFieldDataToPrint.setText(LARGE_STRING)
                 } else {
-                    buttonLoremImsup.text = getString(R.string.point_mainapp_demo_app_make_print_label_large_text)
+                    buttonLoremImsup.text =
+                        getString(R.string.point_mainapp_demo_app_make_print_label_large_text)
                     textFieldDataToPrint.setText("")
                 }
             }
@@ -76,11 +77,12 @@ class PrinterTestActivity : AppCompatActivity(), PrinterSelectorCallback {
     }
 
     companion object {
-        const val LARGE_STRING = "Lorem ipsum dolor sit amet consectetur adipiscing elit ac, vel posuere lobortis nunc praesent" +
-                " penatibus consequat, nam per cursus ultrices sem luctus sollicitudin. Auctor non sagittis lectus ultricies cubilia" +
-                " praesent, bibendum convallis torquent condimentum nullam consequat sem, augue ullamcorper eu purus habitasse. " +
-                "Vestibulum pretium cras leo magna duis nullam porta dui urna, velit laoreet ridiculus nostra risus venenatis sapien" +
-                " potenti, senectus donec mi varius felis erat curabitur penatibus. Placerat natoque aenean velit nullam risus dis ac" +
-                " platea praesent pulvinar, ligula molestie pellentesque parturient leo eros nisi varius."
+        const val LARGE_STRING =
+            "Lorem ipsum dolor sit amet consectetur adipiscing elit ac, vel posuere lobortis nunc praesent" +
+                    " penatibus consequat, nam per cursus ultrices sem luctus sollicitudin. Auctor non sagittis lectus ultricies cubilia" +
+                    " praesent, bibendum convallis torquent condimentum nullam consequat sem, augue ullamcorper eu purus habitasse. " +
+                    "Vestibulum pretium cras leo magna duis nullam porta dui urna, velit laoreet ridiculus nostra risus venenatis sapien" +
+                    " potenti, senectus donec mi varius felis erat curabitur penatibus. Placerat natoque aenean velit nullam risus dis ac" +
+                    " platea praesent pulvinar, ligula molestie pellentesque parturient leo eros nisi varius."
     }
 }
