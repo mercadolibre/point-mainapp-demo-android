@@ -45,18 +45,18 @@ class PrinterBitmapActivity : AppCompatActivity() {
     }
 
     private fun printImageBitmap() {
-
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.point_mainapp_demo_app_ic_datafono)
-
-        MPManager.bitmapPrinter.print(bitmap) { response ->
-            response
-                .doIfSuccess { result ->
-                    onResultSuccess(result)
-                }
-                .doIfError { error ->
-                    onResultFailure(error.message.orEmpty())
-                    toast(error.message.orEmpty())
-                }
+        val inputStream = resources.openRawResource(R.raw.point_mainapp_demo_app_ic_datafono)
+        BitmapFactory.decodeStream(inputStream)?.run {
+            MPManager.bitmapPrinter.print(this) { response ->
+                response
+                    .doIfSuccess { result ->
+                        onResultSuccess(result)
+                    }
+                    .doIfError { error ->
+                        onResultFailure(error.message.orEmpty())
+                        toast(error.message.orEmpty())
+                    }
+            }
         }
     }
 
