@@ -1,3 +1,7 @@
+# v4.0.1
+## Fixed
+- Fix: Improve Payment Flow Validation and Payment Method Adjustments
+
 # v4.0.0
 ## Added
 - Updated sdk library with unified version to SmartApps
