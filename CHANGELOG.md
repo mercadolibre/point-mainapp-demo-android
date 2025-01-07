@@ -1,3 +1,7 @@
+# v4.0.2
+## Added
+- Implement new metadata for on-demand app installation. 
+
 # v4.0.1
 ## Fixed
 - Fix: Improve Payment Flow Validation and Payment Method Adjustments
