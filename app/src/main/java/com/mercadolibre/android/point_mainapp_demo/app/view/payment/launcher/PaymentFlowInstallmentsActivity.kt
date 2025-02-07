@@ -14,6 +14,8 @@ import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappD
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentInstallmentAdapter
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PayerConditionString
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.toTaxes
 
 class PaymentFlowInstallmentsActivity : AppCompatActivity() {
 
@@ -27,6 +29,7 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
     private val paymentMethod by lazy { intent.getStringExtra(PAYMENT_METHOD) }
     private val description by lazy { intent.getStringExtra(DESCRIPTION) }
     private val printOnTerminal by lazy { intent.getBooleanExtra(PRINT_ON_TERMINAL, false) }
+    private val payerCondition: PayerConditionString? by lazy { intent.getStringExtra(PAYER_CONDITION) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +97,8 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
         amount = amount.toDouble(),
         description = description,
         paymentMethod = paymentMethodValue?.run { PaymentMethod.valueOf(this) },
-        printOnTerminal = printOnTerminal
+        printOnTerminal = printOnTerminal,
+        taxes = payerCondition?.toTaxes()
     )
 
     private fun launchPaymentInstallment(paymentFlowRequestData: PaymentFlowRequestData) {
@@ -124,5 +128,6 @@ class PaymentFlowInstallmentsActivity : AppCompatActivity() {
         internal const val PAYMENT_METHOD = "payment_method"
         internal const val TOTAL_AMOUNT = "Total Amount"
         internal const val PRINT_ON_TERMINAL = "print_on_terminal"
+        internal const val PAYER_CONDITION = "payer_condition"
     }
 }
