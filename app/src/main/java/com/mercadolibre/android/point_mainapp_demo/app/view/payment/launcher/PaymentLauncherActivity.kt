@@ -129,7 +129,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun launchPaymentFlowIntent(
-        amount: String,description: String?
+        amount: String, description: String?
     ) {
         binding.paymentProgressBar.visible()
         paymentFlow.launchPaymentFlow(
