@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
+import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PayerCondition
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentFlowRequestData
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
 import com.mercadolibre.android.point_mainapp_demo.app.R
@@ -20,9 +22,12 @@ import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.DESCRIPTION
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYER_CONDITION
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYMENT_METHOD
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PRINT_ON_TERMINAL
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PayerConditionString
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.toTaxes
 
 /** Main activity class */
 class PaymentLauncherActivity : AppCompatActivity() {
@@ -52,7 +57,14 @@ class PaymentLauncherActivity : AppCompatActivity() {
         }
 
         configPaymentButton()
+        configPayerConditionDropDown()
         isAutomaticPrintOnTerminal()
+    }
+
+    private fun configPayerConditionDropDown() {
+        binding.payerCondition.setText(NO_TAX)
+        val finalList = listOf(NO_TAX) + PayerCondition.values().map { it.name }
+        binding.payerCondition.setSimpleItems(finalList.toTypedArray())
     }
 
     private fun isAutomaticPrintOnTerminal() =
@@ -93,7 +105,8 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 PAYMENT_METHOD to lastPaymentMethodSelected?.name,
                 AMOUNT to amount,
                 DESCRIPTION to description,
-                PRINT_ON_TERMINAL to isPrintOnTerminal
+                PRINT_ON_TERMINAL to isPrintOnTerminal,
+                PAYER_CONDITION to binding.payerCondition.getSelectedValue()
             )
         )
 
@@ -121,10 +134,11 @@ class PaymentLauncherActivity : AppCompatActivity() {
         binding.paymentProgressBar.visible()
         paymentFlow.launchPaymentFlow(
             PaymentFlowRequestData(
-                amount.toDouble(),
-                description,
+                amount = amount.toDouble(),
+                description = description,
                 paymentMethod = lastPaymentMethodSelected,
-                printOnTerminal = isPrintOnTerminal
+                printOnTerminal = isPrintOnTerminal,
+                taxes = binding.payerCondition.getSelectedValue()?.toTaxes()
             )
         ) { response ->
             binding.paymentProgressBar.gone()
@@ -169,9 +183,13 @@ class PaymentLauncherActivity : AppCompatActivity() {
         getColor(R.color.doneColor)
     }
 
+    private fun MaterialAutoCompleteTextView.getSelectedValue(): PayerConditionString? =
+        text.toString().takeIf { it != NO_TAX }
+
     companion object {
         private const val ERROR_INVALID_AMOUNT = "Amount is null or empty"
         private const val MESSAGE_PAYMENT_CANCELED = "Your payment was %s"
         private const val MESSAGE_PAYMENT_SUCCESS = "Your payment reference is: %s"
+        private const val NO_TAX = "NO TAX"
     }
 }

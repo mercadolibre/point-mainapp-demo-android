@@ -26,6 +26,15 @@
         <item name="boxStrokeColor">@color/point_mainapp_demo_app_text_input_box_stroke</item>
     </style>
 
+    <style name="point_mainapp_demo_appTheme.TextInputLayoutTheme.DropDown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="colorControlActivated">@color/primaryColor</item>
+        <item name="colorControlHighlight">@color/primaryColor</item>
+        <item name="android:textColorHint">@color/primaryTextColor</item>
+        <item name="startIconTint">@color/primaryTextColor</item>
+        <item name="boxStrokeColor">@color/point_mainapp_demo_app_text_input_box_stroke</item>
+    </style>
+
     <style name="point_mainapp_demo_appTheme.TextInputLayoutTheme.errorAppearance" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/design_default_color_error</item>
     </style>

@@ -1,6 +1,14 @@
+# v4.1.1
+## Fixed
+- Remove cash payment from payment method. This payment method will be available at a later date
+
+# v4.1.0
+## Added
+- Improve payment flow with taxes in payment.
+
 # v4.0.2
 ## Added
-- Implement new metadata for on-demand app installation. 
+- Implement new metadata for on-demand app installation.
 
 # v4.0.1
 ## Fixed

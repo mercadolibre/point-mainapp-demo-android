@@ -59,6 +59,31 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/payerConditionLayout"
+            style="@style/point_mainapp_demo_appTheme.TextInputLayoutTheme.DropDown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/ui_2m"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/ui_1m"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/point_mainapp_demo_app_lab_tax"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionInputLayout"
+            app:startIconDrawable="@drawable/point_mainapp_demo_app_ic_receipt">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/payerCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:textColor="@color/primaryTextColor"
+                app:simpleItemLayout="@layout/point_mainapp_demo_app_item_spinner" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <CheckBox
             android:id="@+id/checkbox_is_automatic_printing"
             android:layout_width="wrap_content"
@@ -71,7 +96,7 @@
             android:checked="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descriptionInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/payerConditionLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_payment_method"
