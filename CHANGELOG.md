@@ -1,3 +1,7 @@
+# v4.1.1
+## Fixed
+- Remove cash payment from payment method. This payment method will be available at a later date
+
 # v4.1.0
 ## Added
 - Improve payment flow with taxes in payment.
