@@ -11,6 +11,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.Pr
 import com.mercadolibre.android.point_mainapp_demo.app.view.camera.CameraScannerActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.result.PaymentStatusApprovedActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterCustomTagActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
@@ -25,6 +26,14 @@ object ActionsProviderImpl : ActionsProvider {
                     R.drawable.point_mainapp_demo_app_ic_payments
                 ),
                 action = HomeActions.LaunchActivity(PaymentLauncherActivity::class.java)
+            ),
+            ActionModel(
+                title = context.getString(R.string.point_mainapp_demo_app_lab_text_go_to_payment_status),
+                icon = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.point_mainapp_demo_app_ic_payments
+                ),
+                action = HomeActions.LaunchActivity(PaymentStatusApprovedActivity::class.java)
             ),
             ActionModel(
                 title = context.getString(R.string.point_mainapp_demo_app_button_bluetooth_tools),
