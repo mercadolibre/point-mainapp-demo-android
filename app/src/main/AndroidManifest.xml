@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/point_mainapp_demo_appTheme.main">
         <activity
+            android:name=".view.payment.result.PaymentStatusApprovedActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.payment.launcher.PaymentFlowInstallmentsActivity"
             android:exported="false" />
         <activity
@@ -23,12 +26,10 @@
         <activity
             android:name=".view.bluetooth.printer.PrinterTestActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.printer.PrinterCustomTagActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:exported="false" />
-
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".view.home.HomeActivity"
             android:exported="true">
@@ -76,10 +77,8 @@
         <meta-data
             android:name="com.mercadolibre.android.sdk.CLIENT_ID"
             android:value="193213529837179L" />
-
         <meta-data
             android:name="com.mercadolibre.android.sdk.OAUTH_ENABLED"
             android:value="true" />
     </application>
-
 </manifest>

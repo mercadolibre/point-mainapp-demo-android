@@ -77,4 +77,15 @@
 
     <!-- payment flow -->
     <string name="point_mainapp_demo_app_description_is_automatic_printing">Enable automatic printing</string>
+
+    <string name="point_mainapp_demo_app_lab_hind_external_reference">Insert external reference</string>"
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status">Go to payment status</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_amount">Amount:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_method">payment method:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_reference">payment reference:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_creation_date">payment creation date:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_sn_number">SN Device: </string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_last_four_digits">last 4 digits:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_brand_name">brand name:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_installment">installment:</string>
 </resources>
