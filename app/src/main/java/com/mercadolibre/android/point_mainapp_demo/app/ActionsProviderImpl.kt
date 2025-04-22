@@ -9,6 +9,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.actions.model.ActionModel
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.BluetoothTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.bluetooth.printer.PrinterTestActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.camera.CameraScannerActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.camera.LaunchScannerActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.result.PaymentStatusApprovedActivity
@@ -90,6 +91,14 @@ object ActionsProviderImpl : ActionsProvider {
                     R.drawable.point_mainapp_demo_app_ic_qr_code
                 ),
                 action = HomeActions.LaunchActivity(CameraScannerActivity::class.java)
+            ),
+            ActionModel(
+                title = "New Camera Scanner",
+                icon = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.point_mainapp_demo_app_ic_qr_code
+                ),
+                action = HomeActions.LaunchActivity(LaunchScannerActivity::class.java)
             ),
             ActionModel(
                 title = context.getString(R.string.point_mainapp_demo_app_smart_info_main_title),

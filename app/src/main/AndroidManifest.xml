@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/point_mainapp_demo_appTheme.main">
         <activity
+            android:name=".view.camera.LaunchScannerActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.payment.result.PaymentStatusApprovedActivity"
             android:exported="false" />
         <activity
@@ -73,6 +76,9 @@
         <activity
             android:name=".view.camera.CameraScannerActivity"
             android:exported="false" />
+
+        <meta-data android:name="com.mercadolibre.android.sdk.PLATFORM_ID"
+            android:value="dev-main-test-app-demo" />
 
         <meta-data
             android:name="com.mercadolibre.android.sdk.CLIENT_ID"
