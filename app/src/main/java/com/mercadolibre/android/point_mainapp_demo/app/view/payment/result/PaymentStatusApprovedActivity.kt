@@ -7,25 +7,26 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.MPManager
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentResponse
-import com.mercadolibre.android.point_mainapp_demo.app.databinding.ActivityPaymentStatusApprovedBinding
+import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentStatusApprovedBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 
 class PaymentStatusApprovedActivity : AppCompatActivity() {
 
-    private var binding: ActivityPaymentStatusApprovedBinding? = null
+    private val binding: PointMainappDemoAppActivityPaymentStatusApprovedBinding by lazy {
+        PointMainappDemoAppActivityPaymentStatusApprovedBinding.inflate(layoutInflater)
+    }
 
     private val paymentStatus = MPManager.paymentStatus
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPaymentStatusApprovedBinding.inflate(layoutInflater)
-        binding?.run { setContentView(root) }
+        setContentView(binding.root)
         searchPayment()
         goBack()
     }
 
     private fun searchPayment() {
-        binding?.apply {
+        binding.apply {
             searchInputPaymentStatusApproved.setEndIconOnClickListener {
                 val paymentId = searchInputPaymentStatusApproved.editText?.text.toString()
                 getPaymentStatus(paymentId)
@@ -45,7 +46,7 @@ class PaymentStatusApprovedActivity : AppCompatActivity() {
     }
 
     private fun paymentStatusSuccessResult(paymentResponse: PaymentResponse) {
-        binding?.apply {
+        binding.apply {
             cardPaymentStatusApproved.visible()
             textPaymentAmountResult.text = paymentResponse.paymentAmount.toString()
             textPaymentInstallmentResult.text = paymentResponse.paymentInstallments
@@ -58,12 +59,12 @@ class PaymentStatusApprovedActivity : AppCompatActivity() {
     }
 
     private fun paymentStatusErrorResult(message: String?) {
-        Snackbar.make(binding!!.root, message ?: "Error", Snackbar.ANIMATION_MODE_SLIDE)
+        Snackbar.make(binding.root, message ?: "Error", Snackbar.ANIMATION_MODE_SLIDE)
             .setBackgroundTint(getColor(android.R.color.holo_red_light)).show()
     }
 
     private fun goBack() {
-        binding?.apply {
+        binding.apply {
             buttonPaymentStatusApproved.setOnClickListener {
                 finish()
             }

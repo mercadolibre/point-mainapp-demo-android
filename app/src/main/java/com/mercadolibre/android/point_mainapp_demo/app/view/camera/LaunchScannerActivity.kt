@@ -10,12 +10,12 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.camera.provider.
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfError
 import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.doIfSuccess
 import com.mercadolibre.android.point_mainapp_demo.app.R
-import com.mercadolibre.android.point_mainapp_demo.app.databinding.ActivityLaunchScannerBinding
+import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityLaunchScannerBinding
 
 class LaunchScannerActivity : AppCompatActivity() {
 
-    private val binding: ActivityLaunchScannerBinding by lazy {
-        ActivityLaunchScannerBinding.inflate(layoutInflater)
+    private val binding: PointMainappDemoAppActivityLaunchScannerBinding by lazy {
+        PointMainappDemoAppActivityLaunchScannerBinding.inflate(layoutInflater)
     }
 
     private var scannerRequestBuilder = ScannerFlowRequestData(
