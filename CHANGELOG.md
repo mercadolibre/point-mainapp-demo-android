@@ -10,7 +10,6 @@
 ## added
 - adding functionality to retrieve an approved payment by id
 
-
 # v4.1.1
 ## Fixed
 - Remove cash payment from payment method. This payment method will be available at a later date

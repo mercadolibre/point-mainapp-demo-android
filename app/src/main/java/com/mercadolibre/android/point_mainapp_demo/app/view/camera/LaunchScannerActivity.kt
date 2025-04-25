@@ -37,20 +37,23 @@ class LaunchScannerActivity : AppCompatActivity() {
     }
 
     private fun initializeViewsWithCurrentState() {
-        binding.switchTurnOn.isChecked = false
-        binding.valueInitialOrientation.setText(ORIENTATION_NONE)
-        binding.valueInitialOrientation.setSimpleItems(
-            resources.getStringArray(R.array.point_mainapp_demo_app_camera_scanner_orientation)
-        )
+        binding.apply {
+            switchTurnOn.isChecked = false
+            valueInitialOrientation.setText(ORIENTATION_NONE)
+            valueInitialOrientation.setSimpleItems(
+                resources.getStringArray(R.array.point_mainapp_demo_app_camera_scanner_orientation)
+            )
+        }
     }
 
     private fun setupScanButtons() {
-        binding.pointMainappDemoAppCameraQrScannerNewInitBtn.setOnClickListener {
-            launchScanner(ScanType.CAMERA_SCANNER_QR)
-        }
-
-        binding.pointMainappDemoAppNewCameraBarcodeScannerInitBtn.setOnClickListener {
-            launchScanner(ScanType.CAMERA_SCANNER_BARCODE)
+        binding.apply {
+            pointMainappDemoAppCameraQrScannerNewInitBtn.setOnClickListener {
+                launchScanner(ScanType.CAMERA_SCANNER_QR)
+            }
+            pointMainappDemoAppNewCameraBarcodeScannerInitBtn.setOnClickListener {
+                launchScanner(ScanType.CAMERA_SCANNER_BARCODE)
+            }
         }
     }
 
