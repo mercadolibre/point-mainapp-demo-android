@@ -63,6 +63,13 @@
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_success">Successful reading: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_error">Error: %s</string>
     <string name="point_mainapp_demo_app_cammera_scanner_start_scan_undefined">Undefined: %s</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_new_start_barcode_callback_title">Start Barcode Scanner (callback)</string>
+    <string name="point_mainapp_demo_app_cammera_scanner_new_start_qr_callback_title">Start QR Scanner (callback)</string>
+    <string-array name="point_mainapp_demo_app_camera_scanner_orientation">
+        <item>None</item>
+        <item>Landscape</item>
+        <item>Portrait</item>
+    </string-array>
 
     <!-- Smart info -->
     <string name="point_mainapp_demo_app_smart_info_main_title">Smart info</string>
@@ -78,7 +85,7 @@
     <!-- payment flow -->
     <string name="point_mainapp_demo_app_description_is_automatic_printing">Enable automatic printing</string>
 
-    <string name="point_mainapp_demo_app_lab_hind_external_reference">Insert external reference</string>"
+    <string name="point_mainapp_demo_app_lab_hind_external_reference">Insert external reference</string>
     <string name="point_mainapp_demo_app_lab_text_go_to_payment_status">Go to payment status</string>
     <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_amount">Amount:</string>
     <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_method">payment method:</string>
