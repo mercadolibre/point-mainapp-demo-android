@@ -1,3 +1,11 @@
+# v4.4.0
+## added
+- Support for the Platform ID parameter in the checkout flow and availability of camera scanner enhancements
+
+# v4.3.0
+## added
+- Availability of the method to obtain the status of an approved payment
+
 # v4.2.0
 ## added
 - adding functionality to retrieve an approved payment by id
