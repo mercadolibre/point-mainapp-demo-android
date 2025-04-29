@@ -1,3 +1,7 @@
+# v.3.9.50
+## Added
+- Add new payment method for feeding voucher MLC
+
 # v4.2.0
 ## added
 - adding functionality to retrieve an approved payment by id

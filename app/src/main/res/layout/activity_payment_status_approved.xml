@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primaryLightColor"
-    tools:context=".view.payment.result.PaymentStatusApprovedActivity">
+    tools:context=".view.payment.result.PaymentStatusApprovedActivity"
+    tools:ignore="ResourceName">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/search_input_payment_status_approved"
