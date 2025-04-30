@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.mercadolibre.android.point_mainapp_demo.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -53,28 +52,10 @@
             android:name=".view.bluetooth.BluetoothTestActivity"
             android:exported="false" />
         <activity
-            android:name=".view.payment.result.PaymentResultActivity"
-            android:exported="true"
-            tools:ignore="AppLinkUrlError">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="launcher_native_app"
-                    android:scheme="mercadopago" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".view.payment.launcher.PaymentLauncherActivity"
             android:exported="false" />
         <activity
             android:name=".view.refunds.RefundsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.camera.CameraScannerActivity"
             android:exported="false" />
 
         <meta-data android:name="com.mercadolibre.android.sdk.PLATFORM_ID"
