@@ -1,3 +1,7 @@
+# v4.0.3
+## Fixed
+- Fixed NullPointerException when initializing clientMessenger in onServiceConnected.
+
 # v4.0.2
 ## Added
 - Implement new metadata for on-demand app installation. 
