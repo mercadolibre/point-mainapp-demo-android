@@ -95,4 +95,5 @@
     <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_last_four_digits">last 4 digits:</string>
     <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_brand_name">brand name:</string>
     <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_installment">installment:</string>
+    <string name="point_mainapp_demo_app_lab_text_go_to_payment_status_payment_tip_amount">Tip amount:</string>
 </resources>
