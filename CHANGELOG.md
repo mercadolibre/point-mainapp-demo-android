@@ -1,3 +1,8 @@
+# v4.5.0
+## Added
+- Updated sdk library version to 4.6.0
+- Add tip amount in feedback of payment response
+
 # v4.4.0
 ## added
 - Support for the Platform ID parameter in the checkout flow and availability of camera scanner enhancements

@@ -55,6 +55,7 @@ class PaymentStatusApprovedActivity : AppCompatActivity() {
             textPaymentStatusBrandNameResult.text = paymentResponse.paymentBrandName
             textPaymentStatusCreationDateResult.text = paymentResponse.paymentCreationDate
             textPaymentStatusLastFourDigitsResult.text = paymentResponse.paymentLastFourDigits
+            textPaymentStatusTipAmount.text = paymentResponse.tipAmount
         }
     }
 
