@@ -1,3 +1,8 @@
+# v5.0.0
+## Changed
+- Updated sdk library version to 5.0.0
+- Deleted legacy payment activity result and scanner activity
+
 # v4.5.0
 ## Added
 - Updated sdk library version to 4.6.0
