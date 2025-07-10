@@ -2,14 +2,17 @@ apply plugin:'com.android.application'
 apply from: "$rootDir/gradle/android-app.gradle"
 apply from: "$rootDir/gradle/dexcount.gradle"
 apply plugin: 'kotlin-android'
-apply plugin: 'jacoco'
-apply from: rootProject.file('jacoco.gradle')
 
 def keystorePropertiesFile = file("keystore.properties")
 def keystoreProperties = new Properties()
 
 android {
+    namespace = 'com.mercadolibre.android.point_mainapp_demo.app'
     compileSdk project.compileSdkVersion.toInteger()
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     signingConfigs {
         release {
@@ -98,7 +101,7 @@ android {
 
 dependencies {
 
-    implementation files("libs/nativesdk-5.0.0.aar")
+    implementation files("libs/nativesdk-5.1.0.aar")
     // AndroidX
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
@@ -106,10 +109,10 @@ dependencies {
     // Kotlin
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.fragment:fragment-ktx:$ktxFragmentVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$ktxVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     // Lifecycle extension
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     // Gson
     implementation "com.google.code.gson:gson:$gsonVersion"
     // Network

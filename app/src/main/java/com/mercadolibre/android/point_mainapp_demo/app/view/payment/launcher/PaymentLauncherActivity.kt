@@ -178,7 +178,7 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun getBackgroundColorSnackBar(canceled: Boolean): Int = if (canceled) {
-        getColor(R.color.design_default_color_error)
+        getColor(android.R.color.holo_red_dark)
     } else {
         getColor(R.color.doneColor)
     }

@@ -104,7 +104,7 @@ class LaunchScannerActivity : AppCompatActivity() {
 
     private fun showFeedback(message: String, isError: Boolean = false) {
         val backgroundColor = if (isError) {
-            getColor(R.color.design_default_color_error)
+            getColor(android.R.color.holo_red_dark)
         } else {
             getColor(R.color.doneColor)
         }

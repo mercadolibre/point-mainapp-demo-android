@@ -2,12 +2,13 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleBuildToolsVersion"
         classpath "org.jacoco:org.jacoco.core:$jacocoVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 plugins {
-    id 'com.android.application' version '7.4.0' apply false
-    id 'com.android.library' version '7.4.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.7.21' apply false
+    id 'com.android.application' version '8.1.4' apply false
+    id 'com.android.library' version '8.1.4' apply false
+    id 'org.jetbrains.kotlin.android' version '2.0.0' apply false
 }
 
 task clean(type: Delete) {

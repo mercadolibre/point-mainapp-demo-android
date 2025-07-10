@@ -1,16 +1,16 @@
 
 android {
-    compileSdkVersion project.compileSdkVersion.toInteger()
+    compileSdk project.compileSdkVersion.toInteger()
     buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion project.minSdkVersion.toInteger()
-        targetSdkVersion project.targetSdkVersion
+        minSdk project.minSdkVersion.toInteger()
+        targetSdk project.targetSdkVersion.toInteger()
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
         renderscriptTargetApi project.renderscriptTargetApiVersion.toInteger()
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard-rules.pro'
         multiDexEnabled true
     }
@@ -25,7 +25,7 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         abortOnError true
         disable 'RtlHardcoded', 'RtlSymmetry', 'ContentDescription'
     }
