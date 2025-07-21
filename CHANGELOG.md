@@ -1,3 +1,7 @@
+# v5.0.3
+## Fixed
+- Updated sdk library version to 5.0.3
+
 # v5.0.0
 ## Changed
 - Updated sdk library version to 5.0.0
