@@ -12,6 +12,7 @@ import com.mercadolibre.android.point_integration_sdk.nativesdk.message.utils.do
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PayerCondition
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentFlowRequestData
 import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.PaymentMethod
+import com.mercadolibre.android.point_integration_sdk.nativesdk.payment.data.SubMerchantData
 import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
@@ -138,7 +139,24 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 description = description,
                 paymentMethod = lastPaymentMethodSelected,
                 printOnTerminal = isPrintOnTerminal,
-                taxes = binding.payerCondition.getSelectedValue()?.toTaxes()
+                taxes = binding.payerCondition.getSelectedValue()?.toTaxes(),
+                subMerchantData = SubMerchantData(
+                    subMerchantId = 123,
+                    mcc = "123123123",
+                    country = "BRA",
+                    addressDoorNumber = 23,
+                    zip = "03710120",
+                    documentNumber = "40792973860",
+                    city = "São Paulo",
+                    addressStreet = "Rua",
+                    legalName = "Legal Name",
+                    regionCodeIso = "SP",
+                    regionCode = "11",
+                    documentType = "CPF",
+                    fiscalCondition = "CONSUMIDOR_FINAL",
+                    phone = "11999999999",
+                    url = "www.google.com"
+                )
             )
         ) { response ->
             binding.paymentProgressBar.gone()
