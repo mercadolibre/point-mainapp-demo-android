@@ -67,8 +67,5 @@
         <meta-data
             android:name="com.mercadolibre.android.sdk.OAUTH_ENABLED"
             android:value="true" />
-        <meta-data
-            android:name="com.mercadolibre.android.sdk.SUB_MERCHANT_ENABLED"
-            android:value="true" />
     </application>
 </manifest>
