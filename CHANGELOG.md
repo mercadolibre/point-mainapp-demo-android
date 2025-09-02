@@ -1,3 +1,7 @@
+# v5.0.4
+## Fixed
+- Improvements for sub-merchant field treatment & traceability.
+
 # v5.0.3
 ## Fixed
 - Added visualization of the external_reference field in the getStatus method response
