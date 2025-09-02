@@ -1,3 +1,8 @@
+# v5.0.3
+## Fixed
+- Added visualization of the external_reference field in the getStatus method response
+- PREPAID_CARD payment method propagation to avoid sending UNDEFINED paymentMethod
+
 # v5.0.0
 ## Changed
 - Updated sdk library version to 5.0.0
