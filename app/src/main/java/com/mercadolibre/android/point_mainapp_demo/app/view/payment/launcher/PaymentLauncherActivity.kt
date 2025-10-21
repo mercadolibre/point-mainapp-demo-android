@@ -1,8 +1,9 @@
 package com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -16,15 +17,11 @@ import com.mercadolibre.android.point_mainapp_demo.app.R
 import com.mercadolibre.android.point_mainapp_demo.app.databinding.PointMainappDemoAppActivityPaymentLauncherBinding
 import com.mercadolibre.android.point_mainapp_demo.app.util.gone
 import com.mercadolibre.android.point_mainapp_demo.app.util.hideKeyboard
-import com.mercadolibre.android.point_mainapp_demo.app.util.launchActivity
 import com.mercadolibre.android.point_mainapp_demo.app.util.toast
 import com.mercadolibre.android.point_mainapp_demo.app.util.visible
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.adapter.PaymentMethodAdapter
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.AMOUNT
-import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.DESCRIPTION
-import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYER_CONDITION
-import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PAYMENT_METHOD
-import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.PRINT_ON_TERMINAL
+import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentFlowInstallmentsActivity.Companion.EXTRA_INSTALLMENTS_RESULT
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PayerConditionString
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.PaymentMethodModel
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.models.toTaxes
@@ -42,6 +39,13 @@ class PaymentLauncherActivity : AppCompatActivity() {
         PaymentMethodAdapter {
             lastPaymentMethodSelected = PaymentMethod.valueOf(it)
         }
+    }
+    private var pendingPaymentAmount: String? = null
+    private var pendingPaymentDescription: String? = null
+    private val installmentsLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        handleInstallmentsResult(result.resultCode, result.data)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,18 +104,19 @@ class PaymentLauncherActivity : AppCompatActivity() {
     private fun launchPaymentFlow(amount: String?, description: String?) = when {
         amount.isNullOrEmpty() -> ERROR_INVALID_AMOUNT.setLayoutError()
 
-        isCreditCard() -> launchActivity(
-            PaymentFlowInstallmentsActivity::class.java, bundleOf(
-                PAYMENT_METHOD to lastPaymentMethodSelected?.name,
-                AMOUNT to amount,
-                DESCRIPTION to description,
-                PRINT_ON_TERMINAL to isPrintOnTerminal,
-                PAYER_CONDITION to binding.payerCondition.getSelectedValue()
-            )
-        )
+        isCreditCard() -> {
+            pendingPaymentAmount = amount
+            pendingPaymentDescription = description
+            val intent = Intent(this, PaymentFlowInstallmentsActivity::class.java).apply {
+                putExtra(AMOUNT, amount)
+            }
+            installmentsLauncher.launch(intent)
+        }
 
         else -> launchPaymentFlowIntent(
-            amount = amount, description = description
+            amount = amount, 
+            description = description,
+            installments = null
         )
     }
 
@@ -129,18 +134,22 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun launchPaymentFlowIntent(
-        amount: String, description: String?
+        amount: String, 
+        description: String?,
+        installments: Int? = null
     ) {
         binding.paymentProgressBar.visible()
-        paymentFlow.launchPaymentFlow(
-            PaymentFlowRequestData(
-                amount = amount.toDouble(),
-                description = description,
-                paymentMethod = lastPaymentMethodSelected,
-                printOnTerminal = isPrintOnTerminal,
-                taxes = binding.payerCondition.getSelectedValue()?.toTaxes()
-            )
-        ) { response ->
+        val paymentRequestData = PaymentFlowRequestData(
+            amount = amount.toDouble(),
+            description = description,
+            paymentMethod = lastPaymentMethodSelected,
+            printOnTerminal = isPrintOnTerminal,
+            taxes = binding.payerCondition.getSelectedValue()?.toTaxes()
+        ).apply {
+            installments?.let { setInstallmentsForCreditCard(it) }
+        }
+        
+        paymentFlow.launchPaymentFlow(paymentRequestData) { response ->
             binding.paymentProgressBar.gone()
             response.doIfSuccess {
                 showSnackBar(MESSAGE_PAYMENT_SUCCESS.format(it.paymentReference))
@@ -150,6 +159,32 @@ class PaymentLauncherActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun handleInstallmentsResult(resultCode: Int, data: Intent?) {
+        when (resultCode) {
+            RESULT_OK -> {
+                val selectedInstallments = data?.getIntExtra(EXTRA_INSTALLMENTS_RESULT, 0)
+                pendingPaymentAmount?.let { amount ->
+                    launchPaymentFlowIntent(
+                        amount = amount,
+                        description = pendingPaymentDescription,
+                        installments = selectedInstallments
+                    )
+                }
+            }
+            RESULT_CANCELED -> {
+                pendingPaymentAmount?.let { amount ->
+                    launchPaymentFlowIntent(
+                        amount = amount,
+                        description = pendingPaymentDescription,
+                        installments = null
+                    )
+                }
+            }
+        }
+        pendingPaymentAmount = null
+        pendingPaymentDescription = null
     }
 
     private fun String?.setLayoutError() {

@@ -1,3 +1,17 @@
+# v5.1.1
+## Fixed
+- Correct detection of Main app in smart apps integration
+- Improvements on installments flow to init a payment
+
+# v5.1.0
+## Added
+- Get features and fixes designed for the PDV app to enable it with other smart apps:
+  - Adjusted description validation to be more flexible.
+  - New field to init a payment: Transaction metadata. This change allowed send additional info to the payment flow.
+
+## 5.0.4
+- Changed sub-merchant var to val to avoid payment flow & traceability inconsistencies
+
 # v5.0.3
 ## Fixed
 - Added visualization of the external_reference field in the getStatus method response
