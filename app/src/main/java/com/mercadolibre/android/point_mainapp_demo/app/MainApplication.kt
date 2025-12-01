@@ -11,14 +11,14 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = MPConfigBuilder(this, DEMO_APP_CLIENT_ID)
+        /*val config = MPConfigBuilder(this, DEMO_APP_CLIENT_ID)
             .withBluetoothConfig()
             .withBluetoothUIConfig()
             .withBitmapPrinterConfig()
             .withCameraScanner()
             .build()
 
-        MPManager.initialize(this, config)
+        MPManager.initialize(this, config)*/
     }
 
     companion object {
