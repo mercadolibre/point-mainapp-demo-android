@@ -104,20 +104,38 @@ class PaymentLauncherActivity : AppCompatActivity() {
     private fun launchPaymentFlow(amount: String?, description: String?) = when {
         amount.isNullOrEmpty() -> ERROR_INVALID_AMOUNT.setLayoutError()
 
-        isCreditCard() -> {
-            pendingPaymentAmount = amount
-            pendingPaymentDescription = description
-            val intent = Intent(this, PaymentFlowInstallmentsActivity::class.java).apply {
-                putExtra(AMOUNT, amount)
-            }
-            installmentsLauncher.launch(intent)
-        }
+        isCreditCard() -> checkInstallmentsAndProceed(amount, description)
 
         else -> launchPaymentFlowIntent(
             amount = amount, 
             description = description,
             installments = null
         )
+    }
+
+    private fun checkInstallmentsAndProceed(amount: String, description: String?) {
+        binding.paymentProgressBar.visible()
+        MPManager.paymentInstallmentTools.getInstallmentsAmount({ mpResponse ->
+            binding.paymentProgressBar.gone()
+            mpResponse.doIfSuccess { installments ->
+                if (installments.isNotEmpty()) {
+                    launchInstallmentsSelection(amount, description)
+                } else {
+                    launchPaymentFlowIntent(amount, description, installments = null)
+                }
+            }.doIfError {
+                launchPaymentFlowIntent(amount, description, installments = null)
+            }
+        }, amount)
+    }
+
+    private fun launchInstallmentsSelection(amount: String, description: String?) {
+        pendingPaymentAmount = amount
+        pendingPaymentDescription = description
+        val intent = Intent(this, PaymentFlowInstallmentsActivity::class.java).apply {
+            putExtra(AMOUNT, amount)
+        }
+        installmentsLauncher.launch(intent)
     }
 
     private fun isCreditCard() = lastPaymentMethodSelected == PaymentMethod.CREDIT_CARD
@@ -162,25 +180,14 @@ class PaymentLauncherActivity : AppCompatActivity() {
     }
 
     private fun handleInstallmentsResult(resultCode: Int, data: Intent?) {
-        when (resultCode) {
-            RESULT_OK -> {
-                val selectedInstallments = data?.getIntExtra(EXTRA_INSTALLMENTS_RESULT, 0)
-                pendingPaymentAmount?.let { amount ->
-                    launchPaymentFlowIntent(
-                        amount = amount,
-                        description = pendingPaymentDescription,
-                        installments = selectedInstallments
-                    )
-                }
-            }
-            RESULT_CANCELED -> {
-                pendingPaymentAmount?.let { amount ->
-                    launchPaymentFlowIntent(
-                        amount = amount,
-                        description = pendingPaymentDescription,
-                        installments = null
-                    )
-                }
+        if (resultCode == RESULT_OK) {
+            val selectedInstallments = data?.getIntExtra(EXTRA_INSTALLMENTS_RESULT, 0)
+            pendingPaymentAmount?.let { amount ->
+                launchPaymentFlowIntent(
+                    amount = amount,
+                    description = pendingPaymentDescription,
+                    installments = selectedInstallments
+                )
             }
         }
         pendingPaymentAmount = null
