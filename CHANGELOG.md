@@ -1,3 +1,7 @@
+# v5.2.1
+## Fixed
+- [ISPI-1292] Update SDK integration to 5.2.1 and don't show installments screen if no needed.
+
 # v5.1.1
 ## Fixed
 - Correct detection of Main app in smart apps integration
