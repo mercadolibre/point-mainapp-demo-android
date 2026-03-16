@@ -13,6 +13,7 @@ import com.mercadolibre.android.point_mainapp_demo.app.view.info.SmartInfoActivi
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.launcher.PaymentLauncherActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.payment.result.PaymentStatusApprovedActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterBitmapActivity
+import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterCombinedActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.printer.PrinterCustomTagActivity
 import com.mercadolibre.android.point_mainapp_demo.app.view.refunds.RefundsActivity
 
@@ -82,6 +83,14 @@ object ActionsProviderImpl : ActionsProvider {
                     R.drawable.point_mainapp_demo_app_black_ic_print
                 ),
                 action = HomeActions.LaunchActivity(PrinterCustomTagActivity::class.java)
+            ),
+            ActionModel(
+                title = context.getString(R.string.point_mainapp_demo_app_home_printer_combined),
+                icon = AppCompatResources.getDrawable(
+                    context,
+                    R.drawable.point_mainapp_demo_app_black_ic_print
+                ),
+                action = HomeActions.LaunchActivity(PrinterCombinedActivity::class.java)
             ),
             ActionModel(
                 title = context.getString(R.string.point_mainapp_demo_app_cammera_scanner_main_title),

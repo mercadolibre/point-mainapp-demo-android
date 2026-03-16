@@ -33,6 +33,10 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
+            android:name=".view.printer.PrinterCombinedActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
             android:name=".view.home.HomeActivity"
             android:exported="true">
             <intent-filter>
@@ -67,6 +71,10 @@
             android:value="193213529837179L" />
         <meta-data
             android:name="com.mercadolibre.android.sdk.OAUTH_ENABLED"
+            android:value="true" />
+
+        <meta-data
+            android:name="com.mercadolibre.android.sdk.PAYMENT_METADATA_ENABLED"
             android:value="true" />
     </application>
 </manifest>

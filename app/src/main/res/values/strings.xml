@@ -52,7 +52,21 @@
     <string name="point_mainapp_demo_app_text_button_printer_custom_tag">Print custom tag</string>
     <string name="point_mainapp_demo_app_home_descption_printer_custom_tag">To print a custom tag. You can paste custom tag or DTE using scrcpy Only chile</string>
     <string name="point_mainapp_demo_app_home_print_pdf417_in_boleta_custom_tag">If you want to print a PDF417 in Boleta check here</string>
+    <string name="point_mainapp_demo_app_home_checkbox_print_pdf417_in_boleta">Print PDF417 in Boleta</string>
     <string name="point_mainapp_demo_app_home_print_payment_method_selected_custom_tag">Payment Method selected: %s</string>
+    <string name="point_mainapp_demo_app_home_hint_custom_tag">Enter custom tag content</string>
+
+    <!-- Combined Printer -->
+    <string name="point_mainapp_demo_app_home_printer_combined">Combined Printer Test</string>
+    <string name="combined_printer_title">Combined Printer Test</string>
+    <string name="combined_printer_description">Test printing both Bitmap and Custom Tag in two modes: Sequential and Callback-based</string>
+    <string name="btn_print_sequential">Print Sequential</string>
+    <string name="btn_print_with_callback">Print Callback</string>
+    <string name="btn_restart">Restart</string>
+    <string name="printing_sequential_mode">Printing in Sequential mode (both prints sent in line)...</string>
+    <string name="printing_callback_mode">Printing in Callback mode (second print after first success)...</string>
+    <string name="error_empty_content">Content cannot be empty</string>
+    <string name="all_prints_completed">All prints completed successfully!</string>
 
     <!-- Camera Scanner -->
     <string name="point_mainapp_demo_app_cammera_scanner_main_title">Camera Scanner</string>

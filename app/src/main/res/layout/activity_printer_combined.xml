@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryLightColor"
+    tools:context=".view.printer.PrinterCombinedActivity">
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ui_2m">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon_description"
+                android:layout_width="@dimen/ui_6m"
+                android:layout_height="@dimen/ui_6m"
+                android:layout_marginTop="@dimen/ui_2m"
+                android:tint="@color/primaryColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/point_mainapp_demo_app_black_ic_print" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_1_25m"
+                android:text="@string/combined_printer_title"
+                android:textAlignment="center"
+                android:textSize="@dimen/ui_medium_body_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_description" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_1m"
+                android:text="@string/combined_printer_description"
+                android:textAlignment="center"
+                android:textSize="@dimen/ui_body_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_inputs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="input_layout_text,checkbox_print_pdf417_boleta,btn_get_payment_method,tv_payment_method_selected,btn_print_sequential,btn_print_with_callback" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_2m"
+                android:hint="@string/point_mainapp_demo_app_home_hint_custom_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_description">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:maxLines="5"
+                    android:minLines="2" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/checkbox_print_pdf417_boleta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_1m"
+                android:text="@string/point_mainapp_demo_app_home_checkbox_print_pdf417_in_boleta"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_text" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_get_payment_method"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_1m"
+                android:text="@string/point_mainapp_demo_app_lab_get_payment_method_action"
+                android:textAllCaps="false"
+                app:cornerRadius="@dimen/ui_1m"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/checkbox_print_pdf417_boleta" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_payment_method_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_1m"
+                android:textAlignment="center"
+                android:textSize="@dimen/ui_body_size"
+                android:textStyle="italic"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_get_payment_method"
+                tools:text="Payment Method: credit_card"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_print_sequential"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_2m"
+                android:layout_marginEnd="@dimen/ui_050m"
+                android:paddingVertical="@dimen/ui_1_25m"
+                android:text="@string/btn_print_sequential"
+                android:textAllCaps="false"
+                app:cornerRadius="@dimen/ui_1m"
+                app:icon="@drawable/point_mainapp_demo_app_black_ic_print"
+                app:layout_constraintEnd_toStartOf="@id/btn_print_with_callback"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_payment_method_selected" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_print_with_callback"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_050m"
+                android:layout_marginTop="@dimen/ui_2m"
+                android:paddingVertical="@dimen/ui_1_25m"
+                android:text="@string/btn_print_with_callback"
+                android:textAllCaps="false"
+                app:cornerRadius="@dimen/ui_1m"
+                app:icon="@drawable/point_mainapp_demo_app_black_ic_print"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_print_sequential"
+                app:layout_constraintTop_toBottomOf="@id/tv_payment_method_selected" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_2m"
+                android:background="@android:color/white"
+                android:padding="@dimen/ui_1m"
+                android:textAlignment="viewStart"
+                android:textSize="@dimen/ui_body_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_print_sequential"
+                tools:text="✓ Bitmap: SUCCESS\n✓ Custom Tag: SUCCESS" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_restart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_2m"
+                android:paddingVertical="@dimen/ui_1_25m"
+                android:text="@string/btn_restart"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                app:cornerRadius="@dimen/ui_1m"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_results"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
