@@ -66,6 +66,10 @@
     <string name="printing_sequential_mode">Printing in Sequential mode (both prints sent in line)...</string>
     <string name="printing_callback_mode">Printing in Callback mode (second print after first success)...</string>
     <string name="error_empty_content">Content cannot be empty</string>
+    <string name="hint_print_count">Number of repetitions (default: 2)</string>
+    <string name="error_invalid_print_count">Enter a valid number of repetitions (1–50)</string>
+    <string name="printing_sequential_mode_n">Printing %d custom tag(s) in Sequential mode...</string>
+    <string name="printing_callback_mode_n">Printing %d pair(s) in Callback mode...</string>
     <string name="all_prints_completed">All prints completed successfully!</string>
 
     <!-- Camera Scanner -->

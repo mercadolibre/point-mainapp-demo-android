@@ -65,137 +65,105 @@ class PrinterCombinedActivity : AppCompatActivity() {
     }
 
     /**
-     * Modo 1: Imprime las dos impresiones en línea (una línea debajo de otra)
-     * Envía ambas impresiones SIN esperar el callback de la primera
+     * Modo 1: Dispara N custom tags en línea SIN esperar callbacks entre ellos.
+     * No incluye bitmap para aislar el comportamiento del SDK con múltiples
+     * llamadas concurrentes de impresión custom tag.
      */
     private fun printBothSequential() {
         if (!validateInputs()) return
+        val count = getPrintCount()
+        var completed = 0
+        var finalized = false
 
         binding.apply {
             progressCircular.visible()
             groupInputs.gone()
-            btnRestart.gone()  // Asegurar que restart esté oculto
+            btnRestart.gone()
             iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_black_ic_print)
-            tvResults.text = getString(R.string.printing_sequential_mode)  // Limpiar texto anterior
+            tvResults.text = getString(R.string.printing_sequential_mode_n, count)
         }
 
-        // Impresión 1: Custom Tag (se envía primero)
-        printCustomTag()
+        val content = binding.inputText.text.toString()
+        val printPdf417InBoleta = binding.checkboxPrintPdf417Boleta.isChecked
 
-        // Impresión 2: Bitmap (se envía inmediatamente SIN esperar el callback del Custom Tag)
-        printBitmap()
+        repeat(count) { index ->
+            val label = if (count > 1) " [${index + 1}/$count]" else ""
+
+            MPManager.bitmapPrinter.print(content, lastPaymentMethodSelected, printPdf417InBoleta) { response ->
+                response
+                    .doIfSuccess { result ->
+                        appendResult("✓ Custom Tag$label: $result")
+                        completed++
+                        if (completed == count && !finalized) {
+                            finalized = true
+                            onPrintsCompleted()
+                        }
+                    }
+                    .doIfError { error ->
+                        appendResult("✗ Custom Tag$label error: ${error.message.orEmpty()}")
+                        if (!finalized) {
+                            finalized = true
+                            onPrintError(error.message.orEmpty())
+                        }
+                    }
+            }
+        }
     }
 
     /**
-     * Modo 2: Imprime la segunda impresión después que responde el callback de éxito de la primera
-     * Espera el callback exitoso del custom tag antes de enviar el bitmap
+     * Modo 2: Encadena N pares de impresión (Custom Tag → Bitmap) de forma recursiva.
+     * Cada par espera el callback exitoso del anterior antes de disparar el siguiente.
      */
     private fun printBothWithCallback() {
         if (!validateInputs()) return
+        val count = getPrintCount()
 
         binding.apply {
             progressCircular.visible()
             groupInputs.gone()
-            btnRestart.gone()  // Asegurar que restart esté oculto
+            btnRestart.gone()
             iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_black_ic_print)
-            tvResults.text = getString(R.string.printing_callback_mode)  // Limpiar texto anterior
+            tvResults.text = getString(R.string.printing_callback_mode_n, count)
         }
 
-        // Impresión 1: Custom Tag
+        printPairWithCallback(currentPair = 1, totalPairs = count)
+    }
+
+    /**
+     * Imprime un par (Custom Tag → Bitmap) y al completarse exitosamente
+     * dispara el siguiente par hasta alcanzar [totalPairs].
+     */
+    private fun printPairWithCallback(currentPair: Int, totalPairs: Int) {
         val content = binding.inputText.text.toString()
         val printPdf417InBoleta = binding.checkboxPrintPdf417Boleta.isChecked
+        val label = if (totalPairs > 1) " [$currentPair/$totalPairs]" else ""
 
-        MPManager.bitmapPrinter.print(
-            content,
-            lastPaymentMethodSelected,
-            printPdf417InBoleta,
-        ) { response ->
+        MPManager.bitmapPrinter.print(content, lastPaymentMethodSelected, printPdf417InBoleta) { response ->
             response
                 .doIfSuccess { customTagResult ->
-                    // Callback exitoso del custom tag
-                    appendResult("✓ Custom Tag: $customTagResult")
+                    appendResult("✓ Custom Tag$label: $customTagResult")
 
-                    // Ahora imprimimos el Bitmap después del éxito del custom tag
-                    printBitmapWithResult()
+                    val inputStream = resources.openRawResource(R.raw.point_mainapp_demo_app_ic_datafono)
+                    BitmapFactory.decodeStream(inputStream)?.run {
+                        MPManager.bitmapPrinter.print(this) { bitmapResponse ->
+                            bitmapResponse
+                                .doIfSuccess { bitmapResult ->
+                                    appendResult("✓ Bitmap$label: $bitmapResult")
+                                    if (currentPair < totalPairs) {
+                                        printPairWithCallback(currentPair + 1, totalPairs)
+                                    } else {
+                                        onPrintsCompleted()
+                                    }
+                                }
+                                .doIfError { error ->
+                                    onPrintError("Bitmap$label error: ${error.message.orEmpty()}")
+                                }
+                        }
+                    } ?: onPrintError("Error al decodificar el bitmap")
                 }
                 .doIfError { error ->
-                    onPrintError("Custom Tag error: ${error.message.orEmpty()}")
+                    onPrintError("Custom Tag$label error: ${error.message.orEmpty()}")
                 }
-        }
-    }
-
-    /**
-     * Imprime bitmap en modo sequential
-     * Como es la última impresión esperada, marca el proceso como completado cuando termina
-     */
-    private fun printBitmap() {
-        val inputStream = resources.openRawResource(R.raw.point_mainapp_demo_app_ic_datafono)
-        BitmapFactory.decodeStream(inputStream)?.run {
-            MPManager.bitmapPrinter.print(this) { response ->
-                response
-                    .doIfSuccess { result ->
-                        appendResult("✓ Bitmap: $result")
-                        // Marca completado cuando bitmap termina exitosamente
-                        onPrintsCompleted()
-                    }
-                    .doIfError { error ->
-                        appendResult("✗ Bitmap error: ${error.message.orEmpty()}")
-                        // ✓ CORREGIDO: Ahora maneja el error correctamente
-                        onPrintError(error.message.orEmpty())
-                    }
-            }
-        } ?: run {
-            // ✓ AGREGADO: Manejo de error si no se puede decodificar el bitmap
-            appendResult("✗ Bitmap: Error al decodificar imagen")
-            onPrintError("Error al decodificar el bitmap")
-        }
-    }
-
-    /**
-     * Imprime custom tag en modo sequential (sin esperar a que termine para continuar)
-     * NOTA: En modo sequential, ambas impresiones se disparan inmediatamente.
-     * Si hay error aquí, NO se detiene el proceso porque printBitmap() ya se ejecutó.
-     */
-    private fun printCustomTag() {
-        val content = binding.inputText.text.toString()
-        val printPdf417InBoleta = binding.checkboxPrintPdf417Boleta.isChecked
-
-        MPManager.bitmapPrinter.print(
-            content,
-            lastPaymentMethodSelected,
-            printPdf417InBoleta,
-        ) { response ->
-            response
-                .doIfSuccess { result ->
-                    appendResult("✓ Custom Tag: $result")
-                }
-                .doIfError { error ->
-                    appendResult("✗ Custom Tag error: ${error.message.orEmpty()}")
-                    // ✓ CORREGIDO: Ahora maneja el error correctamente
-                    // Nota: No llamamos onPrintError() aquí porque printBitmap()
-                    // también está corriendo y él decidirá el estado final
-                }
-        }
-    }
-
-    /**
-     * Imprime bitmap y procesa el resultado final (usado en modo callback)
-     */
-    private fun printBitmapWithResult() {
-        val inputStream = resources.openRawResource(R.raw.point_mainapp_demo_app_ic_datafono)
-        BitmapFactory.decodeStream(inputStream)?.run {
-            MPManager.bitmapPrinter.print(this) { response ->
-                response
-                    .doIfSuccess { result ->
-                        appendResult("✓ Bitmap: $result")
-                        onPrintsCompleted()
-                    }
-                    .doIfError { error ->
-                        onPrintError("Bitmap error: ${error.message.orEmpty()}")
-                    }
-            }
-        } ?: run {
-            onPrintError("Error al decodificar el bitmap")
         }
     }
 
@@ -209,6 +177,16 @@ class PrinterCombinedActivity : AppCompatActivity() {
             return false
         }
         return true
+    }
+
+    /**
+     * Lee el campo de cantidad de repeticiones.
+     * Si está vacío o inválido, retorna el valor por defecto (2).
+     * Rango válido: 1–50.
+     */
+    private fun getPrintCount(): Int {
+        val raw = binding.inputPrintCount.text.toString().toIntOrNull() ?: DEFAULT_PRINT_COUNT
+        return raw.coerceIn(1, MAX_PRINT_COUNT)
     }
 
     /**
@@ -255,8 +233,8 @@ class PrinterCombinedActivity : AppCompatActivity() {
      */
     private fun restartScreen() {
         binding.apply {
-            // Restaurar el contenido hardcodeado en lugar de limpiarlo
             inputText.setText(HARDCODED_CUSTOM_TAG_CONTENT)
+            inputPrintCount.text?.clear()
             checkboxPrintPdf417Boleta.isChecked = false
             iconDescription.setImageResource(R.drawable.point_mainapp_demo_app_black_ic_print)
             tvResults.text = ""
@@ -311,9 +289,11 @@ class PrinterCombinedActivity : AppCompatActivity() {
     }
 
     companion object {
+        private const val DEFAULT_PRINT_COUNT = 2
+        private const val MAX_PRINT_COUNT = 50
+
         /**
-         * Contenido hardcodeado del custom tag para las pruebas de impresión
-         * Este contenido utiliza tags especiales del formato de impresión:
+         * Contenido hardcodeado del custom tag para las pruebas de impresión.
          * - {br} = Salto de línea
          * - {center} = Centrar texto
          * - {w}{/w} = Texto en negrita/ancho

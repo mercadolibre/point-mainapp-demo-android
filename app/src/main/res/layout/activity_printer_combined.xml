@@ -70,7 +70,7 @@
                 android:id="@+id/group_inputs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="input_layout_text,checkbox_print_pdf417_boleta,btn_get_payment_method,tv_payment_method_selected,btn_print_sequential,btn_print_with_callback" />
+                app:constraint_referenced_ids="input_layout_text,input_layout_print_count,checkbox_print_pdf417_boleta,btn_get_payment_method,tv_payment_method_selected,btn_print_sequential,btn_print_with_callback" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout_text"
@@ -78,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/ui_2m"
                 android:hint="@string/point_mainapp_demo_app_home_hint_custom_tag"
+                app:boxBackgroundColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_description">
@@ -89,7 +90,28 @@
                     android:inputType="textMultiLine"
                     android:lines="3"
                     android:maxLines="5"
-                    android:minLines="2" />
+                    android:minLines="2"
+                    android:textColor="@color/secondaryTextColor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input_layout_print_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_1m"
+                android:hint="@string/hint_print_count"
+                app:boxBackgroundColor="@android:color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_layout_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_print_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="@color/secondaryTextColor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox
@@ -100,7 +122,7 @@
                 android:text="@string/point_mainapp_demo_app_home_checkbox_print_pdf417_in_boleta"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/input_layout_text" />
+                app:layout_constraintTop_toBottomOf="@id/input_layout_print_count" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_get_payment_method"
