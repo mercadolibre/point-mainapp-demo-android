@@ -1,3 +1,8 @@
+# v5.2.2
+## Fixed
+- Update integration SDK 5.2.1 -> 5.2.2
+  - Fixed ANR event flooding; ANR detection disabled by default.
+
 # v5.2.1
 ## Fixed
 - [ISPI-1292] Update SDK integration to 5.2.1 and don't show installments screen if no needed.
