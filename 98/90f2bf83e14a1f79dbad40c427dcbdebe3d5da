@@ -1,0 +1,30 @@
+CHANGELOG.md
+  s_0fed40f764027c::t_d51d99c5768244 3
+  h_8ec33c6d5441d7 1-2
+  s_0fed40f764027c::t_ead68eb36f077a 4-23
+gradle.properties
+  h_8ec33c6d5441d7 42-43
+app/build.gradle
+  h_8ec33c6d5441d7 101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "9890f2bf83e14a1f79dbad40c427dcbdebe3d5da",
+  "prompts": {},
+  "humans": {
+    "h_8ec33c6d5441d7": {
+      "author": "Felipe Leon <luisfelipe.leon@mercadolibre.com.co>"
+    }
+  },
+  "sessions": {
+    "s_0fed40f764027c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "448dbd3f-ee34-4d78-9e73-82b30a5f12b4",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Felipe Leon <luisfelipe.leon@mercadolibre.com.co>"
+    }
+  }
+}
