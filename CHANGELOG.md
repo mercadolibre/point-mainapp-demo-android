@@ -1,25 +1,10 @@
 # v7.0.0
 ## Added
-- [ISPI-2848] Upgrade integration SDK 5.2.2 to 7.0.0
-  - [ISPI-1924] MediatorDetector: dynamic IPC target resolution via ContentProvider
-  - [ISPI-1956] Permission ContentProvider for mediator detection
-  - [SMARTI-2424] Dynamic metadata to payment flow
-  - [SMARTI-2578] New signature for payment metadata
-  - [SMARTI-2573] Log to message data (Bundle)
-  - [PSF-12094] Add posSaleId to PaymentTransactionMetadata
-  - [PSF-12208] Add tip amount to PaymentTransactionMetadata
-  - [ISPI-521] Add CongratsUrl to PaymentTransactionMetadata
-  - [ISPI-724] Get detailed payment by external reference
-  - [SMARTI-2973] Send packageName in metadata json
+- [ISPI-2848] Bump integration SDK to 7.0.0
+  - New method to get detailed payment by external reference
 ## Fixed
-  - [ISPI-2028] Fix ANR event flooding
-  - [ISPI-1508] Remove IsPaymentMetadataEnabled flag + externalReference length validation
-  - [SMARTI-2587] Flexible description validation
-  - [ISPI-311] Fix detection of Main app in smart apps
-## Changed
-  - [SMARTI-2434] compileSdk 34 + androidx.core 1.12.0
-  - [SMARTI-2339] Kotlin 2.0.21 + Java 17
-  - Migrated to androidx.activity 1.8.2
+  - Improved app stability (ANR detection improvements)
+  - More flexible payment description validation
 
 # v5.2.2
 ## Fixed
