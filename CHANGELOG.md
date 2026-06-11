@@ -1,3 +1,11 @@
+# v7.0.0
+## Added
+- [ISPI-2848] Bump integration SDK to 7.0.0
+  - New method to get detailed payment by external reference
+## Fixed
+  - Improved app stability (ANR detection improvements)
+  - More flexible payment description validation
+
 # v5.2.2
 ## Fixed
 - Update integration SDK 5.2.1 -> 5.2.2
